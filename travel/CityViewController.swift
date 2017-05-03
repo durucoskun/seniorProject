@@ -12,7 +12,7 @@ class CityViewController: UIViewController,UITableViewDataSource,UITableViewDele
 
     @IBOutlet weak var cityTableView: UITableView!
    
-    
+    var cell : CityTableViewCell? = nil
     var cityDataSource = CityDataSource()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,18 +38,22 @@ class CityViewController: UIViewController,UITableViewDataSource,UITableViewDele
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         
-        let cell = cityTableView.dequeueReusableCell(withIdentifier: "Identifier",for: indexPath as IndexPath) as! CityTableViewCell
+        cell = cityTableView.dequeueReusableCell(withIdentifier: "Identifier",for: indexPath as IndexPath) as! CityTableViewCell
         let city = (cityDataSource.destinations?[indexPath.row])!
         
-        cell.destination.text = "DESTINATION : \(city["DestinationCity"]!)"
-        cell.price.text = "MIN PRICE: \(city["MinPrice"]!)"
+
+      cell?.destination.setTitle("DESTINATION : \(city["DestinationCity"]!)",for: UIControlState.normal)
+        
+      cell?.price.setTitle("MIN PRICE: \(city["MinPrice"]!)",for: UIControlState.normal)
+
         
         
-        return cell
+        return cell!
     }
     
     override func viewDidAppear(_ animated: Bool) {
         cityTableView.delegate = self
+        
         
        
     }
@@ -73,7 +77,7 @@ class CityViewController: UIViewController,UITableViewDataSource,UITableViewDele
     }
     
     
-    
+  
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -81,6 +85,10 @@ class CityViewController: UIViewController,UITableViewDataSource,UITableViewDele
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         
+     /*
+        
+        if (cell?.destination.isSelected)!{
+        }else{
         
         let selectedCell = sender as! CityTableViewCell
         
@@ -89,7 +97,28 @@ class CityViewController: UIViewController,UITableViewDataSource,UITableViewDele
         let controller = segue.destination as! CityDetailViewController
         
         controller.selectedCity = (cityDataSource.destinations?[indexPath!.row])!
+        }
+         
+         
+         */
+        var indexPath: NSIndexPath!
+        
+        if let button = sender as? UIButton {
+            if let superview = button.superview {
+                if let cell = superview.superview as? CityTableViewCell{
+                    indexPath = self.cityTableView.indexPath(for: cell) as NSIndexPath!
+                }
+            }
+        }
+               
+        
+        if  let nextView = segue.destination as? CityDetailViewController{
+            nextView.selectedCity = (cityDataSource.destinations?[indexPath.row])!
+            
+        }
+        
+       
     }
-    
+     
 
 }

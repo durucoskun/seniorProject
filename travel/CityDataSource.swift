@@ -11,6 +11,7 @@ import Foundation
 @objc protocol CityDataDelegate{
     
     @objc optional func cityListLoaded()
+    @objc optional func cityDetailsLoaded (place : Place)
     
 }
 
@@ -96,7 +97,7 @@ class CityDataSource: NSObject {
                             
                             if (destination == nextCity.placeId){
                                 //    print ("Departure : \(newCity.cityName) -->Destination : \(nextCity.cityName)")
-                                let destinationDictionary : [String : Any] = ["DestinationCity":nextCity.cityName!,"MinPrice" :quote.minPrice]
+                                let destinationDictionary : [String : Any] = ["DestinationCity":nextCity.cityName!,"MinPrice" :quote.minPrice,"Country":nextCity.countryName]
                                 
                                ( destinations?.append(destinationDictionary as NSDictionary))!
                                 
@@ -192,6 +193,7 @@ class CityDataSource: NSObject {
         
     }
     
+  
     
     
 }

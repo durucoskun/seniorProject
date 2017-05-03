@@ -9,12 +9,12 @@
 import UIKit
 
 class CityTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var destination: UIButton!
+    
+    @IBOutlet weak var price: UIButton!
 
-    @IBOutlet weak var destination: UILabel!
-    @IBOutlet weak var price: UILabel!
-    
-    
-    
+ 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

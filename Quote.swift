@@ -11,7 +11,7 @@ import UIKit
 class Quote: NSObject {
     
     let quoteId: Int
-    let minPrice : Double
+    let minPrice : Double?
     let direct : Bool
     var outbound : OutboundLeg
        var inbound : InboundLeg
