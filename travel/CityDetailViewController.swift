@@ -18,9 +18,9 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
         super.viewDidLoad()
 
         
-        self.title = "\(selectedCity["DestinationCity"])"
+        self.title = "\(selectedCity["DestinationCity"]!)"
         
-        cityData.delegate = self
+      cityData.delegate = self
         
         // Do any additional setup after loading the view.
     }

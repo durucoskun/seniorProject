@@ -15,7 +15,7 @@ class Place: NSObject {
     let name : String
     let type : String
     let code : String
-    let cityName : String
+    let cityName : String?
     let cityId : String
     let countryName : String
     

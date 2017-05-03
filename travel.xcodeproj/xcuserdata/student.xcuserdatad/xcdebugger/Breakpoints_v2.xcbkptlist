@@ -42,7 +42,7 @@
                   moduleName = "travel"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/student/Downloads/travel-2/travel/InboundLeg.swift"
-                  timestampString = "514658046.211324"
+                  timestampString = "514914782.96973"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -57,7 +57,7 @@
                   moduleName = "travel"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/student/Downloads/travel-2/travel/InboundLeg.swift"
-                  timestampString = "514658046.215572"
+                  timestampString = "514914782.974983"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -96,6 +96,22 @@
             startingLineNumber = "133"
             endingLineNumber = "133"
             landmarkName = "getQuotes(quoteArray:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "travel/CityViewController.swift"
+            timestampString = "514914672.960378"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

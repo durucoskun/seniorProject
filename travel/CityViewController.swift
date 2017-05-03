@@ -39,19 +39,17 @@ class CityViewController: UIViewController,UITableViewDataSource,UITableViewDele
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         
         let cell = cityTableView.dequeueReusableCell(withIdentifier: "Identifier",for: indexPath as IndexPath) as! CityTableViewCell
-        let city = cityDataSource.destinations?[indexPath.row]
+        let city = (cityDataSource.destinations?[indexPath.row])!
         
-        cell.destination.text = "\(city?["DestinationCity"])"
-        cell.price.text = "\(city?["MinPrice"])"
-        print ("yasassssssssss")
+        cell.destination.text = "DESTINATION : \(city["DestinationCity"]!)"
+        cell.price.text = "MIN PRICE: \(city["MinPrice"]!)"
+        
         
         return cell
     }
     
     override func viewDidAppear(_ animated: Bool) {
         cityTableView.delegate = self
-        
-        print (cityDataSource.destinations?.count)
         
        
     }

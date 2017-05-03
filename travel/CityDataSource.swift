@@ -37,26 +37,26 @@ class CityDataSource: NSObject {
         
         let dataTask = networkSession.dataTask(with: req) {(data,response,error) in print("Data")
             
-        let jsonReadable = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-//             print(jsonReadable!)
+            let jsonReadable = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+            // print(jsonReadable!)
             
             
-            
+            ////
             do
             {
                 let jsonDictionary = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! [String: Any]
                 
                 
-                let quoteArray = jsonDictionary["Quotes"] as! NSArray
+                let quoteArray = jsonDictionary["Quotes"]! as! NSArray
                 self.getQuotes(quoteArray: quoteArray)
                 
-                let placeArray = jsonDictionary["Places"] as! NSArray
+                let placeArray = jsonDictionary["Places"]! as! NSArray
                 self.getPlaces(placeArray : placeArray)
                 
-                let carrierArray = jsonDictionary["Carriers"] as! NSArray
+                let carrierArray = jsonDictionary["Carriers"]! as! NSArray
                 self.getCarriers (carrierArray : carrierArray)
                 
-                let currencyArray = jsonDictionary["Currencies"] as! NSArray
+                let currencyArray = jsonDictionary["Currencies"]! as! NSArray
                 //    self.currencies (currencyArray : currencyArray)
                 
                 self.checkDestinations(code: code)
@@ -82,23 +82,23 @@ class CityDataSource: NSObject {
         
         var destination : Int
         for city in places!{
-            let newCity = city// as! Place
+            let newCity = city as! Place
             
             if (newCity.code == code){
                 let id = newCity.placeId
                 // print ("Departure : \(newCity.cityName)")
                 for quote in quotes!{
-                    let newQuote = quote// as! Quote
+                    let newQuote = quote as! Quote
                     if (quote.outbound.originId == id){
                         destination =  quote.outbound.destinationId
                         for place in places!{
-                            let   nextCity = place// as! Place
+                            let   nextCity = place as! Place
                             
                             if (destination == nextCity.placeId){
                                 //    print ("Departure : \(newCity.cityName) -->Destination : \(nextCity.cityName)")
-                                let destinationDictionary : [String : Any] = ["DestinationCity":nextCity.cityName,"MinPrice" :quote.minPrice]
+                                let destinationDictionary : [String : Any] = ["DestinationCity":nextCity.cityName!,"MinPrice" :quote.minPrice]
                                 
-                                destinations?.append(destinationDictionary as NSDictionary)
+                               ( destinations?.append(destinationDictionary as NSDictionary))!
                                 
                             }
                             
@@ -121,14 +121,14 @@ class CityDataSource: NSObject {
         for quote in quoteArray{
             let quoteDictionary = quote as! NSDictionary
             
-            let newQuote = Quote(quoteId :quoteDictionary["QuoteId"] as! Int ,
-                                 minPrice : quoteDictionary ["MinPrice"] as! Double,
-                                 direct : quoteDictionary["Direct"] as! Bool,
-                                 outbound :OutboundLeg(dictionary :(quoteDictionary["OutboundLeg"] as! NSDictionary) as! [String : Any] as NSDictionary),
-                                 inbound:InboundLeg(dictionary: (quoteDictionary["InboundLeg"] as! NSDictionary) as! [String : Any]),
-                                 date : quoteDictionary["QuoteDateTime"] as! String)
+            let newQuote = Quote(quoteId :quoteDictionary["QuoteId"]! as! Int ,
+                                 minPrice : quoteDictionary ["MinPrice"]! as! Double,
+                                 direct : quoteDictionary["Direct"]! as! Bool,
+                                 outbound :OutboundLeg(dictionary :(quoteDictionary["OutboundLeg"]! as! NSDictionary) as! [String : Any] as NSDictionary),
+                                 inbound:InboundLeg(dictionary: (quoteDictionary["InboundLeg"]! as! NSDictionary) as! [String : Any]),
+                                 date : quoteDictionary["QuoteDateTime"]! as! String)
             
-            quotes?.append(newQuote)
+            (quotes?.append(newQuote))!
         }
         
     }
@@ -141,17 +141,17 @@ class CityDataSource: NSObject {
             
             if (placeDictionary.count > 4){
                 
-                let newPlace = Place (placeId : placeDictionary["PlaceId"] as! Int ,
-                                      IataCode : placeDictionary ["IataCode"] as! String,
-                                      name : placeDictionary ["Name"] as! String,
-                                      type : placeDictionary["Type"] as! String,
-                                      code : placeDictionary["SkyscannerCode"] as! String,
-                                      cityName : placeDictionary ["CityName"] as! String,
-                                      cityId : placeDictionary["CityId"] as! String,
-                                      countryName : placeDictionary["CountryName"] as! String
+                let newPlace = Place (placeId : placeDictionary["PlaceId"]! as! Int ,
+                                      IataCode : placeDictionary ["IataCode"]! as! String,
+                                      name : placeDictionary ["Name"]! as! String,
+                                      type : placeDictionary["Type"]! as! String,
+                                      code : placeDictionary["SkyscannerCode"]! as! String,
+                                      cityName : placeDictionary ["CityName"]! as! String,
+                                      cityId : placeDictionary["CityId"]! as! String,
+                                      countryName : placeDictionary["CountryName"]! as! String
                 )
                 
-                places?.append(newPlace)
+                (places?.append(newPlace))!
                 
             }
             
@@ -163,7 +163,7 @@ class CityDataSource: NSObject {
         for carrier in carrierArray{
             let carrierDictionary = carrier as! NSDictionary
             
-            let newCarrier = Carrier(id : carrierDictionary["CarrierId"] as! Int , name: carrierDictionary["Name"] as! String)
+            let newCarrier = Carrier(id : carrierDictionary["CarrierId"]! as! Int , name: carrierDictionary["Name"]! as! String)
             
             carriers?.append(newCarrier)
             
@@ -183,7 +183,7 @@ class CityDataSource: NSObject {
             
             let new = dest as! NSDictionary
          
-            print ("To \(new["DestinationCity"]!)Min Price is \( new ["MinPrice"]!)")
+          //  print ("To \(new["DestinationCity"]!)Min Price is \( new ["MinPrice"]!)")
             
             
         }
