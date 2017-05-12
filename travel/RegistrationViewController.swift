@@ -8,9 +8,12 @@
 
 import UIKit
 import Firebase
+import FirebaseDatabase
 
 class RegistrationViewController: UIViewController {
 
+    
+    var ref = FIRDatabase.database().reference()
     
     @IBOutlet weak var username: UITextField!
     @IBOutlet weak var email: UITextField!
@@ -37,6 +40,20 @@ class RegistrationViewController: UIViewController {
         FIRAuth.auth()?.createUser(withEmail: email.text!, password: password.text!,completion: { (user, error) in
             //check the user is not nill
             if user != nil {
+                
+                // SET USERNAME
+                
+                self.ref.child("USERS").child((user?.uid)!).setValue(["username": self.username.text])
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
                 //user is found
                 self.performSegue(withIdentifier: "showLoginPage", sender: self)
             }

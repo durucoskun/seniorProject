@@ -6,6 +6,7 @@ target 'travel' do
   use_frameworks!
  'Firebase/Core'
  pod 'Firebase/Auth'
+ pod 'Firebase/Database'
   # Pods for travel
 
 end

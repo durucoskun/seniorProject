@@ -7,11 +7,17 @@
 //
 
 import UIKit
+import FirebaseDatabase
 
 class CityDetailViewController: UIViewController ,CityDataDelegate{
     
+    
+
+
+    
     @IBOutlet weak var cityName: UILabel!
         @IBOutlet weak var countryName: UILabel!
+    var currency : String = ""
     
     
     var selectedCity : NSDictionary = [:]

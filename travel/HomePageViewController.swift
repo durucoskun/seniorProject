@@ -16,6 +16,7 @@ class HomePageViewController: UIViewController, CLLocationManagerDelegate {
     let citydata = CityDataSource()
     var location = CLLocation()
     var currentCityName: String!
+     var currency: String = ""
     
     @IBOutlet weak var departureLocation: UITextField!
     
@@ -63,7 +64,7 @@ class HomePageViewController: UIViewController, CLLocationManagerDelegate {
                 self.present(alert, animated:true,completion:nil)
                 break goAction
             }
-        var currency: String = ""
+       
       
         if currencyPicker.selectedSegmentIndex==0{
             currency = "TRY"
@@ -142,6 +143,7 @@ class HomePageViewController: UIViewController, CLLocationManagerDelegate {
         
         if  let nextView = segue.destination as? CityViewController{
             nextView.cityDataSource = citydata
+            nextView.currency = currency
             
         }
         

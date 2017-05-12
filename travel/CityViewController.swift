@@ -8,13 +8,19 @@
 
 import UIKit
 
+
 class CityViewController: UIViewController,UITableViewDataSource,UITableViewDelegate, CityDataDelegate{
 
+    
+    
+    
+    
     @IBOutlet weak var cityTableView: UITableView!
     var url:String!
     var city :String!
     var cell : CityTableViewCell? = nil
     var cityDataSource = CityDataSource()
+    var currency : String = ""
   
     
     override func viewDidLoad() {
@@ -47,7 +53,7 @@ class CityViewController: UIViewController,UITableViewDataSource,UITableViewDele
 
       cell?.destination.setTitle("DESTINATION : \(city["DestinationCity"]!)",for: UIControlState.normal)
         
-      cell?.price.setTitle("MIN PRICE: \(city["MinPrice"]!)",for: UIControlState.normal)
+      cell?.price.setTitle("MIN PRICE: \(city["MinPrice"]!) \(currency)",for: UIControlState.normal)
 
         
         
