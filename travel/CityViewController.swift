@@ -11,9 +11,12 @@ import UIKit
 class CityViewController: UIViewController,UITableViewDataSource,UITableViewDelegate, CityDataDelegate{
 
     @IBOutlet weak var cityTableView: UITableView!
-   
+    var url:String!
+    var city :String!
     var cell : CityTableViewCell? = nil
     var cityDataSource = CityDataSource()
+  
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "DESTINATIONS"
@@ -53,7 +56,6 @@ class CityViewController: UIViewController,UITableViewDataSource,UITableViewDele
     
     override func viewDidAppear(_ animated: Bool) {
         cityTableView.delegate = self
-        
         
        
     }
@@ -116,6 +118,9 @@ class CityViewController: UIViewController,UITableViewDataSource,UITableViewDele
             nextView.selectedCity = (cityDataSource.destinations?[indexPath.row])!
             
         }
+        
+        
+        
         
        
     }

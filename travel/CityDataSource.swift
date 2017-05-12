@@ -39,7 +39,7 @@ class CityDataSource: NSObject {
         let dataTask = networkSession.dataTask(with: req) {(data,response,error) in print("Data")
             
             let jsonReadable = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-            // print(jsonReadable!)
+             print(jsonReadable!)
             
             
             ////

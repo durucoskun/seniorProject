@@ -16,6 +16,7 @@ class HomePageViewController: UIViewController, CLLocationManagerDelegate {
     let citydata = CityDataSource()
     var location = CLLocation()
     var currentCityName: String!
+    
     @IBOutlet weak var departureLocation: UITextField!
     
     @IBOutlet weak var departureDate: UIDatePicker!
@@ -26,14 +27,63 @@ class HomePageViewController: UIViewController, CLLocationManagerDelegate {
         self.departureLocation.text = self.currentCityName
         }
     }
+    @IBOutlet weak var currencyPicker: UISegmentedControl!
     
     let manager = CLLocationManager()
     
     @IBAction func go(_ sender: UIButton) {
-        var url = "http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/DE/EUR/en-US/\(departureLocation.text!)/anywhere/2017-05-25/2017-05-28?apiKey=at812187236421337946364002643367"
-        citydata.loadCities(url: url, code: departureLocation.text!)
+        goAction: do{
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        var departure = dateFormatter.string(from: departureDate.date)
+        var returnD = dateFormatter.string(from: returnDate.date)
+        var timeDiff = DateComponents()
+        timeDiff.hour = -3
+        timeDiff.minute = -1
+        let correctCurrDate = Calendar.current.date(byAdding: timeDiff, to: Date())!
+
+        print(departureDate.date)
+        print(Date())
+            if(departureDate.date<correctCurrDate){
+                let alert = UIAlertController(title: "Oops!", message: "Departure date cannot be before current date", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.default, handler:nil))
+                self.present(alert, animated:true,completion:nil)
+                break goAction
+            }
+            
+        if(departureDate.date>=returnDate.date){
+                let alert = UIAlertController(title: "Oops!", message: "Departure date cannot be later than/the same as return date", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.default, handler:nil))
+                self.present(alert, animated:true,completion:nil)
+                break goAction
+        }
+            if(departureLocation.text==""){
+                let alert = UIAlertController(title: "Oops!", message: "Departure location cannot be empty", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.default, handler:nil))
+                self.present(alert, animated:true,completion:nil)
+                break goAction
+            }
+        var currency: String = ""
+      
+        if currencyPicker.selectedSegmentIndex==0{
+            currency = "TRY"
+        }
+        else if currencyPicker.selectedSegmentIndex==1{
+            currency = "USD"
+        }
+        else if currencyPicker.selectedSegmentIndex==2{
+            currency = "EUR"
+        }
         
-        //   citydata.loadCities(url: "http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/DE/EUR/en-US/IST/anywhere/2017-05-01/2017-05-04?apiKey=at812187236421337946364002643367", code: IST)
+        var url = "http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/TR/\(currency)/en-US/\(departureLocation.text!)/anywhere/\(departure)/\(returnD)?apiKey=at812187236421337946364002643367"
+        
+         DispatchQueue.main.async {
+       
+            self.citydata.loadCities(url: url, code: self.departureLocation.text!)
+            
+        }
+        }
+        
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
