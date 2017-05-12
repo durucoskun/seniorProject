@@ -30,7 +30,7 @@ class HomePageViewController: UIViewController, CLLocationManagerDelegate {
     let manager = CLLocationManager()
     
     @IBAction func go(_ sender: UIButton) {
-        var url = "http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/DE/EUR/en-US/\(departureLocation.text!)/anywhere/2017-05-11/2017-05-14?apiKey=at812187236421337946364002643367"
+        var url = "http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/DE/EUR/en-US/\(departureLocation.text!)/anywhere/2017-05-25/2017-05-28?apiKey=at812187236421337946364002643367"
         citydata.loadCities(url: url, code: departureLocation.text!)
         
         //   citydata.loadCities(url: "http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/DE/EUR/en-US/IST/anywhere/2017-05-01/2017-05-04?apiKey=at812187236421337946364002643367", code: IST)
