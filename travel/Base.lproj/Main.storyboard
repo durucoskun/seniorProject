@@ -115,7 +115,7 @@
                     <connections>
                         <outlet property="message" destination="wJ4-12-V7H" id="AZn-gq-IhG"/>
                         <outlet property="password" destination="0ay-ho-s2E" id="Ubx-Kg-cct"/>
-                        <outlet property="username" destination="6s8-jA-O61" id="3YG-bP-vey"/>
+                        <outlet property="username" destination="mdT-J5-jfW" id="EAb-R2-NLS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
