@@ -28,7 +28,7 @@ class CityDataSource: NSObject {
     var delegate : CityDataDelegate?
     
     func loadCities(url: String,code : String){
-       
+       destinations?.removeAll()
         
         let networkSession = URLSession.shared
         

@@ -18,19 +18,36 @@ class RegistrationViewController: UIViewController {
     
     
     @IBAction func createAnAccount(_ sender: Any) {
+               }
+    
+    @IBAction func createAccount(_ sender: UIButton) {
+        createAcc: do{
+        if self.email.text==""{
+            let alert = UIAlertController(title: "Oops!", message: "E-mail cannot be empty", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.default, handler:nil))
+            self.present(alert, animated:true,completion:nil)
+            break createAcc
+        }
+        if self.password.text==""{
+            let alert = UIAlertController(title: "Oops!", message: "E-mail cannot be empty", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.default, handler:nil))
+            self.present(alert, animated:true,completion:nil)
+            break createAcc
+            }
         FIRAuth.auth()?.createUser(withEmail: email.text!, password: password.text!,completion: { (user, error) in
             //check the user is not nill
-            if let u = user {
+            if user != nil {
                 //user is found
-               /* self.performSegue(withIdentifier: "showMainPage", sender: self)
-            */
+                self.performSegue(withIdentifier: "showLoginPage", sender: self)
             }
             else {
+                
             }
         })
         
-        }
-    
+
+    }
+    }
 
 
     override func viewDidLoad() {

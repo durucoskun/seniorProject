@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>15406942516-p1qes6s17tpg1qi7batllco3o30gh4bt.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.15406942516-p1qes6s17tpg1qi7batllco3o30gh4bt</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCodfawN3hBZ8qDPxvOrYQ0_3fXnpWtrjc</string>
+	<key>GCM_SENDER_ID</key>
+	<string>15406942516</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.aygen.travel</string>
+	<key>PROJECT_ID</key>
+	<string>travelapp-31a9e</string>
+	<key>STORAGE_BUCKET</key>
+	<string>travelapp-31a9e.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:15406942516:ios:923fcfc9f073331f</string>
+	<key>DATABASE_URL</key>
+	<string>https://travelapp-31a9e.firebaseio.com</string>
+</dict>
+</plist>
