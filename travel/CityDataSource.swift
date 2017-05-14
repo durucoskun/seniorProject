@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import FirebaseDatabase
+
 
 @objc protocol CityDataDelegate{
     
@@ -16,6 +18,10 @@ import Foundation
 }
 
 class CityDataSource: NSObject {
+    
+    
+
+    var refCities = FIRDatabase.database().reference()
     
     public var quotes : Array<Quote>?
     public var places : Array<Place>?
@@ -151,6 +157,8 @@ class CityDataSource: NSObject {
                                       cityId : placeDictionary["CityId"]! as! String,
                                       countryName : placeDictionary["CountryName"]! as! String
                 )
+                
+              refCities.child("CITIES").child("\(newPlace.IataCode)").setValue(["SkyScannerCode" : newPlace.code, "CityName" : newPlace.cityName,"CityId" : newPlace.cityId,"Country" : newPlace.countryName,"Name" : newPlace.name])
                 
                 (places?.append(newPlace))!
                 

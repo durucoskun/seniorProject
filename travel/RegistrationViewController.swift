@@ -43,15 +43,7 @@ class RegistrationViewController: UIViewController {
                 
                 // SET USERNAME
                 
-                self.ref.child("USERS").child((user?.uid)!).setValue(["username": self.username.text])
-                
-                
-                
-                
-                
-                
-                
-                
+               self.ref.child("USERS").child((user?.uid)!).setValue(["username":self.username.text])
                 
                 
                 //user is found
