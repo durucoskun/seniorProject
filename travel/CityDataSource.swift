@@ -8,6 +8,7 @@
 
 import Foundation
 import FirebaseDatabase
+import UIKit
 
 
 @objc protocol CityDataDelegate{
@@ -19,8 +20,9 @@ import FirebaseDatabase
 
 class CityDataSource: NSObject {
     
+    var appDelegate = UIApplication.shared.delegate as! AppDelegate
     
-
+    
     var ref = FIRDatabase.database().reference()
     
     public var quotes : Array<Quote>?
@@ -33,8 +35,10 @@ class CityDataSource: NSObject {
     
     var delegate : CityDataDelegate?
     
-    func loadCities(url: String,code : String){
-       destinations?.removeAll()
+    func loadCities(url: String,code : String, vc: HomePageViewController){
+        
+        destinations?.removeAll()
+        let semaphore = DispatchSemaphore(value: 0);
         
         let networkSession = URLSession.shared
         
@@ -45,12 +49,13 @@ class CityDataSource: NSObject {
         let dataTask = networkSession.dataTask(with: req) {(data,response,error) in print("Data")
             
             let jsonReadable = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-             print(jsonReadable!)
+            print(jsonReadable!)
             
             
-            ////
+            
             do
             {
+                print(self.destinations!.count)
                 let jsonDictionary = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! [String: Any]
                 
                 
@@ -67,22 +72,25 @@ class CityDataSource: NSObject {
                 //    self.currencies (currencyArray : currencyArray)
                 
                 self.checkDestinations(code: code)
-                
+                //semaphore.signal();
+                print(self.destinations!.count)
             }
             catch
             {
                 print("We have a JSON exception")
             }
             
+            
         }
-        
-        
-        
-        ///////////////
+      
         dataTask.resume()
-        //        task.resume()
-        
-        //var request = URLRequest
+        //semaphore.wait(timeout: DispatchTime.distantFuture);
+        print("waited")
+        showNextView(fromViewController: vc)
+    }
+    
+    func showNextView(fromViewController: HomePageViewController) {
+        fromViewController.goToNextView()
     }
     
     func checkDestinations (code : String){
@@ -93,7 +101,7 @@ class CityDataSource: NSObject {
             
             if (newCity.code == code){
                 let id = newCity.placeId
-    
+                
                 for quote in quotes!{
                     let newQuote = quote as! Quote
                     if (quote.outbound.originId == id){
@@ -102,10 +110,11 @@ class CityDataSource: NSObject {
                             let   nextCity = place as! Place
                             
                             if (destination == nextCity.placeId){
-                              
+                                
                                 let destinationDictionary : [String : Any] = ["DestinationCity":nextCity.cityName!,"MinPrice" :quote.minPrice,"Country":nextCity.countryName]
                                 
-                               ( destinations?.append(destinationDictionary as NSDictionary))!
+                                ( destinations?.append(destinationDictionary as NSDictionary))!
+                                print(destinations?.count)
                                 
                             }
                             
@@ -119,7 +128,7 @@ class CityDataSource: NSObject {
             }
         }
         
-       
+        
         loadCityList()
     }
     func getQuotes(quoteArray : NSArray){
@@ -158,21 +167,21 @@ class CityDataSource: NSObject {
                                       countryName : placeDictionary["CountryName"]! as! String
                 )
                 
-              ref.child("CITIES").child("\(newPlace.IataCode)").setValue(["SkyScannerCode" : newPlace.code, "CityName" : newPlace.cityName,"CityId" : newPlace.cityId,"Country" : newPlace.countryName,"Name" : newPlace.name])
+                ref.child("CITIES").child("\(newPlace.IataCode)").setValue(["SkyScannerCode" : newPlace.code, "CityName" : newPlace.cityName,"CityId" : newPlace.cityId,"Country" : newPlace.countryName,"Name" : newPlace.name])
                 
                 (places?.append(newPlace))!
-
+                
                 
                 
                 ref.child("AIRPORTS").observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
                     if( snapshot.hasChild(newPlace.cityName!)){
-                     ////// BURAYI EKLEMEMIZ LAZIM!!!!!!!
+                        ////// BURAYI EKLEMEMIZ LAZIM!!!!!!!
                         // anı citye farklı havaalanlaır eklemek icin
                         
                     }
-                    })
+                })
                 
-            ref.child("AIRPORTS").child("\(newPlace.cityName!)").setValue(["SkyScannerCode" : newPlace.code])
+                ref.child("AIRPORTS").child("\(newPlace.cityName!)").setValue(["SkyScannerCode" : newPlace.code])
                 
             }
             
@@ -185,7 +194,7 @@ class CityDataSource: NSObject {
             let carrierDictionary = carrier as! NSDictionary
             
             let newCarrier = Carrier(id : carrierDictionary["CarrierId"]! as! Int , name: carrierDictionary["Name"]! as! String)
-       
+            
             carriers?.append(newCarrier)
             
         }
@@ -199,11 +208,11 @@ class CityDataSource: NSObject {
     
     func loadCityList(){
         
-  
-              for dest in destinations!{
+        
+        for dest in destinations!{
             
             let new = dest as! NSDictionary
-        
+            
             
             
         }
@@ -212,7 +221,7 @@ class CityDataSource: NSObject {
         
     }
     
-  
+    
     
     
 }

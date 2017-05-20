@@ -27,6 +27,8 @@ class CityViewController: UIViewController,UITableViewDataSource,UITableViewDele
         super.viewDidLoad()
         self.title = "DESTINATIONS"
         cityTableView.dataSource = self
+        let city = (cityDataSource.destinations?.count)!
+        print(city)
         //cityDataSource.delegate = self
 
         // Do any additional setup after loading the view.

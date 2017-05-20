@@ -278,7 +278,6 @@
                                 <state key="normal" title="GO"/>
                                 <connections>
                                     <action selector="go:" destination="o7Y-KG-vbu" eventType="touchUpInside" id="Szb-bb-rDJ"/>
-                                    <segue destination="eOd-39-gej" kind="show" id="TS3-07-0F1"/>
                                 </connections>
                             </button>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ycx-Fe-0GM">
@@ -302,6 +301,14 @@
                                     <segment title="€"/>
                                 </segments>
                             </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CUh-qS-dH9">
+                                <rect key="frame" x="139" y="552" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <segue destination="eOd-39-gej" kind="show" identifier="showList" id="UYo-tI-ZQh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.46267973410000002" green="0.16121272910000001" blue="0.24358407339999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -316,7 +323,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zSz-Sn-xCJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1832.8" y="138.98050974512745"/>
+            <point key="canvasLocation" x="1830" y="139"/>
         </scene>
         <!--City View Controller-->
         <scene sceneID="1wE-el-VU4">
@@ -340,7 +347,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="124"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3dg-Wr-0SW" id="ao1-hI-cZO">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="124"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="123.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aqa-jo-6wX">

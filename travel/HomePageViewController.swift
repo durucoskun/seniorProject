@@ -13,14 +13,14 @@ import FirebaseDatabase
 
 class HomePageViewController: UIViewController, CLLocationManagerDelegate {
     
-    
+    var appDelegate = UIApplication.shared.delegate as! AppDelegate
     var ref = FIRDatabase.database().reference()
     
     @IBOutlet weak var mapKitView: MKMapView!
     let citydata = CityDataSource()
     var location = CLLocation()
     var currentCityName: String!
-     var currency: String = ""
+    var currency: String = ""
     var cityCode : String = ""
     
     @IBOutlet weak var departureLocation: UITextField!
@@ -30,26 +30,29 @@ class HomePageViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var maxPrice: UITextField!
     @IBAction func locationButton(_ sender: Any) {
         if self.currentCityName != nil {
-        self.departureLocation.text = self.currentCityName
+            self.departureLocation.text = self.currentCityName
         }
     }
     @IBOutlet weak var currencyPicker: UISegmentedControl!
     
     let manager = CLLocationManager()
     
+    
+    
     @IBAction func go(_ sender: UIButton) {
+        let vc = self.appDelegate.getCurrentViewController()
         goAction: do{
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        var departure = dateFormatter.string(from: departureDate.date)
-        var returnD = dateFormatter.string(from: returnDate.date)
-        var timeDiff = DateComponents()
-        timeDiff.hour = -3
-        timeDiff.minute = -1
-        let correctCurrDate = Calendar.current.date(byAdding: timeDiff, to: Date())!
-
-        print(departureDate.date) ////
-        print(Date()) ////
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            var departure = dateFormatter.string(from: departureDate.date)
+            var returnD = dateFormatter.string(from: returnDate.date)
+            var timeDiff = DateComponents()
+            timeDiff.hour = -3
+            timeDiff.minute = -1
+            let correctCurrDate = Calendar.current.date(byAdding: timeDiff, to: Date())!
+            
+            print(departureDate.date)
+            print(Date())
             if(departureDate.date<correctCurrDate){
                 let alert = UIAlertController(title: "Oops!", message: "Departure date cannot be before current date", preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.default, handler:nil))
@@ -57,80 +60,67 @@ class HomePageViewController: UIViewController, CLLocationManagerDelegate {
                 break goAction
             }
             
-        if(departureDate.date>=returnDate.date){
+            if(departureDate.date>=returnDate.date){
                 let alert = UIAlertController(title: "Oops!", message: "Departure date cannot be later than/the same as return date", preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.default, handler:nil))
                 self.present(alert, animated:true,completion:nil)
                 break goAction
-        }
+            }
             if(departureLocation.text==""){
                 let alert = UIAlertController(title: "Oops!", message: "Departure location cannot be empty", preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.default, handler:nil))
                 self.present(alert, animated:true,completion:nil)
                 break goAction
             }
-       
-      
-        if currencyPicker.selectedSegmentIndex==0{
-            currency = "TRY"
-        }
-        else if currencyPicker.selectedSegmentIndex==1{
-            currency = "USD"
-        }
-        else if currencyPicker.selectedSegmentIndex==2{
-            currency = "EUR"
-        }
+            if(maxPrice.text==""){
+                let alert = UIAlertController(title: "Oops!", message: "Maximum price cannot be empty", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.default, handler:nil))
+                self.present(alert, animated:true,completion:nil)
+                break goAction
+            }
+            
+            if currencyPicker.selectedSegmentIndex==0{
+                currency = "TRY"
+            }
+            else if currencyPicker.selectedSegmentIndex==1{
+                currency = "USD"
+            }
+            else if currencyPicker.selectedSegmentIndex==2{
+                currency = "EUR"
+            }
+            
+            var departureAirport: String = ""
+            var url : String = ""
             
             
-            /*
-             
-            BURAYA GIRMIYO NEDEN ANLAMADIM
-            ref.child("AIRPORTS").observeSingleEvent(of: .value, with: { (snapshot) in
-                if (snapshot.exists()){
-                    
-                }else {
-                print ("MERHABAAAA")
-                if snapshot.hasChild("Amsterdam"){
-                    print("merhaba")
-                }
-                }})
-          
-
-           
-            print(ref.key)
-            ref.child("AIRPORTS").observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
-                print("MERHABA")
-                if snapshot.hasChild("Amsterdam"){
-                    print("merhaba")
-                }
-            })
-          
+            
             ref.child("AIRPORTS").observeSingleEvent(of: .value, with: { (snapshot) in
                 
-                if snapshot.hasChild("Amsterdam"){
-                    print("merhaba")
-                }
-                print (snapshot.hasChild("\(self.departureLocation.text!)"))
                 
-             self.cityCode = self.value(forKey: "SkyscannerCode") as! String
-                print (self.cityCode)
-                 //cityCode = value?["SkyscannerCode"] as?  String
-                self.cityCode = snapshot.childSnapshot(forPath: "SkyscannerCode").key
-               // print (snapshot.childSnapshot(forPath: "SkyscannerCode"))
+                departureAirport = snapshot.childSnapshot(forPath: "\(self.departureLocation.text!)").children.nextObject().debugDescription
+                let rng = departureAirport.index(departureAirport.startIndex, offsetBy: 31)..<departureAirport.index(departureAirport.endIndex, offsetBy: -1)
+                departureAirport = departureAirport.substring(with: rng)
+                print(departureAirport)
+                
+                
+                url = "http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/TR/\(self.currency)/en-US/\(departureAirport)/anywhere/\(departure)/\(returnD)?apiKey=at812187236421337946364002643367"
+                print(url)
+                
+                self.citydata.loadCities(url: url, code: self.departureLocation.text!, vc: vc as! HomePageViewController)
+                
                 
             })
             
- */
-    var url = "http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/TR/\(currency)/en-US/\(departureLocation.text)/anywhere/\(departure)/\(returnD)?apiKey=at812187236421337946364002643367"
-        
-         DispatchQueue.main.async {
-       
-           self.citydata.loadCities(url: url, code: self.departureLocation.text!)
             
-        }
+            
         }
         
     }
+    
+    func goToNextView() {
+        performSegue(withIdentifier: "showList", sender: self)
+    }
+    
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
@@ -149,17 +139,12 @@ class HomePageViewController: UIViewController, CLLocationManagerDelegate {
             }
             else{
                 if let place = placemark?[0]{
-                    if place.administrativeArea! == "Istanbul"{
-                        if self.currentCityName == nil{
-                            self.currentCityName = "IST"
-                            self.departureLocation.text = self.currentCityName
-                        }
-                        }
-
-                        }
+                    self.departureLocation.text = place.administrativeArea!
+                    
                 }
             }
         }
+    }
     
     
     override func viewDidLoad() {
@@ -170,6 +155,7 @@ class HomePageViewController: UIViewController, CLLocationManagerDelegate {
         manager.requestWhenInUseAuthorization()
         manager.startUpdatingLocation()
         
+        
         // Do any additional setup after loading the view.
     }
     override func didReceiveMemoryWarning() {
@@ -179,12 +165,12 @@ class HomePageViewController: UIViewController, CLLocationManagerDelegate {
     
     
     
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
         
         if  let nextView = segue.destination as? CityViewController{
             nextView.cityDataSource = citydata
@@ -193,7 +179,7 @@ class HomePageViewController: UIViewController, CLLocationManagerDelegate {
         }
         
         
-     }
+    }
     
     
 }
