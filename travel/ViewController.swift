@@ -33,6 +33,8 @@ class ViewController: UIViewController ,UITableViewDelegate{
             if user != nil {
                 //user is found
                 self.message.text = ""
+                UserDefaults.standard.set(true, forKey: "isLoggedIn")
+                UserDefaults.standard.synchronize()
                 self.performSegue(withIdentifier: "showMainPage", sender: self)
             }
             else {

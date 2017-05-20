@@ -41,9 +41,8 @@ class RegistrationViewController: UIViewController {
             //check the user is not nill
             if user != nil {
                 
-                // SET USERNAME
-                
-               self.ref.child("USERS").child((user?.uid)!).setValue(["username":self.username.text])
+                // SET USERNAME and Email
+               self.ref.child("USERS").child((user?.uid)!).setValue(["username":self.username.text,"email":self.email.text])
                 
                 
                 //user is found

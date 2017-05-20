@@ -9,14 +9,19 @@
 import UIKit
 import MapKit
 import CoreLocation
+import FirebaseDatabase
 
 class HomePageViewController: UIViewController, CLLocationManagerDelegate {
+    
+    
+    var ref = FIRDatabase.database().reference()
     
     @IBOutlet weak var mapKitView: MKMapView!
     let citydata = CityDataSource()
     var location = CLLocation()
     var currentCityName: String!
      var currency: String = ""
+    var cityCode : String = ""
     
     @IBOutlet weak var departureLocation: UITextField!
     
@@ -43,8 +48,8 @@ class HomePageViewController: UIViewController, CLLocationManagerDelegate {
         timeDiff.minute = -1
         let correctCurrDate = Calendar.current.date(byAdding: timeDiff, to: Date())!
 
-        print(departureDate.date)
-        print(Date())
+        print(departureDate.date) ////
+        print(Date()) ////
             if(departureDate.date<correctCurrDate){
                 let alert = UIAlertController(title: "Oops!", message: "Departure date cannot be before current date", preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.default, handler:nil))
@@ -75,12 +80,52 @@ class HomePageViewController: UIViewController, CLLocationManagerDelegate {
         else if currencyPicker.selectedSegmentIndex==2{
             currency = "EUR"
         }
-        
-        var url = "http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/TR/\(currency)/en-US/\(departureLocation.text!)/anywhere/\(departure)/\(returnD)?apiKey=at812187236421337946364002643367"
+            
+            
+            /*
+             
+            BURAYA GIRMIYO NEDEN ANLAMADIM
+            ref.child("AIRPORTS").observeSingleEvent(of: .value, with: { (snapshot) in
+                if (snapshot.exists()){
+                    
+                }else {
+                print ("MERHABAAAA")
+                if snapshot.hasChild("Amsterdam"){
+                    print("merhaba")
+                }
+                }})
+          
+
+           
+            print(ref.key)
+            ref.child("AIRPORTS").observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+                print("MERHABA")
+                if snapshot.hasChild("Amsterdam"){
+                    print("merhaba")
+                }
+            })
+          
+            ref.child("AIRPORTS").observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                if snapshot.hasChild("Amsterdam"){
+                    print("merhaba")
+                }
+                print (snapshot.hasChild("\(self.departureLocation.text!)"))
+                
+             self.cityCode = self.value(forKey: "SkyscannerCode") as! String
+                print (self.cityCode)
+                 //cityCode = value?["SkyscannerCode"] as?  String
+                self.cityCode = snapshot.childSnapshot(forPath: "SkyscannerCode").key
+               // print (snapshot.childSnapshot(forPath: "SkyscannerCode"))
+                
+            })
+            
+ */
+    var url = "http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/TR/\(currency)/en-US/\(departureLocation.text)/anywhere/\(departure)/\(returnD)?apiKey=at812187236421337946364002643367"
         
          DispatchQueue.main.async {
        
-            self.citydata.loadCities(url: url, code: self.departureLocation.text!)
+           self.citydata.loadCities(url: url, code: self.departureLocation.text!)
             
         }
         }

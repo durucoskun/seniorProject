@@ -21,7 +21,7 @@ class CityDataSource: NSObject {
     
     
 
-    var refCities = FIRDatabase.database().reference()
+    var ref = FIRDatabase.database().reference()
     
     public var quotes : Array<Quote>?
     public var places : Array<Place>?
@@ -93,7 +93,7 @@ class CityDataSource: NSObject {
             
             if (newCity.code == code){
                 let id = newCity.placeId
-                // print ("Departure : \(newCity.cityName)")
+    
                 for quote in quotes!{
                     let newQuote = quote as! Quote
                     if (quote.outbound.originId == id){
@@ -102,7 +102,7 @@ class CityDataSource: NSObject {
                             let   nextCity = place as! Place
                             
                             if (destination == nextCity.placeId){
-                                //    print ("Departure : \(newCity.cityName) -->Destination : \(nextCity.cityName)")
+                              
                                 let destinationDictionary : [String : Any] = ["DestinationCity":nextCity.cityName!,"MinPrice" :quote.minPrice,"Country":nextCity.countryName]
                                 
                                ( destinations?.append(destinationDictionary as NSDictionary))!
@@ -158,9 +158,21 @@ class CityDataSource: NSObject {
                                       countryName : placeDictionary["CountryName"]! as! String
                 )
                 
-              refCities.child("CITIES").child("\(newPlace.IataCode)").setValue(["SkyScannerCode" : newPlace.code, "CityName" : newPlace.cityName,"CityId" : newPlace.cityId,"Country" : newPlace.countryName,"Name" : newPlace.name])
+              ref.child("CITIES").child("\(newPlace.IataCode)").setValue(["SkyScannerCode" : newPlace.code, "CityName" : newPlace.cityName,"CityId" : newPlace.cityId,"Country" : newPlace.countryName,"Name" : newPlace.name])
                 
                 (places?.append(newPlace))!
+
+                
+                
+                ref.child("AIRPORTS").observeSingleEvent(of: FIRDataEventType.value, with: { (snapshot) in
+                    if( snapshot.hasChild(newPlace.cityName!)){
+                     ////// BURAYI EKLEMEMIZ LAZIM!!!!!!!
+                        // anı citye farklı havaalanlaır eklemek icin
+                        
+                    }
+                    })
+                
+            ref.child("AIRPORTS").child("\(newPlace.cityName!)").setValue(["SkyScannerCode" : newPlace.code])
                 
             }
             
@@ -173,7 +185,7 @@ class CityDataSource: NSObject {
             let carrierDictionary = carrier as! NSDictionary
             
             let newCarrier = Carrier(id : carrierDictionary["CarrierId"]! as! Int , name: carrierDictionary["Name"]! as! String)
-            
+       
             carriers?.append(newCarrier)
             
         }
@@ -191,8 +203,7 @@ class CityDataSource: NSObject {
               for dest in destinations!{
             
             let new = dest as! NSDictionary
-         
-          //  print ("To \(new["DestinationCity"]!)Min Price is \( new ["MinPrice"]!)")
+        
             
             
         }

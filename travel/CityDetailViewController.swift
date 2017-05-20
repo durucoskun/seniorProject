@@ -9,11 +9,14 @@
 import UIKit
 import FirebaseDatabase
 
+
+
 class CityDetailViewController: UIViewController ,CityDataDelegate{
     
     
 
 
+    @IBOutlet weak var cityImage: UIImageView!
     
     @IBOutlet weak var cityName: UILabel!
         @IBOutlet weak var countryName: UILabel!
@@ -33,6 +36,8 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
         
         self.cityName.text = " \(selectedCity["DestinationCity"]!) (\(selectedCity["Country"]!))"
         self.countryName.text = "\(((selectedCity["Country"]!)   as AnyObject).uppercased!)"
+       
+
         
         // Do any additional setup after loading the view.
     }

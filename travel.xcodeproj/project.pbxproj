@@ -29,6 +29,8 @@
 		869BE32D1EC5CEAD00EB1779 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 869BE32C1EC5CEAD00EB1779 /* GoogleService-Info.plist */; };
 		9217B08B1EAFD8ED0081137E /* CityDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9217B08A1EAFD8ED0081137E /* CityDetailViewController.swift */; };
 		9234C7861EC3915600A4DB6A /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9234C7851EC3915600A4DB6A /* RegistrationViewController.swift */; };
+		927A81511ED046DC0026841B /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927A81501ED046DC0026841B /* MainNavigationController.swift */; };
+		927A81531ED04A630026841B /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927A81521ED04A630026841B /* File.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +59,8 @@
 		869BE32C1EC5CEAD00EB1779 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9217B08A1EAFD8ED0081137E /* CityDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityDetailViewController.swift; sourceTree = "<group>"; };
 		9234C7851EC3915600A4DB6A /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		927A81501ED046DC0026841B /* MainNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
+		927A81521ED04A630026841B /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		BBDE1C737084CA610A406D1B /* Pods-travel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-travel.debug.xcconfig"; path = "Pods/Target Support Files/Pods-travel/Pods-travel.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,6 +114,8 @@
 			children = (
 				869BE32C1EC5CEAD00EB1779 /* GoogleService-Info.plist */,
 				86769EF11E9F95530083EB76 /* AppDelegate.swift */,
+				927A81501ED046DC0026841B /* MainNavigationController.swift */,
+				927A81521ED04A630026841B /* File.swift */,
 				9234C7851EC3915600A4DB6A /* RegistrationViewController.swift */,
 				86769EF31E9F95530083EB76 /* ViewController.swift */,
 				86769EF51E9F95530083EB76 /* Main.storyboard */,
@@ -262,6 +268,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				927A81511ED046DC0026841B /* MainNavigationController.swift in Sources */,
 				86769F071E9F9B0D0083EB76 /* HomePageViewController.swift in Sources */,
 				86769EF41E9F95530083EB76 /* ViewController.swift in Sources */,
 				3F0627CA1EB16773005B2DB7 /* Destination.swift in Sources */,
@@ -278,6 +285,7 @@
 				86769EFA1E9F95530083EB76 /* travel.xcdatamodeld in Sources */,
 				86769F0D1E9FB1400083EB76 /* CityDataSource.swift in Sources */,
 				86769EF21E9F95530083EB76 /* AppDelegate.swift in Sources */,
+				927A81531ED04A630026841B /* File.swift in Sources */,
 				3FFC03721EAD15E30044AB9C /* CityViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
