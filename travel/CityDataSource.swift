@@ -55,7 +55,7 @@ class CityDataSource: NSObject {
             
             do
             {
-                print(self.destinations!.count)
+               
                 let jsonDictionary = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! [String: Any]
                 
                 
@@ -72,8 +72,8 @@ class CityDataSource: NSObject {
                 //    self.currencies (currencyArray : currencyArray)
                 
                 self.checkDestinations(code: code)
-                //semaphore.signal();
-                print(self.destinations!.count)
+                semaphore.signal();
+                
             }
             catch
             {
@@ -84,7 +84,7 @@ class CityDataSource: NSObject {
         }
       
         dataTask.resume()
-        //semaphore.wait(timeout: DispatchTime.distantFuture);
+        semaphore.wait(timeout: DispatchTime.distantFuture);
         print("waited")
         showNextView(fromViewController: vc)
     }

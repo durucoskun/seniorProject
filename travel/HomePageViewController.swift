@@ -106,7 +106,7 @@ class HomePageViewController: UIViewController, CLLocationManagerDelegate {
                 url = "http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/TR/\(self.currency)/en-US/\(departureAirport)/anywhere/\(departure)/\(returnD)?apiKey=at812187236421337946364002643367"
                 print(url)
                 
-                self.citydata.loadCities(url: url, code: self.departureLocation.text!, vc: vc as! HomePageViewController)
+                self.citydata.loadCities(url: url, code: departureAirport, vc: vc as! HomePageViewController)
                 
                 
             })
@@ -139,11 +139,14 @@ class HomePageViewController: UIViewController, CLLocationManagerDelegate {
             }
             else{
                 if let place = placemark?[0]{
-                    self.departureLocation.text = place.administrativeArea!
-                    
+                    if self.currentCityName == nil{
+                        self.currentCityName = place.administrativeArea!
+                        self.departureLocation.text = self.currentCityName
+                    }
                 }
             }
         }
+        
     }
     
     
