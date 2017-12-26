@@ -12,8 +12,8 @@ import FirebaseDatabase
 
 class RegistrationViewController: UIViewController {
 
-    
-    var ref = FIRDatabase.database().reference()
+    var ref : DatabaseReference!
+
     
     @IBOutlet weak var username: UITextField!
     @IBOutlet weak var email: UITextField!
@@ -37,13 +37,14 @@ class RegistrationViewController: UIViewController {
             self.present(alert, animated:true,completion:nil)
             break createAcc
             }
-        FIRAuth.auth()?.createUser(withEmail: email.text!, password: password.text!,completion: { (user, error) in
+        Auth.auth().createUser(withEmail: email.text!, password: password.text!,completion: { (user, error) in
             //check the user is not nill
             if user != nil {
                 
                 // SET USERNAME and Email
-               self.ref.child("USERS").child((user?.uid)!).setValue(["username":self.username.text,"email":self.email.text])
-                
+              
+              self.ref.root.child("USERS").child((user?.uid)!).setValue(["username":self.username.text,"email":self.email.text])
+                             self.ref.root.child("USERS").child((user?.uid)!).child("INTERESTS").setValue(["Festival":0,"Adventure":0,"Romance":0,"Nature":0,"Night Life":0,"Beach":0,"Food and Drink":0,"Warm Weather":0,"Safety":0,"RoadTrip":0])
                 
                 //user is found
                 self.performSegue(withIdentifier: "showLoginPage", sender: self)
@@ -59,8 +60,9 @@ class RegistrationViewController: UIViewController {
 
 
     override func viewDidLoad() {
+        ref = Database.database().reference()
         super.viewDidLoad()
-
+self.view.backgroundColor = UIColor (patternImage:UIImage(named : "travelling-1.png")!)
         // Do any additional setup after loading the view.
     }
 
@@ -79,5 +81,9 @@ class RegistrationViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+       
+    }
 
 }

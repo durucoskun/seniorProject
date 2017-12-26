@@ -2,7 +2,7 @@
 //  OutboundLeg.swift
 //  travel
 //
-//  Created by Student on 23/04/2017.
+//  Created by Duru Coskun on 23/04/2017.
 //  Copyright © 2017 Ata Aygen. All rights reserved.
 //
 
