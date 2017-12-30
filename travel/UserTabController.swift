@@ -25,7 +25,7 @@ class UserTabController : UITabBarController{
         
         // Profile Tab
         /*let profileController = self.tabBarController?.viewControllers? [0] as! UserProfileController
-        profileController.email.text = email
+        profileController.email.text = emailxs
         profileController.username.text = username
         
         // Flight seacrh Tab
@@ -34,7 +34,9 @@ class UserTabController : UITabBarController{
         // saved Places Tab
    //     let savedPlacesContoller = viewControllers?[2]
  */
-        
+        let flightSearchController = viewControllers?[2] as! HomePageViewController
+        flightSearchController.userUid = self.userUid
+        self.selectedIndex = 2
     }
     
 }

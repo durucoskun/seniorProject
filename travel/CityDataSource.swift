@@ -41,9 +41,12 @@ class CityDataSource: NSObject {
     public var carriers : Array<Carrier>?
     public var currencies : Array<Currency>?
     public var destinations : Array <NSDictionary>? = Array()
+    public var sortedArray : Array <NSDictionary>? = Array()
+    var userUid: String = ""
     var delegate : CityDataDelegate?
     
-    func loadCities(url: String,code : String, vc: HomePageViewController){
+    func loadCities(url: String,code : String, vc: HomePageViewController, uid: String, price: Int){
+        self.userUid=uid
         ref = Database.database().reference()
         destinations?.removeAll()
         let semaphore = DispatchSemaphore(value: 0);
@@ -84,42 +87,99 @@ class CityDataSource: NSObject {
         dataTask.resume()
         semaphore.wait(timeout: DispatchTime.distantFuture);
         print("waited")
-        showNextView(fromViewController: vc)
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
+        self.showNextView(fromViewController: vc)
+        })
     }
     
     func showNextView(fromViewController: HomePageViewController) {
         fromViewController.goToNextView()
     }
+    
     func checkDestinations (code : String){
+        var interest: Array<String> = []
+        let intRef = ref.child("USERS").child(self.userUid).child("INTERESTS")
+        var averages: [String: Float] = [:]
+        intRef.observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
+            if let data = snapshot.value as? [String: Any] {
+                
+                let dataArray = Array(data)
+                let keys = dataArray.map { $0.0 }
+                for i in 0..<dataArray.count{
+                    if((dataArray[i].value as! Int) == 1){
+                        interest.append(keys[i])
+                    }
+                }
+                print(interest)
+            }
+        })
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
+            let avgRef = self.ref.child("CITY")
+            avgRef.observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
+                for child in snapshot.children{
+                    let snap = child as! DataSnapshot
+                    let cityName = snap.key
+                    var average:Float = 0;
+                    if((snap.childSnapshot(forPath: "INTERESTS").value as? [String:Any]) == nil){}
+                    else{
+                        var interests = snap.childSnapshot(forPath: "INTERESTS").value as! [String:Any]
+                        print(interests)
+                        for i in 0..<interest.count{
+                            if(interests[interest[i]] as? Float != nil){
+                            average += interests[interest[i]] as! Float
+                            print(interests[interest[0]]!)
+                            }
+                        }
+                        average = average/Float(interest.count)
+                        averages[cityName] = average
+                    }
+                   /* for i in 0..<interest.count{
+                        average += interests[interest[i]] as! Float
+                    }*/
+                    
+                }
+                
+            })
+        } )
         
+        
+        
+DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
+//        print(averages)
         var destination : Int
-        for city in places!{
+        for city in self.places!{
             let newCity = city as! Place
             
             if (newCity.code == code){
                 
                 let id = newCity.placeId
                 
-                for quote in quotes!{
+                for quote in self.quotes!{
                     let newQuote = quote as! Quote
                     if (quote.outbound.originId == id){
                         destination =  quote.outbound.destinationId
-                        for place in places!{
+                        for place in self.places!{
                             let   nextCity = place as! Place
                             
                             if (destination == nextCity.placeId){
                                 
-                                let destinationDictionary : [String : Any] = ["DestinationCity":nextCity.cityName!,"MinPrice" :quote.minPrice,"Country":nextCity.countryName]
+                                let destinationDictionary : [String : Any] =
+                                    
+                                    ["DestinationCity":nextCity.cityName!,"MinPrice" :quote.minPrice,"Country":nextCity.countryName, "Average": averages[nextCity.cityName!] ]
                                 
-                                ( destinations?.append(destinationDictionary as NSDictionary))!
-                                print(destinations?.count)
+                                (
+                                self.destinations?.append(destinationDictionary as NSDictionary))!
                             }
                         }
                     }
                 }
             }
         }
+    self.sortedArray = (self.destinations as! NSArray).sortedArray(using: [NSSortDescriptor(key: "Average", ascending: false)]) as! [[String:AnyObject]] as Array<NSDictionary>
+    print(self.sortedArray)
+})
         loadCityList()
+    
     }
     
     func getQuotes(quoteArray : NSArray){
@@ -578,7 +638,7 @@ for countryItem in countryArray!{
     
     
     func loadCityList(){
-        for dest in destinations!{
+        for dest in sortedArray!{
             let new = dest as! NSDictionary
             
         }

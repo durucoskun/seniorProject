@@ -21,6 +21,10 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
     var userUid : String?
     var cityname : String?
     var countryname : String?
+    var citydata = CityDataSource()
+
+    
+    var currency: String = ""
     
     var pop: String = ""
     @IBOutlet weak var cityInfo: UILabel!
@@ -30,13 +34,15 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
     
     @IBOutlet weak var cityName: UILabel?
     @IBOutlet weak var countryName: UILabel?
-    var currency : String = ""
+    
     
     var ref :DatabaseReference!
     
     let storage = Storage.storage()
     var selectedCity : NSDictionary = [:]
     let cityData = CityDataSource()
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -116,6 +122,15 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
         // Do any additional setup after loading the view.
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if  let nextView = segue.destination as? CityViewController{
+            nextView.cityDataSource = self.citydata
+            nextView.currency = self.currency
+            nextView.userUid = self.userUid
+        }
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -167,4 +182,5 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
                 
         } )
     }
-}
+
+    }

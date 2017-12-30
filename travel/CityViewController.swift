@@ -27,7 +27,7 @@ class CityViewController: UIViewController,UITableViewDataSource,UITableViewDele
         super.viewDidLoad()
         self.title = "DESTINATIONS"
         cityTableView.dataSource = self
-        
+        print(userUid)
         self.view.backgroundColor = UIColor (patternImage:UIImage(named : "city.png")!)
         
         //cityDataSource.delegate = self
@@ -51,7 +51,7 @@ class CityViewController: UIViewController,UITableViewDataSource,UITableViewDele
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         
         cell = cityTableView.dequeueReusableCell(withIdentifier: "Identifier",for: indexPath as IndexPath) as! CityTableViewCell
-        let city = (cityDataSource.destinations?[indexPath.row])!
+        let city = (cityDataSource.sortedArray?[indexPath.row])!
         
 
       cell?.destination.setTitle("DESTINATION : \(city["DestinationCity"]!)",for: UIControlState.normal)
@@ -73,7 +73,7 @@ class CityViewController: UIViewController,UITableViewDataSource,UITableViewDele
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section : Int)-> Int {
         
-        return (cityDataSource.destinations?.count)!
+        return (cityDataSource.sortedArray?.count)!
         
     }
     
@@ -124,10 +124,16 @@ class CityViewController: UIViewController,UITableViewDataSource,UITableViewDele
                
         
         if  let nextView = segue.destination as? CityDetailViewController{
-            nextView.selectedCity = (cityDataSource.destinations?[indexPath.row])!
+            nextView.selectedCity = (cityDataSource.sortedArray?[indexPath.row])!
             nextView.cityImage?.kf.setImage(with:URL(string:"gs://travelapp-31a9e.appspot.com/New York.jpg"))
             nextView.userUid = self.userUid
+            nextView.citydata = self.cityDataSource
+            nextView.currency = self.currency
             
+        }
+        
+        if let nextView = segue.destination as? UserTabController{
+            nextView.userUid = self.userUid
         }
         
         

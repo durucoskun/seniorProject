@@ -109,7 +109,7 @@ class HomePageViewController: UIViewController, CLLocationManagerDelegate {
                 
                 print(url)
           
-            self.citydata.loadCities(url: url, code: departureAirport, vc: vc as!HomePageViewController)
+                self.citydata.loadCities(url: url, code: departureAirport, vc: vc, uid: self.userUid, price: Int(self.maxPrice.text!)!)
             })
         }
     }
