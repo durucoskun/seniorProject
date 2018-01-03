@@ -59,9 +59,7 @@ class CityDataSource: NSObject {
         let dataTask = networkSession.dataTask(with: req) {(data,response,error) in print("Data")
             
             let jsonReadable = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-            //print(jsonReadable!)
-            // print("CITY DATA SOURCE JSON")
-            do{
+                       do{
                 
                 let jsonDictionary = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! [String: Any]
                 
@@ -110,7 +108,6 @@ class CityDataSource: NSObject {
                         interest.append(keys[i])
                     }
                 }
-                print(interest)
             }
         })
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
@@ -123,11 +120,11 @@ class CityDataSource: NSObject {
                     if((snap.childSnapshot(forPath: "INTERESTS").value as? [String:Any]) == nil){}
                     else{
                         var interests = snap.childSnapshot(forPath: "INTERESTS").value as! [String:Any]
-                        print(interests)
+
                         for i in 0..<interest.count{
                             if(interests[interest[i]] as? Float != nil){
                             average += interests[interest[i]] as! Float
-                            print(interests[interest[0]]!)
+
                             }
                         }
                         average = average/Float(interest.count)
@@ -145,8 +142,8 @@ class CityDataSource: NSObject {
         
         
 DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
-//        print(averages)
-        var destination : Int
+
+    var destination : Int
         for city in self.places!{
             let newCity = city as! Place
             
@@ -176,7 +173,7 @@ DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
             }
         }
     self.sortedArray = (self.destinations as! NSArray).sortedArray(using: [NSSortDescriptor(key: "Average", ascending: false)]) as! [[String:AnyObject]] as Array<NSDictionary>
-    print(self.sortedArray)
+
 })
         loadCityList()
     
@@ -252,10 +249,7 @@ DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
                  latitude = (coordinates["Latitude"] as? Double)!
                  }
                  }
-                 if ( city == "Magadishu"   || city == "Vigo"  ||  city == "Strasbourg" ||  city == "Maracaibo"  || city == "Salalah"  ||  city == "Kaliningrad" || city == "Kano" || city == "Kargoho"  ){
-                 
-                 print("City : \(city) coordinates: long: \(longitude) lat:\(latitude)")
-                 
+                
                  let scoreURL = "http://www.triposo.com//api/20171027/local_score.json?coordinates=\(latitude),\(longitude)&account=RNTTF1VB&token=49onrrp87tqkx4pa3zr2nub0fi2m9equ"
                  
                  // let scoreUrl = "https://www.triposo.com/api/v2/location.json?id=\(city)&fields=intro,properties&account=RJ1V77PU&token=dvz1fidxe66twck6qynircn6ii3o2ydg"
@@ -279,9 +273,7 @@ DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
                  }
                  }
                  
-                 }
-                 
-                 }                             }
+                                     }                             }
             })
         }catch{
             
@@ -295,7 +287,6 @@ DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
                 func getCityCoordinates(latitude : Double,longitude : Double){
                 /*
                     let networkSession = URLSession.shared
-                    print("hmmm")
                   //  var city = "\(newPlace.cityName!)"
                     
                     let whitespace = NSCharacterSet.whitespaces
@@ -304,7 +295,6 @@ DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
                     let range = phrase.rangeOfCharacter(from: whitespace)
                     
                     if let test = range {
-                        print("mmmm")
                         //// bosluklu cityler icin check edilmeli
                         */
                   //  }else{
@@ -313,8 +303,7 @@ DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
                         do{
                             
                             // let coordinateURL = "https://www.triposo.com/api/20171027/location.json?id=\(city)&type=city&fields=coordinates&account=RJ1V77PU&token=dvz1fidxe66twck6qynircn6ii3o2ydg"
-                        //    print(newPlace.cityName!)
-                            
+                     
                             // COORDINATE PART
                             
                             var req = URLRequest(url: URL(string: coordinateURL)!)
@@ -331,8 +320,7 @@ DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
                                     let coordinates = jsonDictionary["results"] as! NSArray
                                     var latitude = 0.0 as! Double
                                     var longitude = 0.0 as! Double
-                                    print(city)
-                                    
+                     
                                     for result in coordinates{
      
                                         let coordinateDictionary = result as! NSDictionary
@@ -404,7 +392,6 @@ DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
          let headers : HTTPHeaders = ["X-Auth-Api-Key": "crkhekpcghn5vkardynczv2q"]
          
          Alamofire.request(url, method: .get, headers: headers).responseJSON{ response in
-         print(response)
          }
          
          */

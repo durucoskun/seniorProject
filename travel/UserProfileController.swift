@@ -16,52 +16,17 @@ class UserProfileController: UIViewController{
     var user: String!
     var userUid : String!
     var ref : DatabaseReference!
-    @IBOutlet weak var userEmail: UILabel!
-    @IBOutlet weak var userName: UILabel!
+   
     @IBOutlet weak var profilePic: UIImageView!
     
+    @IBOutlet weak var message: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        userEmail?.text = mail
-        userName?.text = user
+        message.layer.masksToBounds = true
+        message.layer.cornerRadius = 8.0
        // ref = FIRDatabase.database().reference().child("USERS").child(self.userUid).child("INTERESTS")
         
     }
-    
-    @IBAction func chooseFestival(_ sender: Any) {
-        ref.updateChildValues(["Festival":1,])
-    }
-    
-    @IBAction func chooseAdventure(_ sender: Any) {
-        ref.updateChildValues(["Adventure":1])
-    }
-    @IBAction func chooseRomance(_ sender: Any) {
-        ref.updateChildValues(["Romance":1])
-    }
-    
-    @IBAction func chooseMountain(_ sender: Any) {
-        ref.updateChildValues(["Nature":1])  ///// NATURE?
-    }
-    
-    @IBAction func chooseNightlife(_ sender: Any) {
-        ref.updateChildValues(["Night Life":1])
-    }
-    
-    @IBAction func chooseBeach(_ sender: Any) {
-        ref.updateChildValues(["Beach":1])
-    }
-    @IBAction func chooseFoodAndDrink(_ sender: Any) {
-        ref.updateChildValues(["Food and Drink":1])
-    }
-    @IBAction func chooseWarmWeather(_ sender: Any) {
-        ref.updateChildValues(["Warm Weather":1])
-    }
-    
-    @IBAction func chooseSafety(_ sender: Any) {
-        ref.updateChildValues(["Safety":1])
-    }
-    
     @IBAction func chooseRoadtrip(_ sender: Any) {
         ref.updateChildValues(["RoadTrip":1])
     }

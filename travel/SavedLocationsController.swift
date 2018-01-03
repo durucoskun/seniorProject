@@ -10,70 +10,125 @@
 import UIKit
 import  Kingfisher
 
-class SavedLocationsController : UIViewController{
+class SavedLocationsController : UIViewController,UITableViewDataSource,UITableViewDelegate{
     
-    var images : [UIImageView?] = []
+    
+    var cityList : [String?] = []
     var userUid : String!
     
-    @IBOutlet var collectionView: UICollectionView!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.automaticallyAdjustsScrollViewInsets = false
-        createCollectionView()
-    }
+    var cityCell : CityCell? = nil
+
+   
+    @IBOutlet var cityTableView: UITableView!
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    func createCollectionView(){
+    override func viewDidLoad() {
+        super.viewDidLoad()
+       // self.title = "DESTINATIONS"
+        cityTableView.dataSource = self
+        print(userUid)
+       // self.view.backgroundColor = UIColor (patternImage:UIImage(named : "city.png")!)
         
-        let layout = UICollectionViewFlowLayout()
-        collectionView = UICollectionView(frame : view.frame,collectionViewLayout : layout)
-        collectionView?.register(CityPhotoCell.self, forCellWithReuseIdentifier: "cityCell")
-        collectionView?.backgroundColor = UIColor.white
-        collectionView?.delegate = self
-        collectionView?.dataSource = self
-        view.addSubview(collectionView!)
+        //cityDataSource.delegate = self
         
+        // Do any additional setup after loading the view.
+    }
+    
+    
+    func numberOfSectionsInTableView(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
+        
+      // cityCell = cityTableView.dequeueReusablecityCell(withReuseIdentifier: "cityCell",for: indexPath as IndexPath) as! CityTableViewCell
+        
+        cityCell = cityTableView.dequeueReusableCell(withIdentifier: "cityCell", for: indexPath) as! CityCell
+    let city = (cityList[indexPath.row])!
+        
+        
+      cityCell?.cityName.text = "City : \(city)"
+        return cityCell!
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+        cityTableView.delegate = self
+        
+        
     }
+    
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section : Int)-> Int {
+        
+        return (cityList.count)
+        
+    }
+    
+    
+    
+   
+    
+    
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        
+        /*
+         
+         if (cityCell?.destination.isSelected)!{
+         }else{
+         
+         let selectedcityCell = sender as! CityTableViewcityCell
+         
+         let indexPath = self.cityTableView.indexPath(for : selectedcityCell)
+         
+         let controller = segue.destination as! CityDetailViewController
+         
+         controller.selectedCity = (cityDataSource.destinations?[indexPath!.row])!
+         }
+         
+         
+ 
+        var indexPath: NSIndexPath!
+        
+        if let button = sender as? UIButton {
+            if let superview = button.superview {
+                if let cityCell = superview.superview as? CityTableViewcityCell{
+                    indexPath = self.cityTableView.indexPath(for: cityCell) as NSIndexPath!
+                }
+            }
+        }
+        
+        
+        if  let nextView = segue.destination as? CityDetailViewController{
+            nextView.selectedCity = (cityDataSource.sortedArray?[indexPath.row])!
+            nextView.cityImage?.kf.setImage(with:URL(string:"gs://travelapp-31a9e.appspot.com/New York.jpg"))
+            nextView.userUid = self.userUid
+            nextView.citydata = self.cityDataSource
+            nextView.currency = self.currency
+            
+        }
+        
+        if let nextView = segue.destination as? UserTabController{
+            nextView.userUid = self.userUid
+        }
+        
+        
+       */
+        
+        
+    }
+    
     
 }
 
-extension SavedLocationsController : UICollectionViewDelegate,UICollectionViewDataSource {
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cityCell", for: indexPath) as! CityPhotoCell
-        cell.awakeFromNib()
-        
-        return cell
-    }
-    
-    
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        let cityCell = cell as! CityPhotoCell
-        cityCell.cityImageView = (images[indexPath.row])
-        print(images.count)
-        
-        
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    
-}
+  

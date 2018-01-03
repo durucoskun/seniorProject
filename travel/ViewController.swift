@@ -101,15 +101,13 @@ class ViewController: UIViewController ,UITableViewDelegate{
                                 self.cityImage?.kf.setImage(with: URL (string : "https://firebasestorage.googleapis.com/v0/b/travelapp-31a9e.appspot.com/o/Prag.jpg?alt=media&token=c5f0100b-4f5d-4ec6-a1b0-61a197598ecf"))
                                 
                                  DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
-                                self.images.append(self.cityImage)
-                                print("appended!!!")
-                                })
+                                                               })
                             }
                         }
                     }
                      DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(10), execute: {
-                    print(self.images.count)
-                    savedLocationsController.images = self.images as! [UIImageView?]
+                    print(self.savedCities.count)
+                    savedLocationsController.cityList = self.savedCities as! [String?]
                     })
                  })
                    

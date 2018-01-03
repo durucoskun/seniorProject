@@ -32,11 +32,13 @@
 		9209B62B1FCB2DAF003B6C23 /* UserProfileTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9209B62A1FCB2DAF003B6C23 /* UserProfileTab.swift */; };
 		9217B08B1EAFD8ED0081137E /* CityDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9217B08A1EAFD8ED0081137E /* CityDetailViewController.swift */; };
 		92206C311FD37B7800AF09CA /* SavedLocationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92206C301FD37B7700AF09CA /* SavedLocationsController.swift */; };
-		92206C331FD37CDF00AF09CA /* CityPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92206C321FD37CDF00AF09CA /* CityPhotoCell.swift */; };
 		9234C7861EC3915600A4DB6A /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9234C7851EC3915600A4DB6A /* RegistrationViewController.swift */; };
 		924195631FCF430600C0899D /* UserTabDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924195621FCF430600C0899D /* UserTabDelegate.swift */; };
 		927A81511ED046DC0026841B /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927A81501ED046DC0026841B /* MainNavigationController.swift */; };
 		927A81531ED04A630026841B /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927A81521ED04A630026841B /* File.swift */; };
+		9297359B1FFCFD7000F0417B /* CityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9297359A1FFCFD7000F0417B /* CityCell.swift */; };
+		9297359D1FFD4AA300F0417B /* CityAttractionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9297359C1FFD4AA300F0417B /* CityAttractionCell.swift */; };
+		9297359F1FFD4AC900F0417B /* CityAttractionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9297359E1FFD4AC900F0417B /* CityAttractionController.swift */; };
 		92FBACFF1ED255C50088EFA6 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92FBACFE1ED255C50088EFA6 /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -69,11 +71,13 @@
 		9209B62A1FCB2DAF003B6C23 /* UserProfileTab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileTab.swift; sourceTree = "<group>"; };
 		9217B08A1EAFD8ED0081137E /* CityDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityDetailViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.c; };
 		92206C301FD37B7700AF09CA /* SavedLocationsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedLocationsController.swift; sourceTree = "<group>"; };
-		92206C321FD37CDF00AF09CA /* CityPhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityPhotoCell.swift; sourceTree = "<group>"; };
 		9234C7851EC3915600A4DB6A /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		924195621FCF430600C0899D /* UserTabDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTabDelegate.swift; sourceTree = "<group>"; };
 		927A81501ED046DC0026841B /* MainNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		927A81521ED04A630026841B /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		9297359A1FFCFD7000F0417B /* CityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityCell.swift; sourceTree = "<group>"; };
+		9297359C1FFD4AA300F0417B /* CityAttractionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityAttractionCell.swift; sourceTree = "<group>"; };
+		9297359E1FFD4AC900F0417B /* CityAttractionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityAttractionController.swift; sourceTree = "<group>"; };
 		92FBACFE1ED255C50088EFA6 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		BBDE1C737084CA610A406D1B /* Pods-travel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-travel.debug.xcconfig"; path = "Pods/Target Support Files/Pods-travel/Pods-travel.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -109,6 +113,7 @@
 				3FFC03691EACF20A0044AB9C /* Carrier.swift */,
 				3FFC03661EACF1FF0044AB9C /* Quote.swift */,
 				3FFC03651EACF1FF0044AB9C /* Place.swift */,
+				9297359A1FFCFD7000F0417B /* CityCell.swift */,
 				86769EF01E9F95530083EB76 /* travel */,
 				86769EEF1E9F95530083EB76 /* Products */,
 				860EFD421EBA350C002736B7 /* Frameworks */,
@@ -128,9 +133,10 @@
 			isa = PBXGroup;
 			children = (
 				86769EF11E9F95530083EB76 /* AppDelegate.swift */,
+				9297359C1FFD4AA300F0417B /* CityAttractionCell.swift */,
+				9297359E1FFD4AC900F0417B /* CityAttractionController.swift */,
 				86769F0C1E9FB1400083EB76 /* CityDataSource.swift */,
 				9217B08A1EAFD8ED0081137E /* CityDetailViewController.swift */,
-				92206C321FD37CDF00AF09CA /* CityPhotoCell.swift */,
 				86769F081E9FABFA0083EB76 /* CityTableViewCell.swift */,
 				3FFC03711EAD15E30044AB9C /* CityViewController.swift */,
 				3F0627C91EB16773005B2DB7 /* Destination.swift */,
@@ -299,7 +305,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				927A81511ED046DC0026841B /* MainNavigationController.swift in Sources */,
+				9297359D1FFD4AA300F0417B /* CityAttractionCell.swift in Sources */,
 				86769F071E9F9B0D0083EB76 /* HomePageViewController.swift in Sources */,
+				9297359F1FFD4AC900F0417B /* CityAttractionController.swift in Sources */,
 				86769EF41E9F95530083EB76 /* ViewController.swift in Sources */,
 				3F0627CA1EB16773005B2DB7 /* Destination.swift in Sources */,
 				92206C311FD37B7800AF09CA /* SavedLocationsController.swift in Sources */,
@@ -314,7 +322,7 @@
 				924195631FCF430600C0899D /* UserTabDelegate.swift in Sources */,
 				86769F091E9FABFA0083EB76 /* CityTableViewCell.swift in Sources */,
 				3FFC03701EACF47B0044AB9C /* InboundLeg.swift in Sources */,
-				92206C331FD37CDF00AF09CA /* CityPhotoCell.swift in Sources */,
+				9297359B1FFCFD7000F0417B /* CityCell.swift in Sources */,
 				3FFC036E1EACF46B0044AB9C /* OutboundLeg.swift in Sources */,
 				86769EFA1E9F95530083EB76 /* travel.xcdatamodeld in Sources */,
 				86769F0D1E9FB1400083EB76 /* CityDataSource.swift in Sources */,

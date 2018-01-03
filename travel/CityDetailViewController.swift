@@ -10,7 +10,7 @@ import UIKit
 import FirebaseDatabase
 import Kingfisher
 import FirebaseStorage
-
+import Alamofire
 
 
 
@@ -41,13 +41,20 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
     let storage = Storage.storage()
     var selectedCity : NSDictionary = [:]
     let cityData = CityDataSource()
+    var  longitude : Double = 0.0
+    var latitude : Double = 0.0
     
+    var attractionNames = Array<String>()
+    var attractionBookingInfo =  Array<String> ()
+    var attractionDescription =  Array<String> ()
+    var imageUrls = Array <String> ()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         ref = Database.database().reference()
+        
         let storageRef = storage.reference().child("\(selectedCity["DestinationCity"]!).jpg")
         storageRef.downloadURL { (url, error)-> Void in
             if (url != nil){
@@ -69,7 +76,7 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
         let dataTask = networkSession.dataTask(with: req) {(data,response,error) in print("Data")
             
             let jsonReadable = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-            print(jsonReadable!)
+            
             do
             {
                 let jsonDictionary = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! [String: Any]
@@ -92,13 +99,7 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
                         // self.population.text = "Population :\(self.pop)"
                     }
                     
-                    
-                    // let info = intro["intro"] as! String
-                    print(intro)
-                    print("INTROOOO")
-                    
-                    // print (result)
-                }
+                                }
             }
             catch
             {
@@ -128,6 +129,11 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
             nextView.currency = self.currency
             nextView.userUid = self.userUid
         }
+        else if let nextView = segue.destination as? CityAttractionController{
+            nextView.attractionNames = self.attractionNames
+            nextView.attractionDescription = self.attractionDescription
+            nextView.imageUrls = self.imageUrls
+        }
     }
     
     
@@ -139,19 +145,62 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
     
     override func viewDidAppear(_ animated: Bool) {
         //   cityData.loadCityDetail(cityId: selectedCity!.cityId)
-        
-        
-    }
+        ref.child("CITY").child("\(selectedCity["DestinationCity"]!)").observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
+            var cityInfo = snapshot.value as? NSDictionary
+            
+                if let coordinates = cityInfo?["COORDINATES"] as? NSDictionary{
+                    self.longitude = (coordinates["Longitude"] as? Double)!
+                    print((coordinates["Longitude"] as? Double)!)
+                    self.latitude = (coordinates["Latitude"] as? Double)!
+            
+            }
+            
+            let url = "https://www.triposo.com/api/20171027/local_highlights.json?latitude=\(self.latitude)&longitude=\(self.longitude)&account=RJ1V77PU&token=dvz1fidxe66twck6qynircn6ii3o2ydg"
+            print(url)
+            Alamofire.request(url,method:.get).responseJSON{ response in
+                let jsonDictionary = response.result.value as? NSDictionary
+                let resultArray = jsonDictionary?["results"]! as? NSArray
+                let myDictionary = resultArray?[0] as! NSDictionary
+                let attractionPointArray = myDictionary["pois"] as! NSArray
+                for attraction in attractionPointArray{
+                    let attractionDictionary = attraction as? NSDictionary
+                    
+                    if attractionDictionary?["images"] != nil{
+                        let imageInfo = attractionDictionary?["images"]! as? NSArray
+                       
+                        for item in imageInfo!{
+                            let itemDictionary = item as? NSDictionary
+                            let imageInfoDictionary = (itemDictionary?["sizes"] as? NSDictionary)!
+                            let detailDictionary = (imageInfoDictionary["medium"] as? NSDictionary)!
+                            let url = (detailDictionary["url"] as? String)!
+                            self.imageUrls.append(url)
+                        }
+                    }else{
+                        //imageUrls.append("empty")
+                    }
+
+                   // let bookingInfo = attractionDictionary?["booking_info"] as? NSArray
+                        
+                        let attractionName = (attractionDictionary?["name"])!
+                        let attractionInfo = (attractionDictionary?["snippet"])!
+                       // print(attractionName)
+                      //  print(attractionInfo)
+                      //  if bookingInfo != nil{
+                     //   for item in bookingInfo!{
+                            //print(item)
+                            self.attractionNames.append(attractionName as! String)
+                            self.attractionDescription.append(attractionInfo as! String)
+                        
+                    
+                    
+                    
+                }
+            }
+
+        })
+            }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+   
     @IBAction func addCities(_ sender: Any) {
         var name = cityname as String!
         var country = countryname as String!
@@ -182,5 +231,5 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
                 
         } )
     }
-
-    }
+    
+                             }

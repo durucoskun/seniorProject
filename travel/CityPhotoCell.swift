@@ -14,13 +14,12 @@ class CityPhotoCell : UICollectionViewCell{
   
    // @IBOutlet weak var cityImageView: UIImageView!
     
-    var cityImageView : UIImageView!
-    
+    var cityNameLabel : UILabel?
     override func awakeFromNib() {
-        cityImageView = UIImageView(frame : contentView.frame)
-   cityImageView?.contentMode = .scaleAspectFill
-        cityImageView?.clipsToBounds=true
-        contentView.addSubview(cityImageView)
+        cityNameLabel = UILabel(frame : contentView.frame)
+   cityNameLabel?.contentMode = .scaleAspectFill
+        cityNameLabel?.clipsToBounds=true
+        contentView.addSubview(cityNameLabel!)
     }
     
 
