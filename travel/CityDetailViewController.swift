@@ -176,12 +176,12 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
                             self.imageUrls.append(url)
                         }
                     }else{
-                        //imageUrls.append("empty")
+                        self.imageUrls.append("empty")
                     }
 
                    // let bookingInfo = attractionDictionary?["booking_info"] as? NSArray
                         
-                        let attractionName = (attractionDictionary?["name"])!
+                        let attractionName  = (attractionDictionary?["name"])!
                         let attractionInfo = (attractionDictionary?["snippet"])!
                        // print(attractionName)
                       //  print(attractionInfo)

@@ -8,10 +8,12 @@
 
 import UIKit
 
-class CityAttractionController: UITableViewController {
-    @IBOutlet weak var cityAttractionCell: CityAttractionCell!
+class CityAttractionController: UIViewController,UITableViewDataSource,UITableViewDelegate {
+    
+    
+    @IBOutlet weak var attractionTableView: UITableView!
+    var cityAttractionCell : CityAttractionCell? = nil
     var cityName :String?
-    @IBOutlet var cityTableView: UITableView!
     var attractionNames = Array<String>()
     var attractionBookingInfo =  Array<String> ()
     var attractionDescription =  Array<String> ()
@@ -23,6 +25,8 @@ class CityAttractionController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        attractionTableView.dataSource = self
+        attractionTableView.delegate = self
         // self.title = "DESTINATIONS"
 
         // self.view.backgroundColor = UIColor (patternImage:UIImage(named : "city.png")!)
@@ -41,17 +45,17 @@ print(imageUrls.count)
     
     
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
+     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         
-        cityAttractionCell = cityTableView.dequeueReusableCell(withIdentifier: "cityAttraction", for: indexPath) as! CityAttractionCell
+        cityAttractionCell = attractionTableView.dequeueReusableCell(withIdentifier: "cityAttraction", for: indexPath) as! CityAttractionCell
         
-        cityAttractionCell.attractionInfo.text = attractionDescription[indexPath.row]
-        
-        
-        
+        //cityAttractionCell?.attractionInfo.text = attractionDescription[indexPath.row]
+        //print(cityAttractionCell?.attractionInfo.text)
         
         
-               return cityAttractionCell
+        print("merhaba \(indexPath.row)")
+        
+               return cityAttractionCell!
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -61,7 +65,7 @@ print(imageUrls.count)
     
     
     
-   override func tableView(_ tableView: UITableView, numberOfRowsInSection section : Int)-> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section : Int)-> Int {
         
         return attractionNames.count
         
