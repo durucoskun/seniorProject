@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class CityAttractionController: UIViewController,UITableViewDataSource,UITableViewDelegate {
     
@@ -53,8 +54,10 @@ print(imageUrls.count)
         //print(cityAttractionCell?.attractionInfo.text)
         
         
-        print("merhaba \(indexPath.row)")
-        
+cityAttractionCell?.descriptionText.text = ("\(attractionNames[indexPath.row]) : \(attractionDescription[indexPath.row]) ")
+        if (imageUrls[indexPath.row] != "empty"){
+        cityAttractionCell?.attractionImageView.kf.setImage(with: URL(string : imageUrls[indexPath.row]))
+        }
                return cityAttractionCell!
     }
     

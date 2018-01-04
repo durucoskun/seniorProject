@@ -10,8 +10,10 @@ import UIKit
 
 class CityAttractionCell: UITableViewCell {
     
-    @IBOutlet weak var nabersin: UILabel!
     
+    @IBOutlet weak var descriptionText: UITextView!
+    
+    @IBOutlet weak var attractionImageView: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
     }
