@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import FirebaseDatabase
+import FirebaseAuth
 
 class UserProfileController: UIViewController{
     
@@ -18,6 +19,13 @@ class UserProfileController: UIViewController{
     var ref : DatabaseReference!
    
     @IBOutlet weak var profilePic: UIImageView!
+    
+    @IBAction func logout(_ sender: Any) {
+        try! Auth.auth().signOut()
+        self.performSegue(withIdentifier: "logout", sender: Any?)
+    }
+    
+    
     
     @IBOutlet weak var message: UILabel!
     override func viewDidLoad() {

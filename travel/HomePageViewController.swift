@@ -10,6 +10,7 @@ import UIKit
 import MapKit
 import CoreLocation
 import FirebaseDatabase
+import FirebaseAuth
 
 class HomePageViewController: UIViewController, CLLocationManagerDelegate {
     
