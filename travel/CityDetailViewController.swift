@@ -194,6 +194,22 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
             }
         }
     }
+    
+    func saveImage(image: UIImage, cityname: String) -> Bool {
+        guard let data = UIImageJPEGRepresentation(image, 1) ?? UIImagePNGRepresentation(image) else {
+            return false
+        }
+        guard let directory = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) as NSURL else {
+            return false
+        }
+        do {
+            try data.write(to: directory.appendingPathComponent("\(cityname).png")!)
+            return true
+        } catch {
+            print(error.localizedDescription)
+            return false
+        }
+    }
    
     @IBAction func addCities(_ sender: Any) {
         var name = cityname as String!
@@ -217,6 +233,8 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
                     let alert = UIAlertController(title: "Oops!", message: "The city has been added to your list!", preferredStyle: UIAlertControllerStyle.alert)
                     alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.default, handler:nil))
                     self.present(alert, animated:true,completion:nil)
+                    let success = self.saveImage(image: self.cityImage.image!, cityname: name!)
+                    print(success)
                     
                     // ALERT the city has been added to your list!
                     

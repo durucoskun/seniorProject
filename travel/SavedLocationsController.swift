@@ -8,7 +8,9 @@
 
 
 import UIKit
-import  Kingfisher
+import Kingfisher
+import FirebaseStorage
+
 
 class SavedLocationsController : UIViewController,UITableViewDataSource,UITableViewDelegate{
     
@@ -33,6 +35,7 @@ class SavedLocationsController : UIViewController,UITableViewDataSource,UITableV
        // self.title = "DESTINATIONS"
         cityTableView.dataSource = self
         print(userUid)
+         cityTableView.delegate = self
        // self.view.backgroundColor = UIColor (patternImage:UIImage(named : "city.png")!)
         
         //cityDataSource.delegate = self
@@ -48,21 +51,25 @@ class SavedLocationsController : UIViewController,UITableViewDataSource,UITableV
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
-        
       // cityCell = cityTableView.dequeueReusablecityCell(withReuseIdentifier: "cityCell",for: indexPath as IndexPath) as! CityTableViewCell
         
         cityCell = cityTableView.dequeueReusableCell(withIdentifier: "cityCell", for: indexPath) as! CityCell
-    let city = (cityList[indexPath.row])!
         
+        let city = (cityList[indexPath.row])!
         
-      cityCell?.cityName.text = "City : \(city)"
-        cityCell?.cityImage.kf.setImage(with: URL (string : "https://firebasestorage.googleapis.com/v0/b/travelapp-31a9e.appspot.com/o/\(city).jpg?alt=media&token=c5f0100b-4f5d-4ec6-a1b0-61a197598ecf"))
+       
+        cityCell?.cityName.text = "City : \(city)"
         
+        if let image = getSavedImage(named: "\(city).png") {
+            print(image.size)
+            cityCell?.cityImage.image = image
+        }
         return cityCell!
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        cityTableView.delegate = self
+       
         
         
     }
@@ -75,6 +82,12 @@ class SavedLocationsController : UIViewController,UITableViewDataSource,UITableV
         
     }
     
+    func getSavedImage(named: String) -> UIImage? {
+        if let dir = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) {
+            return UIImage(contentsOfFile: URL(fileURLWithPath: dir.absoluteString).appendingPathComponent(named).path)
+        }
+        return nil
+    }
     
     
    
