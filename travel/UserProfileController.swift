@@ -24,6 +24,8 @@ UINavigationControllerDelegate{
 
     var storageRef : StorageReference!
     let picker = UIImagePickerController()
+    
+    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
    
     @IBOutlet weak var profilePicView: UIImageView!
    
@@ -41,8 +43,16 @@ UINavigationControllerDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        profilePicView.layer.cornerRadius = (self.profilePicView.frame.width)/1.5
+        profilePicView.layer.masksToBounds = true
+        
         picker.delegate = self
-       ref = Database.database().reference().child("USERS").child(self.userUid).child("INTERESTS")
+        ref = Database.database().reference().child("USERS").child(self.userUid).child("INTERESTS")
                 storageRef = Storage.storage().reference().child("userImages/\(self.userUid!).jpg")
         self.imageRef = Database.database().reference().child("USERS").child(self.userUid)
 
@@ -51,7 +61,14 @@ UINavigationControllerDelegate{
                 self.storageRef.getData(maxSize: 10*1024*1024, completion: { (data, error) in
                     let userPhoto = UIImage(data: data!)
                     self.profilePicView.image = userPhoto
+                    self.profilePicView.layer.borderWidth = 3
+                    self.profilePicView.layer.borderColor = UIColor.blue.cgColor
+                    self.activityIndicator.stopAnimating()
                 })
+            }
+            else{
+            self.profilePicView.image = #imageLiteral(resourceName: "profileIcon")
+            self.activityIndicator.stopAnimating()
             }
         })
         //ref.updateChildValues(["RoadTrip":1])
