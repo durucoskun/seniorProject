@@ -133,6 +133,10 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
             nextView.attractionNames = self.attractionNames
             nextView.attractionDescription = self.attractionDescription
             nextView.imageUrls = self.imageUrls
+            nextView.cityDict = self.selectedCity
+            nextView.currency = self.currency
+            nextView.userUid = self.userUid!
+            nextView.cityDataSource = self.citydata
         }
     }
     
@@ -155,51 +159,41 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
             
             }
             
-            let url = "https://www.triposo.com/api/20171027/local_highlights.json?latitude=\(self.latitude)&longitude=\(self.longitude)&account=RJ1V77PU&token=dvz1fidxe66twck6qynircn6ii3o2ydg"
-            print(url)
-            Alamofire.request(url,method:.get).responseJSON{ response in
-                let jsonDictionary = response.result.value as? NSDictionary
-                let resultArray = jsonDictionary?["results"]! as? NSArray
-                let myDictionary = resultArray?[0] as! NSDictionary
-                let attractionPointArray = myDictionary["pois"] as! NSArray
-                for attraction in attractionPointArray{
-                    let attractionDictionary = attraction as? NSDictionary
-                    
-                    if attractionDictionary?["images"] != nil{
-                        let imageInfo = attractionDictionary?["images"]! as? NSArray
-                       
-                        for item in imageInfo!{
-                            let itemDictionary = item as? NSDictionary
-                            let imageInfoDictionary = (itemDictionary?["sizes"] as? NSDictionary)!
-                            let detailDictionary = (imageInfoDictionary["medium"] as? NSDictionary)!
-                            let url = (detailDictionary["url"] as? String)!
-                            self.imageUrls.append(url)
-                        }
-                    }else{
-                        self.imageUrls.append("empty")
-                    }
-
-                   // let bookingInfo = attractionDictionary?["booking_info"] as? NSArray
-                        
-                        let attractionName  = (attractionDictionary?["name"])!
-                        let attractionInfo = (attractionDictionary?["snippet"])!
-                       // print(attractionName)
-                      //  print(attractionInfo)
-                      //  if bookingInfo != nil{
-                     //   for item in bookingInfo!{
-                            //print(item)
-                            self.attractionNames.append(attractionName as! String)
-                            self.attractionDescription.append(attractionInfo as! String)
-                        
-                    
-                    
-                    
-                }
-            }
+            
+            self.getAttractionData(city : self.selectedCity["DestinationCity"]!  as! String)
 
         })
             }
-    
+    func getAttractionData(city : String){
+        
+        let url = "https://www.triposo.com/api/20171027/poi.json?location_id=\(city)&account=RJ1V77PU&token=dvz1fidxe66twck6qynircn6ii3o2ydg"
+        print(url)
+        Alamofire.request(url,method:.get).responseJSON{ response in
+            let jsonDictionary = response.result.value as? NSDictionary
+            let resultArray = jsonDictionary?["results"]! as? NSArray
+            print(resultArray?.count)
+            for item in resultArray!{
+                let itemDictionary = item as? NSDictionary
+                let imageArray = itemDictionary!["images"] as? NSArray
+                if((imageArray?.count)! > 0){
+                let imageItem = imageArray![0] as? NSDictionary
+                let imageInfoDic = imageItem!["sizes"] as? NSDictionary
+                let details = imageInfoDic!["medium"] as? NSDictionary
+                let url = details!["url"] as? String
+                    self.imageUrls.append(url!)
+
+                }else{
+                    self.imageUrls.append("empty")
+                }
+                self.attractionNames.append((itemDictionary!["name"])! as! String)
+                self.attractionDescription.append((itemDictionary!["snippet"])! as! String)
+                
+             //   self.imageUrls.append(url)
+             //   self.attractionNames.append(itemDictionary)
+                
+            }
+        }
+    }
    
     @IBAction func addCities(_ sender: Any) {
         var name = cityname as String!

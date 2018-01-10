@@ -13,12 +13,16 @@ class CityAttractionController: UIViewController,UITableViewDataSource,UITableVi
     
     
     @IBOutlet weak var attractionTableView: UITableView!
+    var cityDict: NSDictionary = [:]
     var cityAttractionCell : CityAttractionCell? = nil
     var cityName :String?
     var attractionNames = Array<String>()
     var attractionBookingInfo =  Array<String> ()
     var attractionDescription =  Array<String> ()
     var imageUrls = Array <String> ()
+    var currency: String = ""
+    var userUid: String = ""
+    var cityDataSource = CityDataSource()
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -57,6 +61,8 @@ print(imageUrls.count)
 cityAttractionCell?.descriptionText.text = ("\(attractionNames[indexPath.row]) : \(attractionDescription[indexPath.row]) ")
         if (imageUrls[indexPath.row] != "empty"){
         cityAttractionCell?.attractionImageView.kf.setImage(with: URL(string : imageUrls[indexPath.row]))
+        } else{
+            cityAttractionCell?.attractionImageView.image = #imageLiteral(resourceName: "profileIcon")
         }
                return cityAttractionCell!
     }
@@ -74,6 +80,15 @@ cityAttractionCell?.descriptionText.text = ("\(attractionNames[indexPath.row]) :
         
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if  let nextView = segue.destination as? CityDetailViewController{
+            nextView.selectedCity = self.cityDict
+            nextView.citydata = self.cityDataSource
+            nextView.currency = self.currency
+            nextView.userUid = self.userUid
+            
+    }
+    }
     
     
     
