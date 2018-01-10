@@ -105,7 +105,7 @@ class ViewController: UIViewController ,UITableViewDelegate{
         semaphore.wait(timeout: DispatchTime.now());
         
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
             
             print("\(self.savedCities.count) forrrr")
             for city in self.savedCities{
@@ -121,15 +121,14 @@ class ViewController: UIViewController ,UITableViewDelegate{
                     }else {
                         self.cityImage?.kf.setImage(with: URL (string : "https://firebasestorage.googleapis.com/v0/b/travelapp-31a9e.appspot.com/o/Prag.jpg?alt=media&token=c5f0100b-4f5d-4ec6-a1b0-61a197598ecf"))
                         
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
-                        })
+                        
                     }
                 }
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(10), execute: {
+            
                 print(self.savedCities.count)
-                savedLocationsController.cityList = self.savedCities as! [String?]
-            })
+                savedLocationsController.cityList = self.savedCities //as [String?]
+            
         })
         
         self.present(userTabController,animated: true,completion : nil)

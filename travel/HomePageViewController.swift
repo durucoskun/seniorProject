@@ -26,6 +26,8 @@ class HomePageViewController: UIViewController, CLLocationManagerDelegate {
     var userUid : String!
     @IBOutlet weak var departureLocation: UITextField!
     
+    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    
     @IBOutlet weak var departureDate: UIDatePicker!
     @IBOutlet weak var returnDate: UIDatePicker!
     @IBOutlet weak var maxPrice: UITextField!
@@ -43,7 +45,15 @@ class HomePageViewController: UIViewController, CLLocationManagerDelegate {
     @IBAction func go(_ sender: UIButton) {
       //  let vc = self.appDelegate.getCurrentViewController()
         let vc = self as! HomePageViewController
-        
+        let overlayView = UIView(frame: UIScreen.main.bounds)
+        overlayView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
+        overlayView.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        view.addSubview(overlayView)
+        overlayView.isHidden = false
         goAction: do{
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -60,6 +70,7 @@ class HomePageViewController: UIViewController, CLLocationManagerDelegate {
                 let alert = UIAlertController(title: "Oops!", message: "Departure date cannot be before current date", preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.default, handler:nil))
                 self.present(alert, animated:true,completion:nil)
+                overlayView.isHidden = true
                 break goAction
             }
             
@@ -67,18 +78,22 @@ class HomePageViewController: UIViewController, CLLocationManagerDelegate {
                 let alert = UIAlertController(title: "Oops!", message: "Departure date cannot be later than/the same as return date", preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.default, handler:nil))
                 self.present(alert, animated:true,completion:nil)
+                overlayView.isHidden = true
                 break goAction
             }
             if(departureLocation.text==""){
                 let alert = UIAlertController(title: "Oops!", message: "Departure location cannot be empty", preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.default, handler:nil))
                 self.present(alert, animated:true,completion:nil)
+                overlayView.isHidden = true
                 break goAction
             }
             if(maxPrice.text==""){
                 let alert = UIAlertController(title: "Oops!", message: "Maximum price cannot be empty", preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.default, handler:nil))
                 self.present(alert, animated:true,completion:nil)
+                overlayView.isHidden = true
+
                 break goAction
             }
             
@@ -109,7 +124,9 @@ class HomePageViewController: UIViewController, CLLocationManagerDelegate {
                
                 
                 print(url)
-          
+                
+                
+
                 self.citydata.loadCities(url: url, code: departureAirport, vc: vc, uid: self.userUid, price: Int(self.maxPrice.text!)!)
             })
         }

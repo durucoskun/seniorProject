@@ -134,6 +134,10 @@ class CityViewController: UIViewController,UITableViewDataSource,UITableViewDele
         
         if let nextView = segue.destination as? UserTabController{
             nextView.userUid = self.userUid
+            let profileController = nextView.viewControllers?[0] as! UserProfileController
+            profileController.userUid = self.userUid
+            let savedLocationsController = nextView.viewControllers?[1] as! SavedLocationsController
+            savedLocationsController.userUid = self.userUid
         }
         
         
