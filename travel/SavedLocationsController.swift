@@ -19,6 +19,9 @@ class SavedLocationsController : UIViewController,UITableViewDataSource,UITableV
     var cityCell : CityCell? = nil
 
    
+   
+  
+    
     @IBOutlet var cityTableView: UITableView!
     
     override func didReceiveMemoryWarning() {
@@ -53,6 +56,8 @@ class SavedLocationsController : UIViewController,UITableViewDataSource,UITableV
         
         
       cityCell?.cityName.text = "City : \(city)"
+        cityCell?.cityImage.kf.setImage(with: URL (string : "https://firebasestorage.googleapis.com/v0/b/travelapp-31a9e.appspot.com/o/\(city).jpg?alt=media&token=c5f0100b-4f5d-4ec6-a1b0-61a197598ecf"))
+        
         return cityCell!
     }
     

@@ -12,4 +12,5 @@ class CityCell: UITableViewCell {
 
     @IBOutlet weak var cityName: UILabel!
     @IBOutlet weak var countryName: UILabel!
+    @IBOutlet weak var cityImage: UIImageView!
 }
