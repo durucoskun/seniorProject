@@ -309,11 +309,11 @@
                   moduleName = "travel"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/durucoskun/Downloads/finalProject/travel/HomePageViewController.swift"
-                  timestampString = "537209363.411949"
+                  timestampString = "537291489.75867"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "99"
-                  endingLineNumber = "99"
+                  startingLineNumber = "100"
+                  endingLineNumber = "100"
                   offsetFromSymbolStart = "12282">
                </Location>
                <Location
@@ -324,11 +324,11 @@
                   moduleName = "travel"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/durucoskun/Downloads/finalProject/travel/HomePageViewController.swift"
-                  timestampString = "537209363.417459"
+                  timestampString = "537291489.781406"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "94"
-                  endingLineNumber = "94"
+                  startingLineNumber = "95"
+                  endingLineNumber = "95"
                   offsetFromSymbolStart = "30">
                </Location>
             </Locations>
@@ -444,38 +444,6 @@
             endingLineNumber = "93"
             landmarkName = "go(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "travel.HomePageViewController.go (__ObjC.UIButton) -&gt; ()"
-                  moduleName = "travel"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/durucoskun/Downloads/finalProject/travel/HomePageViewController.swift"
-                  timestampString = "537209363.429574"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "94"
-                  endingLineNumber = "94"
-                  offsetFromSymbolStart = "12076">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "travel.HomePageViewController.(go (__ObjC.UIButton) -&gt; ()).(closure #1)"
-                  moduleName = "travel"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/durucoskun/Downloads/finalProject/travel/HomePageViewController.swift"
-                  timestampString = "537209363.435142"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "94"
-                  endingLineNumber = "94"
-                  offsetFromSymbolStart = "30">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -499,7 +467,7 @@
                   moduleName = "travel"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/durucoskun/Downloads/finalProject/travel/CityDetailViewController.swift"
-                  timestampString = "537209363.4477021"
+                  timestampString = "537291489.8637691"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "39"
@@ -514,7 +482,7 @@
                   moduleName = "travel"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/durucoskun/Downloads/finalProject/travel/CityDetailViewController.swift"
-                  timestampString = "537209363.453288"
+                  timestampString = "537291489.88726"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "39"
@@ -529,7 +497,7 @@
                   moduleName = "travel"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/durucoskun/Downloads/finalProject/travel/CityDetailViewController.swift"
-                  timestampString = "537209363.459344"
+                  timestampString = "537291489.908929"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "39"
@@ -544,7 +512,7 @@
                   moduleName = "travel"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/durucoskun/Downloads/finalProject/travel/CityDetailViewController.swift"
-                  timestampString = "537209363.464918"
+                  timestampString = "537291489.930198"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "39"
@@ -593,11 +561,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "travel/UserProfileController.swift"
-            timestampString = "537214600.700188"
+            timestampString = "537289747.359163"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "16"
-            endingLineNumber = "16"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
             landmarkName = "UserProfileController"
             landmarkType = "3">
             <Locations>
@@ -671,45 +639,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "travel/UserTabController.swift"
-            timestampString = "533677467.739427"
+            timestampString = "537286179.205649"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "travel.UserTabController.viewDidLoad () -&gt; ()"
-                  moduleName = "travel"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/durucoskun/Downloads/finalProject/travel/UserTabController.swift"
-                  timestampString = "537209363.482877"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "37"
-                  endingLineNumber = "37"
-                  offsetFromSymbolStart = "78">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "travel.UserTabController.viewDidLoad () -&gt; ()"
-                  moduleName = "travel"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/durucoskun/Downloads/finalProject/travel/UserTabController.swift"
-                  timestampString = "537209363.488415"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "37"
-                  endingLineNumber = "37"
-                  offsetFromSymbolStart = "575">
-               </Location>
-            </Locations>
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "UserTabController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -719,45 +655,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "travel/UserTabController.swift"
-            timestampString = "533677467.739427"
+            timestampString = "537286179.205649"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "27"
-            endingLineNumber = "27"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "travel.UserTabController.viewDidLoad () -&gt; ()"
-                  moduleName = "travel"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/durucoskun/Downloads/finalProject/travel/UserTabController.swift"
-                  timestampString = "537209363.50218"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "37"
-                  endingLineNumber = "37"
-                  offsetFromSymbolStart = "78">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "travel.UserTabController.viewDidLoad () -&gt; ()"
-                  moduleName = "travel"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/durucoskun/Downloads/finalProject/travel/UserTabController.swift"
-                  timestampString = "537209363.508319"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "37"
-                  endingLineNumber = "37"
-                  offsetFromSymbolStart = "575">
-               </Location>
-            </Locations>
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "UserTabController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -767,11 +671,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "travel/UserProfileController.swift"
-            timestampString = "534191224.256839"
+            timestampString = "537289747.359163"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "13"
-            endingLineNumber = "13"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
             landmarkName = "UserProfileController"
             landmarkType = "3">
             <Locations>
@@ -875,13 +779,45 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "travel/ViewController.swift"
-            timestampString = "536753128.510069"
+            timestampString = "537274839.235504"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
             landmarkName = "loginOperations(user:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "travel.ViewController.loginOperations (user : Swift.Optional&lt;__ObjC.User&gt;) -&gt; ()"
+                  moduleName = "travel"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/durucoskun/Downloads/finalProject/travel/ViewController.swift"
+                  timestampString = "537291490.015764"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "70"
+                  endingLineNumber = "70"
+                  offsetFromSymbolStart = "665">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "travel.ViewController.loginOperations (user : Swift.Optional&lt;__ObjC.User&gt;) -&gt; ()"
+                  moduleName = "travel"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/durucoskun/Downloads/finalProject/travel/ViewController.swift"
+                  timestampString = "537291490.038175"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "70"
+                  endingLineNumber = "70"
+                  offsetFromSymbolStart = "6707">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -923,7 +859,7 @@
                   moduleName = "travel"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/durucoskun/Downloads/finalProject/travel/CityDataSource.swift"
-                  timestampString = "537209363.544379"
+                  timestampString = "537291490.128424"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "88"
@@ -938,7 +874,7 @@
                   moduleName = "travel"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/durucoskun/Downloads/finalProject/travel/CityDataSource.swift"
-                  timestampString = "537209363.550552"
+                  timestampString = "537291490.149863"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "89"
@@ -1109,7 +1045,7 @@
                   moduleName = "travel"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/durucoskun/Downloads/finalProject/travel/ViewController.swift"
-                  timestampString = "537209363.610002"
+                  timestampString = "537291490.334895"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -1124,7 +1060,7 @@
                   moduleName = "travel"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/durucoskun/Downloads/finalProject/travel/ViewController.swift"
-                  timestampString = "537209363.616768"
+                  timestampString = "537291490.357115"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "15"
@@ -1139,7 +1075,7 @@
                   moduleName = "travel"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/durucoskun/Downloads/finalProject/travel/ViewController.swift"
-                  timestampString = "537209363.622789"
+                  timestampString = "537291490.378629"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -1154,7 +1090,7 @@
                   moduleName = "travel"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/durucoskun/Downloads/finalProject/travel/ViewController.swift"
-                  timestampString = "537209363.629161"
+                  timestampString = "537291490.4010431"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -1169,7 +1105,7 @@
                   moduleName = "travel"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/durucoskun/Downloads/finalProject/travel/ViewController.swift"
-                  timestampString = "537209363.6353869"
+                  timestampString = "537291490.424221"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "15"
@@ -1186,11 +1122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "travel/ViewController.swift"
-            timestampString = "536753128.510069"
+            timestampString = "537286036.717991"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
             landmarkName = "loginOperations(user:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1234,7 +1170,7 @@
                   moduleName = "travel"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/durucoskun/Downloads/finalProject/travel/ViewController.swift"
-                  timestampString = "537209363.666099"
+                  timestampString = "537291490.535762"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "25"
@@ -1249,7 +1185,7 @@
                   moduleName = "travel"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/durucoskun/Downloads/finalProject/travel/ViewController.swift"
-                  timestampString = "537209363.671895"
+                  timestampString = "537291490.5574501"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "25"
@@ -1264,7 +1200,7 @@
                   moduleName = "travel"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/durucoskun/Downloads/finalProject/travel/ViewController.swift"
-                  timestampString = "537209363.677417"
+                  timestampString = "537291490.5808901"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "25"
@@ -1279,7 +1215,7 @@
                   moduleName = "travel"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/durucoskun/Downloads/finalProject/travel/ViewController.swift"
-                  timestampString = "537209363.683792"
+                  timestampString = "537291490.604566"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "25"
@@ -1419,7 +1355,7 @@
                   moduleName = "travel"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/durucoskun/Downloads/finalProject/travel/ViewController.swift"
-                  timestampString = "537209363.714294"
+                  timestampString = "537291490.710622"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "21"
@@ -1434,7 +1370,7 @@
                   moduleName = "travel"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/durucoskun/Downloads/finalProject/travel/ViewController.swift"
-                  timestampString = "537209363.7198631"
+                  timestampString = "537291490.733292"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "21"
@@ -1449,7 +1385,7 @@
                   moduleName = "travel"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/durucoskun/Downloads/finalProject/travel/ViewController.swift"
-                  timestampString = "537209363.725904"
+                  timestampString = "537291490.755347"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "21"
@@ -1464,7 +1400,7 @@
                   moduleName = "travel"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/durucoskun/Downloads/finalProject/travel/ViewController.swift"
-                  timestampString = "537209363.7325751"
+                  timestampString = "537291490.7779011"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "21"
@@ -1481,12 +1417,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "travel/ViewController.swift"
-            timestampString = "536753128.510069"
+            timestampString = "537286036.717991"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119"
-            landmarkName = "loginOperations(user:)"
+            startingLineNumber = "162"
+            endingLineNumber = "162"
+            landmarkName = "didReceiveMemoryWarning()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1497,13 +1433,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "travel/ViewController.swift"
-            timestampString = "536753128.510069"
+            timestampString = "537286036.717991"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "149"
-            endingLineNumber = "149"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
+            startingLineNumber = "193"
+            endingLineNumber = "193">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1520,38 +1454,6 @@
             endingLineNumber = "60"
             landmarkName = "log_in(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "travel.ViewController.(log_in (__ObjC.UIButton) -&gt; ()).(closure #1)"
-                  moduleName = "travel"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/durucoskun/Downloads/finalProject/travel/ViewController.swift"
-                  timestampString = "537209363.771641"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "60"
-                  endingLineNumber = "60"
-                  offsetFromSymbolStart = "2799">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "travel.ViewController.(log_in (__ObjC.UIButton) -&gt; ()).(closure #1)"
-                  moduleName = "travel"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/durucoskun/Downloads/finalProject/travel/ViewController.swift"
-                  timestampString = "537209363.777328"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "60"
-                  endingLineNumber = "60"
-                  offsetFromSymbolStart = "7955">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1577,7 +1479,7 @@
                   moduleName = "travel"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/durucoskun/Downloads/finalProject/travel/RegistrationViewController.swift"
-                  timestampString = "537209363.795555"
+                  timestampString = "537291490.933311"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "40"
@@ -1592,7 +1494,7 @@
                   moduleName = "travel"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/durucoskun/Downloads/finalProject/travel/RegistrationViewController.swift"
-                  timestampString = "537209363.802093"
+                  timestampString = "537291490.955659"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "42"
@@ -1705,45 +1607,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "travel/UserTabController.swift"
-            timestampString = "535983264.215527"
+            timestampString = "537287379.3716871"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "23"
-            endingLineNumber = "23"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "travel.UserTabController.viewDidLoad () -&gt; ()"
-                  moduleName = "travel"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/durucoskun/Downloads/finalProject/travel/UserTabController.swift"
-                  timestampString = "537209363.8584681"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "37"
-                  endingLineNumber = "37"
-                  offsetFromSymbolStart = "78">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "travel.UserTabController.viewDidLoad () -&gt; ()"
-                  moduleName = "travel"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/durucoskun/Downloads/finalProject/travel/UserTabController.swift"
-                  timestampString = "537209363.8653131"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "37"
-                  endingLineNumber = "37"
-                  offsetFromSymbolStart = "575">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1813,7 +1683,7 @@
                   moduleName = "travel"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/durucoskun/Downloads/finalProject/travel/CityDetailViewController.swift"
-                  timestampString = "537209363.8916121"
+                  timestampString = "537291491.246925"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -1828,7 +1698,7 @@
                   moduleName = "travel"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/durucoskun/Downloads/finalProject/travel/CityDetailViewController.swift"
-                  timestampString = "537209363.8963929"
+                  timestampString = "537291491.2698441"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "21"
@@ -1843,7 +1713,7 @@
                   moduleName = "travel"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/durucoskun/Downloads/finalProject/travel/CityDetailViewController.swift"
-                  timestampString = "537209363.901307"
+                  timestampString = "537291491.291478"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -1858,7 +1728,7 @@
                   moduleName = "travel"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/durucoskun/Downloads/finalProject/travel/CityDetailViewController.swift"
-                  timestampString = "537209363.9082659"
+                  timestampString = "537291491.314065"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -1873,7 +1743,7 @@
                   moduleName = "travel"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/durucoskun/Downloads/finalProject/travel/CityDetailViewController.swift"
-                  timestampString = "537209363.915895"
+                  timestampString = "537291491.338087"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "21"
@@ -1904,7 +1774,7 @@
                   moduleName = "travel"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/durucoskun/Downloads/finalProject/travel/CityDetailViewController.swift"
-                  timestampString = "537209363.937672"
+                  timestampString = "537291491.411557"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "151"
@@ -1919,7 +1789,7 @@
                   moduleName = "travel"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/durucoskun/Downloads/finalProject/travel/CityDetailViewController.swift"
-                  timestampString = "537209363.946418"
+                  timestampString = "537291491.434322"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "151"
@@ -1966,45 +1836,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "travel/UserTabController.swift"
-            timestampString = "536751081.776176"
+            timestampString = "537286179.205649"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "travel.UserTabController.viewDidLoad () -&gt; ()"
-                  moduleName = "travel"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/durucoskun/Downloads/finalProject/travel/UserTabController.swift"
-                  timestampString = "537209363.970947"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "37"
-                  endingLineNumber = "37"
-                  offsetFromSymbolStart = "78">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "travel.UserTabController.viewDidLoad () -&gt; ()"
-                  moduleName = "travel"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/durucoskun/Downloads/finalProject/travel/UserTabController.swift"
-                  timestampString = "537209363.977952"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "37"
-                  endingLineNumber = "37"
-                  offsetFromSymbolStart = "575">
-               </Location>
-            </Locations>
+            startingLineNumber = "51"
+            endingLineNumber = "51">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2131,6 +1967,86 @@
             endingLineNumber = "110"
             landmarkName = "ColorSchemeOf(colorSchemeType:color:isFlatScheme:)"
             landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "travel/UserProfileController.swift"
+            timestampString = "537291487.522602"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "travel/UserProfileController.swift"
+            timestampString = "537289747.359163"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "travel/UserProfileController.swift"
+            timestampString = "537291487.522602"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
+            landmarkName = "imagePickerController(_:didFinishPickingMediaWithInfo:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "travel/UserProfileController.swift"
+            timestampString = "537291487.522602"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
+            landmarkName = "imagePickerController(_:didFinishPickingMediaWithInfo:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "travel/UserProfileController.swift"
+            timestampString = "537291289.922479"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

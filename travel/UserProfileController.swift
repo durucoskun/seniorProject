@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 import FirebaseDatabase
 import FirebaseAuth
+import FirebaseStorage
+import Kingfisher
 
 class UserProfileController: UIViewController,  UIImagePickerControllerDelegate,
 UINavigationControllerDelegate{
@@ -18,6 +20,9 @@ UINavigationControllerDelegate{
     var user: String!
     var userUid : String!
     var ref : DatabaseReference!
+    var imageRef : DatabaseReference!
+
+    var storageRef : StorageReference!
     let picker = UIImagePickerController()
    
     @IBOutlet weak var profilePicView: UIImageView!
@@ -38,6 +43,17 @@ UINavigationControllerDelegate{
         super.viewDidLoad()
         picker.delegate = self
        ref = Database.database().reference().child("USERS").child(self.userUid).child("INTERESTS")
+                storageRef = Storage.storage().reference().child("userImages/\(self.userUid!).jpg")
+        self.imageRef = Database.database().reference().child("USERS").child(self.userUid)
+
+        imageRef.observeSingleEvent(of: .value,with : { (snapshot) in
+            if (snapshot.hasChild("UserPhoto")){
+                self.storageRef.getData(maxSize: 10*1024*1024, completion: { (data, error) in
+                    let userPhoto = UIImage(data: data!)
+                    self.profilePicView.image = userPhoto
+                })
+            }
+        })
         //ref.updateChildValues(["RoadTrip":1])
         
     }
@@ -47,6 +63,21 @@ UINavigationControllerDelegate{
         let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage //2
         profilePicView.contentMode = .scaleAspectFit //3
         profilePicView.image = chosenImage //4
+        var data = Data()
+        data = UIImageJPEGRepresentation(chosenImage, 1.0)!
+        let metaData = StorageMetadata()
+        metaData.contentType = "image/jpg"
+        storageRef.putData(data, metadata:metaData){ (metaData, error) in
+            if let error = error{
+                print("error")
+                return
+            }else{
+                let imageUrl = metaData!.downloadURL()!.absoluteString
+                self.imageRef.updateChildValues(["UserPhoto": imageUrl])
+
+            }
+        }
+        
         dismiss(animated:true, completion: nil) //5    }
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
          dismiss(animated: true, completion: nil)
