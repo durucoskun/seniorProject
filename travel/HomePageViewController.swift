@@ -174,6 +174,7 @@ class HomePageViewController: UIViewController, CLLocationManagerDelegate {
         manager.startUpdatingLocation()
         
         self.view.backgroundColor = UIColor (patternImage:UIImage(named : "travelling-1.png")!)
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: Selector("endEditing:")))
         // Do any additional setup after loading the view.
     }
     override func didReceiveMemoryWarning() {

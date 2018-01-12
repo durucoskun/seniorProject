@@ -153,6 +153,8 @@ class ViewController: UIViewController ,UITableViewDelegate{
         ref = Database.database().reference()
         storageRef  = Storage.storage().reference()
         self.view.backgroundColor = UIColor (patternImage:UIImage(named : "travelling-1.png")!)
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: Selector("endEditing:")))
+
         // Do any additional setup after loading the view, typically from a nib.
     }
     
