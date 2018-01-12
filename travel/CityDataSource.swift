@@ -173,8 +173,17 @@ DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
             }
         }
     self.sortedArray = (self.destinations as! NSArray).sortedArray(using: [NSSortDescriptor(key: "Average", ascending: false)]) as! [[String:AnyObject]] as Array<NSDictionary>
-
+    var noDuplicates = [[String: AnyObject]]() as Array<NSDictionary>
+    var usedNames = [String]()
+    for dict in self.sortedArray! {
+        if let name = dict["DestinationCity"], !usedNames.contains(name as! String) {
+            noDuplicates.append(dict)
+            usedNames.append(name as! String)
+        }
+    }
+    self.sortedArray = noDuplicates
 })
+        
         loadCityList()
     
     }
