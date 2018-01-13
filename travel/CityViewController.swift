@@ -76,7 +76,7 @@ class CityViewController: UIViewController,UITableViewDataSource,UITableViewDele
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        let cityDetailController = segue.destination as! CityDetailViewController
+        if let cityDetailController = segue.destination as? CityDetailViewController{
             let selectedCell = sender as! CityTableViewCell
             let selectedIndexPath = self.cityTableView.indexPath(for : selectedCell)
         
@@ -86,7 +86,7 @@ class CityViewController: UIViewController,UITableViewDataSource,UITableViewDele
         cityDetailController.selectedCity = (cityDataSource.sortedArray?[(selectedIndexPath?.row)!])!
         
     
-        if let nextView = segue.destination as? UserTabController{
+        }else if let nextView = segue.destination as? UserTabController{
             nextView.userUid = self.userUid
             let profileController = nextView.viewControllers?[0] as! UserProfileController
             profileController.userUid = self.userUid

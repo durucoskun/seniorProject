@@ -119,14 +119,8 @@ class HomePageViewController: UIViewController, CLLocationManagerDelegate {
                 departureAirport = departureAirport.substring(with: rng)
                 print(departureAirport)
                
-               //url = "http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/TR/\(self.currency)/en-US/\(departureAirport)/anywhere/\(departure)/\(returnD)?apiKey=at812187236421337946364002643367"
-                url = "http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/TR/TRY/en-US/\(departureAirport)/anywhere/anytime//anytime?apiKey=at812187236421337946364002643367"
-               
-                
-                print(url)
-                
-                
-
+               url = "http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/TR/\(self.currency)/en-US/\(departureAirport)/anywhere/\(departure)/\(returnD)?apiKey=at812187236421337946364002643367"
+              //  url = "http://partners.api.skyscanner.net/apiservices/browsequotes/v1.0/TR/TRY/en-US/\(departureAirport)/anywhere/anytime//anytime?apiKey=at812187236421337946364002643367"
                 self.citydata.loadCities(url: url, code: departureAirport, vc: vc, uid: self.userUid, price: Int(self.maxPrice.text!)!)
             })
         }
@@ -181,17 +175,9 @@ class HomePageViewController: UIViewController, CLLocationManagerDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
-    
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+ 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        
-        if  let nextView = segue.destination as? CityViewController{
+               if  let nextView = segue.destination as? CityViewController{
             nextView.cityDataSource = citydata
             nextView.currency = currency
             nextView.userUid = self.userUid

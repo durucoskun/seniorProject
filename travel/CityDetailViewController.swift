@@ -53,6 +53,7 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         ref = Database.database().reference()
         
         let storageRef = storage.reference().child("\(selectedCity["DestinationCity"]!).jpg")

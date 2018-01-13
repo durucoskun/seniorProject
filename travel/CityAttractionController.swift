@@ -69,15 +69,13 @@ cityAttractionCell?.descriptionText.text = ("\(attractionNames[indexPath.row]) :
     
     override func viewDidAppear(_ animated: Bool) {
         
-        
     }
     
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section : Int)-> Int {
-        
+       
         return attractionNames.count
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

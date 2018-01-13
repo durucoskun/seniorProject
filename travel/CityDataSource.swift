@@ -44,9 +44,11 @@ class CityDataSource: NSObject {
     public var sortedArray : Array <NSDictionary>? = Array()
     var userUid: String = ""
     var delegate : CityDataDelegate?
+    var userPrice : Double = 0.0
     
     func loadCities(url: String,code : String, vc: HomePageViewController, uid: String, price: Int){
         self.userUid=uid
+        self.userPrice = Double(price)
         ref = Database.database().reference()
         destinations?.removeAll()
         let semaphore = DispatchSemaphore(value: 0);
@@ -164,8 +166,9 @@ DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
                                     
                                     ["DestinationCity":nextCity.cityName!,"MinPrice" :quote.minPrice,"Country":nextCity.countryName, "Average": averages[nextCity.cityName!] ]
                                 
-                                (
-                                self.destinations?.append(destinationDictionary as NSDictionary))!
+                                if (destinationDictionary["MinPrice"] as! Double ) < self.userPrice {
+                                (self.destinations?.append(destinationDictionary as NSDictionary))!
+                                }
                             }
                         }
                     }
