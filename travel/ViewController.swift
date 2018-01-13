@@ -100,6 +100,8 @@ class ViewController: UIViewController ,UITableViewDelegate{
                     print(self.savedCities)
                     //self.cityCountries = countries
                     print(self.savedCities.count)
+                    savedLocationsController.cityList = self.savedCities
+                    searchController.savedCities = self.savedCities
                 }
                 print(self.savedCities.count)
         }
@@ -107,35 +109,35 @@ class ViewController: UIViewController ,UITableViewDelegate{
         )
         }
         //    semaphore.wait(timeout: DispatchTime.distantFuture);
-        semaphore.wait(timeout: DispatchTime.now());
+//        semaphore.wait(timeout: DispatchTime.now());
+//
+//
+//    DispatchQueue.main.async{
         
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
-            
-            print("\(self.savedCities.count) forrrr")
-            for city in self.savedCities{
-                
-                print(city)
-                let storageReference = self.storageRef.child("\(city).jpg")
-                storageReference.downloadURL { (url, error)-> Void in
-                    if (url != nil){
-                        let newUrl = (url?.absoluteString)
-                        (self.cityImage?.kf.setImage(with: URL(string : newUrl!)))
-                        self.images.append(self.cityImage)
-                        print(":(((")
-                    }else {
-                        self.cityImage?.kf.setImage(with: URL (string : "https://firebasestorage.googleapis.com/v0/b/travelapp-31a9e.appspot.com/o/Prag.jpg?alt=media&token=c5f0100b-4f5d-4ec6-a1b0-61a197598ecf"))
-                        
-                        
-                    }
-                }
-            }
-            
-                print(self.savedCities.count)
-                savedLocationsController.cityList = self.savedCities //as [String?]
-            
-        })
-        
+//            print("\(self.savedCities.count) forrrr")
+//            for city in self.savedCities{
+//
+//                print(city)
+//                let storageReference = self.storageRef.child("\(city).jpg")
+//                storageReference.downloadURL { (url, error)-> Void in
+//                    if (url != nil){
+//                        let newUrl = (url?.absoluteString)
+//                        (self.cityImage?.kf.setImage(with: URL(string : newUrl!)))
+//                        self.images.append(self.cityImage)
+//                        print(":(((")
+//                    }else {
+//                        self.cityImage?.kf.setImage(with: URL (string : "https://firebasestorage.googleapis.com/v0/b/travelapp-31a9e.appspot.com/o/Prag.jpg?alt=media&token=c5f0100b-4f5d-4ec6-a1b0-61a197598ecf"))
+//
+//
+//                    }
+//                }
+//            }
+//
+//                print(self.savedCities.count)
+//                 //as [String?]
+//
+//      }
+        savedLocationsController.cityList = self.savedCities
         self.present(userTabController,animated: true,completion : nil)
         
         

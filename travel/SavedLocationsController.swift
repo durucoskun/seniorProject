@@ -30,7 +30,7 @@ class SavedLocationsController : UIViewController,UITableViewDataSource,UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "DESTINATIONS"
+        self.title = "Saved Locations"
         cityTableView.dataSource = self
         //cityDataSource.delegate = self
         }
@@ -40,9 +40,9 @@ class SavedLocationsController : UIViewController,UITableViewDataSource,UITableV
         return 1
     }
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
-     
         
-        cityCell = cityTableView.dequeueReusableCell(withIdentifier: "cityCell", for: indexPath) as! CityCell
+            
+            cityCell = cityTableView.dequeueReusableCell(withIdentifier: "cityCell", for: indexPath) as! CityCell
             infoDictionary = cityList[indexPath.row]
             let city = infoDictionary["CityName"] as! String
             let country = infoDictionary["CountryName"] as! String
@@ -61,6 +61,7 @@ class SavedLocationsController : UIViewController,UITableViewDataSource,UITableV
             cityCell?.countryName.attributedText = NSMutableAttributedString(string:"\(country)",attributes: countryFont)
         
         return cityCell!
+            
     }
     
     override func viewDidAppear(_ animated: Bool) {

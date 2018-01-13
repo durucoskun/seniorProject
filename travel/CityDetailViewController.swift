@@ -22,7 +22,7 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
     var cityname : String?
     var countryname : String?
     var citydata = CityDataSource()
-    
+    var savedCities: [NSDictionary] = []
     
     var currency: String = ""
     
@@ -139,6 +139,7 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
             nextView.cityDataSource = self.citydata
             nextView.currency = self.currency
             nextView.userUid = self.userUid
+            nextView.savedCitiesList = self.savedCities
         }
         else if let nextView = segue.destination as? CityAttractionController{
             nextView.attractionNames = self.attractionNames
@@ -148,6 +149,7 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
             nextView.currency = self.currency
             nextView.userUid = self.userUid!
             nextView.cityDataSource = self.citydata
+            nextView.savedCities = self.savedCities
         }
     }
     

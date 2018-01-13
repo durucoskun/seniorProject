@@ -22,6 +22,7 @@ class CityAttractionController: UIViewController,UITableViewDataSource,UITableVi
     var imageUrls = Array <String> ()
     var currency: String = ""
     var userUid: String = ""
+    var savedCities:[NSDictionary] = []
     var cityDataSource = CityDataSource()
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -84,6 +85,7 @@ cityAttractionCell?.descriptionText.text = ("\(attractionNames[indexPath.row]) :
             nextView.citydata = self.cityDataSource
             nextView.currency = self.currency
             nextView.userUid = self.userUid
+            nextView.savedCities = self.savedCities
             
     }
     }

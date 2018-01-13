@@ -22,6 +22,7 @@ class CityViewController: UIViewController,UITableViewDataSource,UITableViewDele
     var cell : CityTableViewCell? = nil
     var cityDataSource = CityDataSource()
     var currency : String = ""
+    var savedCitiesList: [NSDictionary] = []
   
     
     override func viewDidLoad() {
@@ -29,6 +30,7 @@ class CityViewController: UIViewController,UITableViewDataSource,UITableViewDele
         self.title = "DESTINATIONS"
         cityTableView.dataSource = self
         print(userUid)
+        print(self.savedCitiesList)
         self.view.backgroundColor = UIColor (patternImage:UIImage(named : "city.png")!)
         
         //cityDataSource.delegate = self
@@ -96,14 +98,19 @@ class CityViewController: UIViewController,UITableViewDataSource,UITableViewDele
         cityDetailController.citydata = self.cityDataSource
         cityDetailController.currency = self.currency
         cityDetailController.selectedCity = (cityDataSource.sortedArray?[(selectedIndexPath?.row)!])!
+        cityDetailController.savedCities = self.savedCitiesList
         
     
-        }else if let nextView = segue.destination as? UserTabController{
+        }
+        else if let nextView = segue.destination as? UserTabController{
             nextView.userUid = self.userUid
             let profileController = nextView.viewControllers?[0] as! UserProfileController
             profileController.userUid = self.userUid
             let savedLocationsController = nextView.viewControllers?[1] as! SavedLocationsController
             savedLocationsController.userUid = self.userUid
+            savedLocationsController.cityList = self.savedCitiesList
+            let searchController = nextView.viewControllers?[2] as! HomePageViewController
+            searchController.savedCities = self.savedCitiesList
         }
     }
 }

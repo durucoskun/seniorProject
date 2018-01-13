@@ -24,6 +24,7 @@ class HomePageViewController: UIViewController, CLLocationManagerDelegate {
     var currency: String = ""
     var cityCode : String = ""
     var userUid : String!
+    var savedCities : [NSDictionary] = []
     @IBOutlet weak var departureLocation: UITextField!
     
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
@@ -187,9 +188,11 @@ class HomePageViewController: UIViewController, CLLocationManagerDelegate {
  
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
                if  let nextView = segue.destination as? CityViewController{
+            
             nextView.cityDataSource = citydata
             nextView.currency = currency
             nextView.userUid = self.userUid
+            nextView.savedCitiesList = self.savedCities
             
         }
         
