@@ -57,81 +57,35 @@ class CityViewController: UIViewController,UITableViewDataSource,UITableViewDele
       cell?.destination.setTitle("DESTINATION : \(city["DestinationCity"]!)",for: UIControlState.normal)
         
       cell?.price.setTitle("MIN PRICE: \(city["MinPrice"]!) \(currency)",for: UIControlState.normal)
-
-        
-        
-        return cell!
+       return cell!
     }
     
     override func viewDidAppear(_ animated: Bool) {
         cityTableView.delegate = self
-        
-       
     }
-    
-    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section : Int)-> Int {
-        
         return (cityDataSource.sortedArray?.count)!
-        
     }
     
-    
-    
     func cityListLoaded() {
-        
         DispatchQueue.main.async {
             self.cityTableView.reloadData()
         }
-        
     }
-    
-    
-  
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
         
-     /*
+        let cityDetailController = segue.destination as! CityDetailViewController
+            let selectedCell = sender as! CityTableViewCell
+            let selectedIndexPath = self.cityTableView.indexPath(for : selectedCell)
         
-        if (cell?.destination.isSelected)!{
-        }else{
+        cityDetailController.userUid = self.userUid
+        cityDetailController.citydata = self.cityDataSource
+        cityDetailController.currency = self.currency
+        cityDetailController.selectedCity = (cityDataSource.sortedArray?[(selectedIndexPath?.row)!])!
         
-        let selectedCell = sender as! CityTableViewCell
-        
-        let indexPath = self.cityTableView.indexPath(for : selectedCell)
-        
-        let controller = segue.destination as! CityDetailViewController
-        
-        controller.selectedCity = (cityDataSource.destinations?[indexPath!.row])!
-        }
-         
-         
-         */
-        var indexPath: NSIndexPath!
-        
-        if let button = sender as? UIButton {
-            if let superview = button.superview {
-                if let cell = superview.superview as? CityTableViewCell{
-                    indexPath = self.cityTableView.indexPath(for: cell) as NSIndexPath!
-                }
-            }
-        }
-               
-        
-        if  let nextView = segue.destination as? CityDetailViewController{
-            nextView.selectedCity = (cityDataSource.sortedArray?[indexPath.row])!
-            nextView.cityImage?.kf.setImage(with:URL(string:"gs://travelapp-31a9e.appspot.com/New York.jpg"))
-            nextView.userUid = self.userUid
-            nextView.citydata = self.cityDataSource
-            nextView.currency = self.currency
-            
-        }
-        
+    
         if let nextView = segue.destination as? UserTabController{
             nextView.userUid = self.userUid
             let profileController = nextView.viewControllers?[0] as! UserProfileController
@@ -139,12 +93,5 @@ class CityViewController: UIViewController,UITableViewDataSource,UITableViewDele
             let savedLocationsController = nextView.viewControllers?[1] as! SavedLocationsController
             savedLocationsController.userUid = self.userUid
         }
-        
-        
-        
-        
-       
     }
-     
-
 }
