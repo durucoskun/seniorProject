@@ -13,8 +13,8 @@ class CityTableViewCell: UITableViewCell {
     @IBOutlet weak var destination: UIButton!
     
     @IBOutlet weak var price: UIButton!
-
- 
+    @IBOutlet weak var score: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

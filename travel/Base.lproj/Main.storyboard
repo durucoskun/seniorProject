@@ -633,40 +633,62 @@ CI</string>
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="124"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aqa-jo-6wX">
-                                                    <rect key="frame" x="42" y="18" width="307" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aqa-jo-6wX">
+                                                    <rect key="frame" x="8" y="28" width="105" height="30"/>
                                                     <state key="normal" title="DESTINATION :">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                 </button>
                                                 <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pts-jw-MSh">
-                                                    <rect key="frame" x="8" y="75" width="322" height="30"/>
+                                                    <rect key="frame" x="8" y="75" width="57" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="PRICE">
                                                         <color key="titleColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SCORE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tFp-Dp-aB1">
+                                                    <rect key="frame" x="253" y="37" width="78" height="68"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="15"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" red="0.2133772203" green="0.46491544019999997" blue="0.47184666450000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstItem="aqa-jo-6wX" firstAttribute="leading" secondItem="ao1-hI-cZO" secondAttribute="leadingMargin" constant="10" id="X8g-cb-IDF"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="0.60000002379999995" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="destination" destination="aqa-jo-6wX" id="Bkp-EO-zkB"/>
                                             <outlet property="price" destination="Pts-jw-MSh" id="DFv-c1-oKO"/>
+                                            <outlet property="score" destination="tFp-Dp-aB1" id="MDW-16-hcr"/>
                                             <segue destination="88a-Th-eKa" kind="show" id="mUv-Ei-j8y"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OxK-Ja-VNU">
-                                <rect key="frame" x="16" y="64" width="46" height="30"/>
+                                <rect key="frame" x="16" y="64" width="96" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
                                     <segue destination="4es-Gd-Lyn" kind="showDetail" id="IBq-t6-swe"/>
                                 </connections>
                             </button>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v8x-BM-yDu">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Title" id="Gph-yN-kIq"/>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -678,7 +700,7 @@ CI</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5JQ-HD-f3T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2878" y="138"/>
+            <point key="canvasLocation" x="2877.5999999999999" y="137.18140929535232"/>
         </scene>
         <!--City Detail View Controller-->
         <scene sceneID="G2o-HO-MhN">
@@ -925,9 +947,9 @@ CI</string>
         <image name="world" width="500" height="500"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="69N-4J-DV8"/>
+        <segue reference="IBq-t6-swe"/>
         <segue reference="zIE-lY-806"/>
         <segue reference="mUv-Ei-j8y"/>
-        <segue reference="IBq-t6-swe"/>
-        <segue reference="69N-4J-DV8"/>
     </inferredMetricsTieBreakers>
 </document>

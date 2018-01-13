@@ -14,6 +14,7 @@ class CityViewController: UIViewController,UITableViewDataSource,UITableViewDele
     
     
     
+    @IBOutlet weak var score: UILabel!
     var userUid : String!
     @IBOutlet weak var cityTableView: UITableView!
     var url:String!
@@ -52,10 +53,8 @@ class CityViewController: UIViewController,UITableViewDataSource,UITableViewDele
         
         cell = cityTableView.dequeueReusableCell(withIdentifier: "Identifier",for: indexPath as IndexPath) as! CityTableViewCell
         let city = (cityDataSource.sortedArray?[indexPath.row])!
-        
-
+        cell?.score.text = String((round(city["Average"]! as! Float)*100)/100)
       cell?.destination.setTitle("DESTINATION : \(city["DestinationCity"]!)",for: UIControlState.normal)
-        
       cell?.price.setTitle("MIN PRICE: \(city["MinPrice"]!) \(currency)",for: UIControlState.normal)
        return cell!
     }
