@@ -87,8 +87,15 @@ class CityDataSource: NSObject {
         dataTask.resume()
         semaphore.wait(timeout: DispatchTime.distantFuture);
         print("waited")
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
+            if(self.sortedArray?.count as! Int == 0){
+                print("array empty")
+                self.showNoDestError(fromViewController: vc)
+                return
+            }
         self.showNextView(fromViewController: vc)
+        
         })
     }
     
@@ -96,7 +103,12 @@ class CityDataSource: NSObject {
         fromViewController.goToNextView()
     }
     
+    func showNoDestError(fromViewController: HomePageViewController){
+        fromViewController.showNoDestAlert()
+    }
+    
     func checkDestinations (code : String){
+        
         var interest: Array<String> = []
         let intRef = ref.child("USERS").child(self.userUid).child("INTERESTS")
         var averages: [String: Float] = [:]
@@ -129,8 +141,10 @@ class CityDataSource: NSObject {
 
                             }
                         }
+                        averages[cityName] = 0.0
                         average = average/Float(interest.count)
                         averages[cityName] = average
+                        
                     }
                    /* for i in 0..<interest.count{
                         average += interests[interest[i]] as! Float
@@ -158,13 +172,13 @@ DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
                     if (quote.outbound.originId == id){
                         destination =  quote.outbound.destinationId
                         for place in self.places!{
-                            let   nextCity = place as! Place
-                            
+                            let nextCity = place as! Place
+                            var cityScore: Float = 0.0
                             if (destination == nextCity.placeId){
-                                
-                                let destinationDictionary : [String : Any] =
-                                    
-                                    ["DestinationCity":nextCity.cityName!,"MinPrice" :quote.minPrice,"Country":nextCity.countryName, "Average": averages[nextCity.cityName!] ]
+                                if(averages[nextCity.cityName!] != nil) {
+                                    cityScore = averages[nextCity.cityName!]!
+                                }
+                                let destinationDictionary: [String:Any] = ["DestinationCity":nextCity.cityName!,"MinPrice" :quote.minPrice,"Country":nextCity.countryName, "Average": cityScore ]
                                 
                                 if (destinationDictionary["MinPrice"] as! Double ) < self.userPrice {
                                 (self.destinations?.append(destinationDictionary as NSDictionary))!
@@ -186,7 +200,11 @@ DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
         }
     }
      */
+    check: do{
     let count = self.sortedArray?.count as! Int
+    if(count==0){
+        break check
+    }
     for i in 1 ..< count{
         if i >= (self.sortedArray?.count)!{
             break
@@ -204,12 +222,14 @@ DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
             }
         }
         }
-  
+    }
    // self.sortedArray = noDuplicates
 })
-        
+        if(self.sortedArray?.count as! Int == 0){
+            return
+        }
         loadCityList()
-    
+        
     }
     
     func getQuotes(quoteArray : NSArray){
@@ -660,7 +680,6 @@ for countryItem in countryArray!{
     func loadCityList(){
         for dest in sortedArray!{
             let new = dest as! NSDictionary
-            
         }
     }
 }

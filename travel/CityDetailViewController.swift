@@ -1,9 +1,9 @@
 //
-//  CityDetailViewController.swift
+//  CityDetailViewController1.swift
 //  travel
 //
-//  Created by Duru Coskun on 25/04/2017.
-//  Copyright © 2017 Ata Aygen. All rights reserved.
+//  Created by Ata Aygen on 14.01.2018.
+//  Copyright © 2018 Ata Aygen. All rights reserved.
 //
 
 import UIKit
@@ -22,7 +22,7 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
     var cityname : String?
     var countryname : String?
     var citydata = CityDataSource()
-
+    
     
     var currency: String = ""
     
@@ -48,11 +48,17 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
     var attractionBookingInfo =  Array<String> ()
     var attractionDescription =  Array<String> ()
     var imageUrls = Array <String> ()
+    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        activityIndicator.center = self.cityImage.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        self.cityImage.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
         
         ref = Database.database().reference()
         
@@ -63,13 +69,17 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
                 self.cityImage.kf.setImage(with: URL(string : newUrl!))
             }else {
                 self.cityImage.kf.setImage(with: URL (string : "https://firebasestorage.googleapis.com/v0/b/travelapp-31a9e.appspot.com/o/Prag.jpg?alt=media&token=c5f0100b-4f5d-4ec6-a1b0-61a197598ecf"))
+                while(self.cityImage.image == nil){
+                    
+                }
+                self.activityIndicator.stopAnimating()
             }
         }
         
         let networkSession = URLSession.shared
         let dataUrl = "https://www.triposo.com/api/v2/location.json?id=\(selectedCity["DestinationCity"]!)&fields=intro,properties&account=RJ1V77PU&token=dvz1fidxe66twck6qynircn6ii3o2ydg"
         /// deneme :december
-     //   let coordinateURL = "https://www.triposo.com/api/20171027/poi.json?location_id=\(cityName)&account=RJ1V77PU&token=dvz1fidxe66twck6qynircn6ii3o2ydg"
+        //   let coordinateURL = "https://www.triposo.com/api/20171027/poi.json?location_id=\(cityName)&account=RJ1V77PU&token=dvz1fidxe66twck6qynircn6ii3o2ydg"
         var req = URLRequest(url: URL(string: dataUrl)!)
         
         req.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -100,7 +110,7 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
                         // self.population.text = "Population :\(self.pop)"
                     }
                     
-                                }
+                }
             }
             catch
             {
@@ -153,18 +163,17 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
         ref.child("CITY").child("\(selectedCity["DestinationCity"]!)").observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
             var cityInfo = snapshot.value as? NSDictionary
             
-                if let coordinates = cityInfo?["COORDINATES"] as? NSDictionary{
-                    self.longitude = (coordinates["Longitude"] as? Double)!
-                    print((coordinates["Longitude"] as? Double)!)
-                    self.latitude = (coordinates["Latitude"] as? Double)!
-            
+            if let coordinates = cityInfo?["COORDINATES"] as? NSDictionary{
+                self.longitude = (coordinates["Longitude"] as? Double)!
+                print((coordinates["Longitude"] as? Double)!)
+                self.latitude = (coordinates["Latitude"] as? Double)!
+                
             }
             
             
             self.getAttractionData(city : self.selectedCity["DestinationCity"]!  as! String)
-
         })
-            }
+    }
     func getAttractionData(city : String){
         
         let url = "https://www.triposo.com/api/20171027/poi.json?location_id=\(city)&account=RJ1V77PU&token=dvz1fidxe66twck6qynircn6ii3o2ydg"
@@ -177,20 +186,20 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
                 let itemDictionary = item as? NSDictionary
                 let imageArray = itemDictionary!["images"] as? NSArray
                 if((imageArray?.count)! > 0){
-                let imageItem = imageArray![0] as? NSDictionary
-                let imageInfoDic = imageItem!["sizes"] as? NSDictionary
-                let details = imageInfoDic!["medium"] as? NSDictionary
-                let url = details!["url"] as? String
+                    let imageItem = imageArray![0] as? NSDictionary
+                    let imageInfoDic = imageItem!["sizes"] as? NSDictionary
+                    let details = imageInfoDic!["medium"] as? NSDictionary
+                    let url = details!["url"] as? String
                     self.imageUrls.append(url!)
-
+                    
                 }else{
                     self.imageUrls.append("empty")
                 }
                 self.attractionNames.append((itemDictionary!["name"])! as! String)
                 self.attractionDescription.append((itemDictionary!["snippet"])! as! String)
                 
-             //   self.imageUrls.append(url)
-             //   self.attractionNames.append(itemDictionary)
+                //   self.imageUrls.append(url)
+                //   self.attractionNames.append(itemDictionary)
                 
             }
         }
@@ -211,11 +220,11 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
             return false
         }
     }
-   
+    
     @IBAction func addCities(_ sender: Any) {
         var name = cityname as String!
         var country = countryname as String!
-        
+        country?.remove(at: (country?.index(before: (country?.endIndex)!))!)
         ref.child("SavedCities").child("\(self.userUid!)").observeSingleEvent(
             of: DataEventType.value, with: { (snapshot) in
                 
@@ -229,13 +238,23 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
                     //ALERT you already added this city
                 }else{
                     
-                    self.ref.child("SavedCities").child("\(self.userUid!)").child("\(name!)").setValue(["City Name":"\(name!)","Country":"\(country!)"])
+                    self.ref.child("SavedCities").child("\(self.userUid!)").updateChildValues(["\(name!)" : "\(country!)"])
                     
-                    let alert = UIAlertController(title: "Oops!", message: "The city has been added to your list!", preferredStyle: UIAlertControllerStyle.alert)
+                    let alert = UIAlertController(title: "Done!", message: "The city has been added to your list!", preferredStyle: UIAlertControllerStyle.alert)
                     alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.default, handler:nil))
                     self.present(alert, animated:true,completion:nil)
-                    let success = self.saveImage(image: self.cityImage.image!, cityname: name!)
-                    print(success)
+                    if(self.activityIndicator.isAnimating){
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
+                        let success = self.saveImage(image: self.cityImage.image!, cityname: name!)
+                        print(success)
+                        })
+                    }
+                    else{
+                        let success = self.saveImage(image: self.cityImage.image!, cityname: name!)
+                        print(success)
+                    }
+                    
+                    
                     
                     // ALERT the city has been added to your list!
                     
@@ -245,4 +264,4 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
         } )
     }
     
-                             }
+}

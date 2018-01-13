@@ -13,9 +13,9 @@ import  Kingfisher
 class SavedLocationsController : UIViewController,UITableViewDataSource,UITableViewDelegate{
     
     
-    var cityList : [String?] = []
+    var cityList : [NSDictionary] = []
     var userUid : String!
-    var cityDictionary : NSDictionary = [:]
+    var infoDictionary : NSDictionary = [:]
     var cityCell : CityCell? = nil
 
    
@@ -43,11 +43,22 @@ class SavedLocationsController : UIViewController,UITableViewDataSource,UITableV
      
         
         cityCell = cityTableView.dequeueReusableCell(withIdentifier: "cityCell", for: indexPath) as! CityCell
-    let city = (cityList[indexPath.row])!
-            cityDictionary = ["City" : city]
+            infoDictionary = cityList[indexPath.row]
+            let city = infoDictionary["CityName"] as! String
+            let country = infoDictionary["CountryName"] as! String
+            
+            let cityFont = [NSFontAttributeName: UIFont(name:"Georgia-Bold", size:15), NSForegroundColorAttributeName: UIColor.white]
+            
+            let countryFont = [NSFontAttributeName : UIFont(name: "Georgia", size: 15), NSForegroundColorAttributeName: UIColor.black]
         
-      cityCell?.cityName.text = "City : \(city) "
-        cityCell?.cityImage.kf.setImage(with: URL (string : "https://firebasestorage.googleapis.com/v0/b/travelapp-31a9e.appspot.com/o/\(city).jpg?alt=media&token=c5f0100b-4f5d-4ec6-a1b0-61a197598ecf"))
+            cityCell?.cityName.attributedText = NSMutableAttributedString(string: "\(city)", attributes: cityFont)
+            //cityCell?.cityImage.kf.setImage(with: URL (string : "https://firebasestorage.googleapis.com/v0/b/travelapp-31a9e.appspot.com/o/\(city).jpg?alt=media&token=c5f0100b-4f5d-4ec6-a1b0-61a197598ecf"))
+            if let image = getSavedImage(named: "\(city).png") {
+                print(image.size)
+                cityCell?.cityImage.image = image
+            }
+            
+            cityCell?.countryName.attributedText = NSMutableAttributedString(string:"\(country)",attributes: countryFont)
         
         return cityCell!
     }
@@ -77,7 +88,12 @@ class SavedLocationsController : UIViewController,UITableViewDataSource,UITableV
         
     }
     
-    
+    func getSavedImage(named: String) -> UIImage? {
+        if let dir = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) {
+            return UIImage(contentsOfFile: URL(fileURLWithPath: dir.absoluteString).appendingPathComponent(named).path)
+        }
+        return nil
+    }
 }
 
   

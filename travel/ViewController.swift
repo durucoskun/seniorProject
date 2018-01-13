@@ -16,7 +16,7 @@ class ViewController: UIViewController ,UITableViewDelegate{
     var email : String!
     var cityImage : UIImageView!
     var ref : DatabaseReference!
-    var savedCities : [String] = []
+    var savedCities : [NSDictionary] = []
     var images : [UIImageView?] = []
     var storageRef : StorageReference!
 
@@ -86,21 +86,26 @@ class ViewController: UIViewController ,UITableViewDelegate{
         
         let semaphore = DispatchSemaphore(value: 0);
         
-        
+        DispatchQueue.main.async{
         self.ref.child("SavedCities").child(self.userUid!).observeSingleEvent(
             of: DataEventType.value, with: { (snapshot) in
                 print("COK UZULUYOM")
-                if let data = snapshot.value as? [String: Any] {
+                if let data = snapshot.value as? [String: String] {
                     let dataArray = Array(data)
-                    let keys = dataArray.map { $0.0 }
-                    self.savedCities = keys
+                    let cityNames = dataArray.map { $0.0 }
+                    let countries = dataArray.map{ $0.1 }
+                    for i in 0..<cityNames.count{
+                        self.savedCities.append(["CityName":cityNames[i],"CountryName":countries[i]])
+                    }
+                    print(self.savedCities)
+                    //self.cityCountries = countries
                     print(self.savedCities.count)
                 }
                 print(self.savedCities.count)
         }
             
-            
         )
+        }
         //    semaphore.wait(timeout: DispatchTime.distantFuture);
         semaphore.wait(timeout: DispatchTime.now());
         

@@ -51,12 +51,25 @@ class CityViewController: UIViewController,UITableViewDataSource,UITableViewDele
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         
+        let priceFont = [NSFontAttributeName : UIFont(name: "Georgia", size: 15), NSForegroundColorAttributeName: UIColor.black]
+        let cityFont = [NSFontAttributeName: UIFont(name:"Georgia-Bold", size:15), NSForegroundColorAttributeName: UIColor.white]
+        let scoreFont = [NSFontAttributeName : UIFont(name: "Georgia-Bold", size: 17), NSForegroundColorAttributeName: UIColor.black]
+        
         cell = cityTableView.dequeueReusableCell(withIdentifier: "Identifier",for: indexPath as IndexPath) as! CityTableViewCell
+        
         let city = (cityDataSource.sortedArray?[indexPath.row])!
-        cell?.score.text = String((round(city["Average"]! as! Float)*100)/100)
-      cell?.destination.setTitle("DESTINATION : \(city["DestinationCity"]!)",for: UIControlState.normal)
-      cell?.price.setTitle("MIN PRICE: \(city["MinPrice"]!) \(currency)",for: UIControlState.normal)
-       return cell!
+        
+        cell?.score.attributedText = NSMutableAttributedString(string: String(format: "%.2f", ((city["Average"]! as! Float)*100/100)), attributes: scoreFont)
+        cell?.score.layer.cornerRadius = (cell?.score.frame.width)!/2
+        cell?.score.layer.masksToBounds = true
+        
+        cell?.destination.setAttributedTitle(NSMutableAttributedString(string:"\(city["DestinationCity"]!), \(city["Country"]!)", attributes: cityFont),for: UIControlState.normal)
+        cell?.destination.contentHorizontalAlignment = .left
+        
+        cell?.price.setAttributedTitle(NSMutableAttributedString(string:"Lowest Price: \(city["MinPrice"]!) \(currency)", attributes:priceFont),for: UIControlState.normal)
+        cell?.price.contentHorizontalAlignment = .left
+        
+        return cell!
     }
     
     override func viewDidAppear(_ animated: Bool) {

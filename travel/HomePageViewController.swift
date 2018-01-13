@@ -27,6 +27,7 @@ class HomePageViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var departureLocation: UITextField!
     
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    var overlayView: UIView = UIView()
     
     @IBOutlet weak var departureDate: UIDatePicker!
     @IBOutlet weak var returnDate: UIDatePicker!
@@ -45,7 +46,7 @@ class HomePageViewController: UIViewController, CLLocationManagerDelegate {
     @IBAction func go(_ sender: UIButton) {
       //  let vc = self.appDelegate.getCurrentViewController()
         let vc = self as! HomePageViewController
-        let overlayView = UIView(frame: UIScreen.main.bounds)
+        overlayView = UIView(frame: UIScreen.main.bounds)
         overlayView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
         activityIndicator.center = self.view.center
         activityIndicator.hidesWhenStopped = true
@@ -128,6 +129,14 @@ class HomePageViewController: UIViewController, CLLocationManagerDelegate {
     
     func goToNextView() {
         performSegue(withIdentifier: "showList", sender: self)
+    }
+    
+    func showNoDestAlert(){
+        activityIndicator.stopAnimating()
+        let alert = UIAlertController(title: "Oops!", message: "There are no destinations matching your search criteria", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.default, handler:nil))
+        self.present(alert, animated:true,completion:nil)
+        overlayView.isHidden = true
     }
     
     
