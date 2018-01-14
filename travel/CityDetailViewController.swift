@@ -291,10 +291,10 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
     @IBAction func backAction(_ sender: UIButton) {
         print(previousView)
         if(previousView == "CityView"){
-            self.performSegue(withIdentifier:"DisplayCityList" , sender: Any?)
+            self.performSegue(withIdentifier:"DisplayCityList" , sender: Any?.self)
         }
         if(previousView == "SavedCities"){
-            self.performSegue(withIdentifier: "DisplaySavedCities", sender: Any?)
+            self.performSegue(withIdentifier: "DisplaySavedCities", sender: Any?.self)
         }
     }
     
