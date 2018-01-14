@@ -12,7 +12,7 @@ class CityAttractionCell: UITableViewCell {
     
     
     @IBOutlet weak var descriptionText: UITextView!
-    
+        @IBOutlet weak var attractionName: UILabel!
     @IBOutlet weak var attractionImageView: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()

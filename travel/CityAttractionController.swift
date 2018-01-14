@@ -12,6 +12,7 @@ import Kingfisher
 class CityAttractionController: UIViewController,UITableViewDataSource,UITableViewDelegate {
     
     
+    @IBOutlet weak var backButton: UIBarButtonItem!
     @IBOutlet weak var attractionTableView: UITableView!
     var cityDict: NSDictionary = [:]
     var cityAttractionCell : CityAttractionCell? = nil
@@ -59,8 +60,10 @@ print(imageUrls.count)
         //cityAttractionCell?.attractionInfo.text = attractionDescription[indexPath.row]
         //print(cityAttractionCell?.attractionInfo.text)
         
-        
-cityAttractionCell?.descriptionText.text = ("\(attractionNames[indexPath.row]) : \(attractionDescription[indexPath.row]) ")
+        cityAttractionCell?.attractionName.text = ("\(attractionNames[indexPath.row])")
+        cityAttractionCell?.attractionName.font = UIFont(name: "Georgia-Bold", size: 20)
+         cityAttractionCell?.attractionName.textColor = UIColor.white
+cityAttractionCell?.descriptionText.text = ("\(attractionDescription[indexPath.row]) ")
         if (imageUrls[indexPath.row] != "empty"){
         cityAttractionCell?.attractionImageView.kf.setImage(with: URL(string : imageUrls[indexPath.row]))
         } else{
