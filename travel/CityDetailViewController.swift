@@ -167,6 +167,7 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
             nextView.cityDataSource = self.citydata
             nextView.savedCities = self.savedCities
             nextView.originView = self.previousView
+            nextView.isSaved = self.isSaved
         }
     }
     

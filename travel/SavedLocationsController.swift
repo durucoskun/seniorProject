@@ -95,6 +95,7 @@ nextView.isSaved = true
             nextView.savedCities = self.cityList
             nextView.userUid = self.userUid
             nextView.previousView = "SavedCities"
+            nextView.isSaved = true
         }
         
     }
