@@ -91,6 +91,7 @@ class SavedLocationsController : UIViewController,UITableViewDataSource,UITableV
 nextView.isSaved = true
             nextView.selectedCity = self.cityList[(indexPath?.row)!]
             nextView.savedCities = self.cityList
+            nextView.userUid = self.userUid
         }
         
     }

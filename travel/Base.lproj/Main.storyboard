@@ -876,6 +876,7 @@ CI</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="w1X-Yt-r1Z" id="IdI-J6-i5V"/>
                         <outlet property="cityImage" destination="nog-ih-H4r" id="EQn-LH-jG1"/>
                         <outlet property="cityInfo" destination="R1R-wf-KLS" id="y7E-UI-ovF"/>
                         <outlet property="countryName" destination="5IA-qH-EtM" id="0e3-Qq-Ia5"/>

@@ -24,6 +24,7 @@ class CityAttractionController: UIViewController,UITableViewDataSource,UITableVi
     var userUid: String = ""
     var savedCities:[NSDictionary] = []
     var cityDataSource = CityDataSource()
+    var isSaved : Bool = false
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -80,12 +81,24 @@ cityAttractionCell?.descriptionText.text = ("\(attractionNames[indexPath.row]) :
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if isSaved{
+            if  let nextView = segue.destination as? CityDetailViewController{
+                nextView.selectedCity = self.cityDict
+                nextView.citydata = self.cityDataSource
+                nextView.currency = self.currency
+                nextView.userUid = self.userUid
+                nextView.savedCities = self.savedCities
+                nextView.isSaved = true
+            }
+
+        }else{
         if  let nextView = segue.destination as? CityDetailViewController{
             nextView.selectedCity = self.cityDict
             nextView.citydata = self.cityDataSource
             nextView.currency = self.currency
             nextView.userUid = self.userUid
             nextView.savedCities = self.savedCities
+            }
             
     }
     }

@@ -17,6 +17,7 @@ import Alamofire
 class CityDetailViewController: UIViewController ,CityDataDelegate{
     
     
+    @IBOutlet weak var backButton: UIButton!
     
     var userUid : String?
     var cityname : String?
@@ -144,6 +145,20 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if isSaved{
+            backButton.setTitle("< Back", for: UIControlState.normal)
+            if let nextView = segue.destination as? CityAttractionController{
+                nextView.attractionNames = self.attractionNames
+                nextView.attractionDescription = self.attractionDescription
+                nextView.imageUrls = self.imageUrls
+                nextView.cityDict = self.selectedCity
+                nextView.currency = self.currency
+                nextView.userUid = self.userUid!
+                nextView.cityDataSource = self.citydata
+                nextView.savedCities = self.savedCities
+                nextView.isSaved = true
+            }
+        }
         if  let nextView = segue.destination as? CityViewController{
             nextView.cityDataSource = self.citydata
             nextView.currency = self.currency
@@ -159,6 +174,8 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
             nextView.userUid = self.userUid!
             nextView.cityDataSource = self.citydata
             nextView.savedCities = self.savedCities
+            print(attractionNames)
+            print(selectedCity)
         }
     }
     
