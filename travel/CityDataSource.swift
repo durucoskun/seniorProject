@@ -61,7 +61,7 @@ class CityDataSource: NSObject {
         let dataTask = networkSession.dataTask(with: req) {(data,response,error) in print("Data")
             
             let jsonReadable = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-                       do{
+            do{
                 
                 let jsonDictionary = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! [String: Any]
                 
@@ -94,8 +94,8 @@ class CityDataSource: NSObject {
                 self.showNoDestError(fromViewController: vc)
                 return
             }
-        self.showNextView(fromViewController: vc)
-        
+            self.showNextView(fromViewController: vc)
+            
         })
     }
     
@@ -134,11 +134,11 @@ class CityDataSource: NSObject {
                     if((snap.childSnapshot(forPath: "INTERESTS").value as? [String:Any]) == nil){}
                     else{
                         var interests = snap.childSnapshot(forPath: "INTERESTS").value as! [String:Any]
-
+                        
                         for i in 0..<interest.count{
                             if(interests[interest[i]] as? Float != nil){
-                            average += interests[interest[i]] as! Float
-
+                                average += interests[interest[i]] as! Float
+                                
                             }
                         }
                         averages[cityName] = 0.0
@@ -146,9 +146,9 @@ class CityDataSource: NSObject {
                         averages[cityName] = average
                         
                     }
-                   /* for i in 0..<interest.count{
-                        average += interests[interest[i]] as! Float
-                    }*/
+                    /* for i in 0..<interest.count{
+                     average += interests[interest[i]] as! Float
+                     }*/
                     
                 }
                 
@@ -157,74 +157,74 @@ class CityDataSource: NSObject {
         
         
         
-DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
-
-    var destination : Int
-        for city in self.places!{
-            let newCity = city as! Place
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
             
-            if (newCity.code == code){
+            var destination : Int
+            for city in self.places!{
+                let newCity = city as! Place
                 
-                let id = newCity.placeId
-                
-                for quote in self.quotes!{
-                    let newQuote = quote as! Quote
-                    if (quote.outbound.originId == id){
-                        destination =  quote.outbound.destinationId
-                        for place in self.places!{
-                            let nextCity = place as! Place
-                            var cityScore: Float = 0.0
-                            if (destination == nextCity.placeId){
-                                if(averages[nextCity.cityName!] != nil) {
-                                    cityScore = averages[nextCity.cityName!]!
-                                }
-                                let destinationDictionary: [String:Any] = ["DestinationCity":nextCity.cityName!,"MinPrice" :quote.minPrice,"Country":nextCity.countryName, "Average": cityScore ]
-                                
-                                if (destinationDictionary["MinPrice"] as! Double ) < self.userPrice {
-                                (self.destinations?.append(destinationDictionary as NSDictionary))!
+                if (newCity.code == code){
+                    
+                    let id = newCity.placeId
+                    
+                    for quote in self.quotes!{
+                        let newQuote = quote as! Quote
+                        if (quote.outbound.originId == id){
+                            destination =  quote.outbound.destinationId
+                            for place in self.places!{
+                                let nextCity = place as! Place
+                                var cityScore: Float = 0.0
+                                if (destination == nextCity.placeId){
+                                    if(averages[nextCity.cityName!] != nil) {
+                                        cityScore = averages[nextCity.cityName!]!
+                                    }
+                                    let destinationDictionary: [String:Any] = ["DestinationCity":nextCity.cityName!,"MinPrice" :quote.minPrice,"Country":nextCity.countryName, "Average": cityScore ]
+                                    
+                                    if (destinationDictionary["MinPrice"] as! Double ) < self.userPrice {
+                                        (self.destinations?.append(destinationDictionary as NSDictionary))!
+                                    }
                                 }
                             }
                         }
                     }
                 }
             }
-        }
-    self.sortedArray = (self.destinations as! NSArray).sortedArray(using: [NSSortDescriptor(key: "Average", ascending: false)]) as! [[String:AnyObject]] as Array<NSDictionary>
-    var noDuplicates = [[String: AnyObject]]() as Array<NSDictionary>
-    var usedNames = [String]()
-    /*
-    for dict in self.sortedArray! {
-        if let name = dict["DestinationCity"], !usedNames.contains(name as! String) {
-            noDuplicates.append(dict)
-            usedNames.append(name as! String)
-        }
-    }
-     */
-    check: do{
-    let count = self.sortedArray?.count as! Int
-    if(count==0){
-        break check
-    }
-    for i in 1 ..< count{
-        if i >= (self.sortedArray?.count)!{
-            break
-        }
-        print(self.sortedArray?[i-1])
-        print()
-        let dictFirst = (self.sortedArray?[i])!
-        let dictSecond = (self.sortedArray?[i-1])!
-        if (dictFirst["DestinationCity"] as! String == dictSecond["DestinationCity"] as! String){
-            if (dictFirst["MinPrice"] as! Double ) < (dictSecond["MinPrice"] as! Double ){
-                self.sortedArray?.remove(at: i-1)
-            }else{
-                self.sortedArray?.remove(at: i)
-
+            self.sortedArray = (self.destinations as! NSArray).sortedArray(using: [NSSortDescriptor(key: "Average", ascending: false)]) as! [[String:AnyObject]] as Array<NSDictionary>
+            var noDuplicates = [[String: AnyObject]]() as Array<NSDictionary>
+            var usedNames = [String]()
+            /*
+             for dict in self.sortedArray! {
+             if let name = dict["DestinationCity"], !usedNames.contains(name as! String) {
+             noDuplicates.append(dict)
+             usedNames.append(name as! String)
+             }
+             }
+             */
+            check: do{
+                let count = self.sortedArray?.count as! Int
+                if(count==0){
+                    break check
+                }
+                for i in 1 ..< count{
+                    if i >= (self.sortedArray?.count)!{
+                        break
+                    }
+                    print(self.sortedArray?[i-1])
+                    print()
+                    let dictFirst = (self.sortedArray?[i])!
+                    let dictSecond = (self.sortedArray?[i-1])!
+                    if (dictFirst["DestinationCity"] as! String == dictSecond["DestinationCity"] as! String){
+                        if (dictFirst["MinPrice"] as! Double ) < (dictSecond["MinPrice"] as! Double ){
+                            self.sortedArray?.remove(at: i-1)
+                        }else{
+                            self.sortedArray?.remove(at: i)
+                            
+                        }
+                    }
+                }
             }
-        }
-        }
-    }
-   // self.sortedArray = noDuplicates
-})
+            // self.sortedArray = noDuplicates
+        })
         if(self.sortedArray?.count as! Int == 0){
             return
         }
@@ -253,16 +253,15 @@ DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
         
         do{
             self.ref.child("CITY").observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
+                
                 for child in snapshot.children{
                     let snap = child as! DataSnapshot
                     let cityName = snap.key
                     
-                    // account id token degisebilir.
                     let scoreUrl = "https://www.triposo.com//api/20171027/tag.json?location_id=\(cityName)&type=background&fields=name,score&account=RNTTF1VB&token=49onrrp87tqkx4pa3zr2nub0fi2m9equ"
                     Alamofire.request(scoreUrl,method: .get).responseJSON{ response in
                         let infoDictionary = (response.result.value) as? NSDictionary
                         if (infoDictionary?["results"] != nil){
-                            
                             let info = infoDictionary?["results"] as? NSArray
                             
                             for scoreItem in info!{
@@ -281,8 +280,8 @@ DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
             })}catch{
                 
         }
-
-
+        
+        
     }
     
     func getInterestScoreByCoordinate(city : String ){
@@ -292,120 +291,113 @@ DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
         
         do{
             self.ref.child("CITY").observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
-                var childSnaphot = snapshot.childSnapshot(forPath: "\(city)") as? DataSnapshot
                 
+                var childSnaphot = snapshot.childSnapshot(forPath: "\(city)") as? DataSnapshot
                 var cityInfo = snapshot.value as? NSDictionary
                 
-                 if let value = cityInfo?["\(city)"] as? NSDictionary{
-                 if let coordinates = value["COORDINATES"] as? NSDictionary{
-                 longitude = (coordinates["Longitude"] as? Double)!
-                 latitude = (coordinates["Latitude"] as? Double)!
-                 }
-                 }
+                if let value = cityInfo?["\(city)"] as? NSDictionary{
+                    if let coordinates = value["COORDINATES"] as? NSDictionary{
+                        longitude = (coordinates["Longitude"] as? Double)!
+                        latitude = (coordinates["Latitude"] as? Double)!
+                    }
+                }
+                let scoreURL = "http://www.triposo.com//api/20171027/local_score.json?coordinates=\(latitude),\(longitude)&account=RNTTF1VB&token=49onrrp87tqkx4pa3zr2nub0fi2m9equ"
                 
-                 let scoreURL = "http://www.triposo.com//api/20171027/local_score.json?coordinates=\(latitude),\(longitude)&account=RNTTF1VB&token=49onrrp87tqkx4pa3zr2nub0fi2m9equ"
-                 
-                 // let scoreUrl = "https://www.triposo.com/api/v2/location.json?id=\(city)&fields=intro,properties&account=RJ1V77PU&token=dvz1fidxe66twck6qynircn6ii3o2ydg"
-                 Alamofire.request(scoreURL,method:.get).responseJSON{ response in
-                 
-                 
-                 let info = (response.result.value)  as? NSDictionary
-                 if (info?["results"] != nil){
-                 print("hello")
-                 let intro = info?["results"] as? NSArray
-                 for item in intro!{
-                 let itemDictionary = item as! NSDictionary
-                 let scores = itemDictionary["scores"] as! NSArray
-                 //print(itemDictionary)
-                 
-                 for scoreInfo in scores{
-                 let dictionary = scoreInfo as! NSDictionary
-                 let score = dictionary["score"] as! Double
-                 let label = dictionary["tag_label"] as! String
-                 self.ref.child("CITY").child(city).child("INTERESTS").updateChildValues(["\(label.firstCharacterUpperCase())":score])
-                 }
-                 }
-                 
-                                     }                             }
+                Alamofire.request(scoreURL,method:.get).responseJSON{ response in
+                    let info = (response.result.value)  as? NSDictionary
+                    if (info?["results"] != nil){
+                        let intro = info?["results"] as? NSArray
+                        for item in intro!{
+                            let itemDictionary = item as! NSDictionary
+                            let scores = itemDictionary["scores"] as! NSArray
+                            for scoreInfo in scores{
+                                let dictionary = scoreInfo as! NSDictionary
+                                let score = dictionary["score"] as! Double
+                                let label = dictionary["tag_label"] as! String
+                                self.ref.child("CITY").child(city).child("INTERESTS").updateChildValues(["\(label.firstCharacterUpperCase())":score])
+                            }
+                        }
+                    }
+                }
             })
         }catch{
             
         }
         
-
+        
         
     }
     
     
-                func getCityCoordinates(latitude : Double,longitude : Double){
-                /*
-                    let networkSession = URLSession.shared
-                  //  var city = "\(newPlace.cityName!)"
-                    
-                    let whitespace = NSCharacterSet.whitespaces
-                    
-                    let phrase = city
-                    let range = phrase.rangeOfCharacter(from: whitespace)
-                    
-                    if let test = range {
-                        //// bosluklu cityler icin check edilmeli
-                        */
-                  //  }else{
-                        
-                      /*
-                        do{
-                            
-                            // let coordinateURL = "https://www.triposo.com/api/20171027/location.json?id=\(city)&type=city&fields=coordinates&account=RJ1V77PU&token=dvz1fidxe66twck6qynircn6ii3o2ydg"
-                     
-                            // COORDINATE PART
-                            
-                            var req = URLRequest(url: URL(string: coordinateURL)!)
-                            req.setValue("application/json", forHTTPHeaderField: "Content-Type")
-                            let dataTask = networkSession.dataTask(with: req) {(data,response,error) in
-                                
-                                let jsonReadable = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)!
-                                
-                                do{
-                                    
-                                    
-                                    let jsonDictionary = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! [String: Any]
-                                    
-                                    let coordinates = jsonDictionary["results"] as! NSArray
-                                    var latitude = 0.0 as! Double
-                                    var longitude = 0.0 as! Double
-                     
-                                    for result in coordinates{
-     
-                                        let coordinateDictionary = result as! NSDictionary
-                                        let coordinates = coordinateDictionary["coordinates"] as! NSDictionary
-                                        longitude = coordinates["longitude"]! as! Double
-                                        latitude = coordinates ["latitude"]! as! Double
-                                    }
-                                    self.ref.child("CITY").child("\(city)").child("COORDINATES").setValue(["Longitude":longitude,"Latitude":latitude])
-                                    
-                                    
-                                    
-                                }catch{
-                                    print("exception")
-                                }
-                            }
-                            
-                            dataTask.resume()
-                        }catch{
-                            print ("ERRRRROOOR")
-                        }
-     
-                    }
-    */
-                    
-                }
+    func getCityCoordinates(latitude : Double,longitude : Double){
+        /*
+         let networkSession = URLSession.shared
+         //  var city = "\(newPlace.cityName!)"
+         
+         let whitespace = NSCharacterSet.whitespaces
+         
+         let phrase = city
+         let range = phrase.rangeOfCharacter(from: whitespace)
+         
+         if let test = range {
+         //// bosluklu cityler icin check edilmeli
+         */
+        //  }else{
+        
+        /*
+         do{
+         
+         // let coordinateURL = "https://www.triposo.com/api/20171027/location.json?id=\(city)&type=city&fields=coordinates&account=RJ1V77PU&token=dvz1fidxe66twck6qynircn6ii3o2ydg"
+         
+         // COORDINATE PART
+         
+         var req = URLRequest(url: URL(string: coordinateURL)!)
+         req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+         let dataTask = networkSession.dataTask(with: req) {(data,response,error) in
+         
+         let jsonReadable = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)!
+         
+         do{
+         
+         
+         let jsonDictionary = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! [String: Any]
+         
+         let coordinates = jsonDictionary["results"] as! NSArray
+         var latitude = 0.0 as! Double
+         var longitude = 0.0 as! Double
+         
+         for result in coordinates{
+         
+         let coordinateDictionary = result as! NSDictionary
+         let coordinates = coordinateDictionary["coordinates"] as! NSDictionary
+         longitude = coordinates["longitude"]! as! Double
+         latitude = coordinates ["latitude"]! as! Double
+         }
+         self.ref.child("CITY").child("\(city)").child("COORDINATES").setValue(["Longitude":longitude,"Latitude":latitude])
+         
+         
+         
+         }catch{
+         print("exception")
+         }
+         }
+         
+         dataTask.resume()
+         }catch{
+         print ("ERRRRROOOR")
+         }
+         
+         }
+         */
+        
+    }
     func getSafetyScores(){
-     
+        
         
         self.ref.child("CITY").observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
             for child in snapshot.children{
                 let snap = child as! DataSnapshot
-            let city = snap.key
+                let city = snap.key
                 
                 let dictionary = snap.value as? NSDictionary
                 let countryID = dictionary?["CountryId"] as? String
@@ -416,27 +408,27 @@ DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
                         let infoDictionary = response.result.value as? NSDictionary
                         if(infoDictionary != nil){
                             let number = (infoDictionary?["advisoryState"]) as? Double
-                           let safetyScore = (3-number!)*3.33 as Double
+                            let safetyScore = (3-number!)*3.33 as Double
                             self.ref.child("CITY").child("\(city)").child("INTERESTS").updateChildValues(["Safety":safetyScore])
                             print("\(city) updated")
                         }
                     }
                 }
-
+                
             }
-            }
-
+        }
+            
         )
     }
     
     func getPlaces (placeArray : NSArray){
         
-       
         
-    //  getInterestScoreByName() // triposo
-      //  getInterestScoreByCoordinate(city: String) // triposodan
         
-       getSafetyScores() //2 TUGO API ile safety scoreları cekildi
+        //  getInterestScoreByName() // triposo
+        //  getInterestScoreByCoordinate(city: String) // triposodan
+        
+        getSafetyScores() //2 TUGO API ile safety scoreları cekildi
         
         
         /*
@@ -480,73 +472,73 @@ DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
          */
         ///////// COUNTRY IDLERI EKLENDI
         /*
+         
+         self.ref.child("CITY").observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
+         for child in snapshot.children{
+         let snap = child as! DataSnapshot
+         let cityName = snap.key
+         self.ref.child("CITY").child("\(cityName)").observeSingleEvent(of: DataEventType.value, with: { (citySnapshot) in
+         for cityChild in citySnapshot.children{
+         let cityDictionary = (child as! DataSnapshot).value as? NSDictionary
+         let country = cityDictionary?["Country"] as? String
+         self.ref.child("CITIES").child("ZRH").observeSingleEvent(of: DataEventType.value, with: { (countrySnap) in
+         for countryChild in countrySnap.children{
+         let countryDictionary = (countryChild as! DataSnapshot).value as? NSDictionary
+         let name = countryDictionary?["englishName"] as? String
+         if (country == name!){
+         self.ref.child("CITY").child("\(cityName)").updateChildValues(["CountryId" : countryDictionary?["id"]])
+         print("YES")
+         }
+         }
+         
+         })
+         */
+        /*
+         // print("\(country!) : \(cityName)")
+         var url = "https://api.tugo.com/v1/travelsafe/countries"
+         
+         let headers : HTTPHeaders = ["X-Auth-Api-Key": "crkhekpcghn5vkardynczv2q"]
+         Alamofire.request(url, method: .get, headers: headers).responseJSON{ response in
+         print("City: \(cityName)")
+         print(response.result.value)
+         if (response.result.value != nil){
+         let countryArray = response.result.value as? NSArray
+         for countryItem in countryArray!{
+         let countryDictionary = countryItem as? NSDictionary
+         let name = countryDictionary?["englishName"] as! String
+         print("country:  eklenicek \(name)")
+         if (country! == name){
+         self.ref.child("CITY").child("\(cityName)").updateChildValues(["CountryId" : countryDictionary?["id"]])
+         print("Country \(country!) added to \(cityName)")
+         }
+         
+         }
+         
+         }
+         
+         
+         
+         }
+         
+         }
+         
+         }
+         )
+         }
+         }
+         )
+         
+         */
         
-        self.ref.child("CITY").observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
-            for child in snapshot.children{
-                let snap = child as! DataSnapshot
-                let cityName = snap.key
-                self.ref.child("CITY").child("\(cityName)").observeSingleEvent(of: DataEventType.value, with: { (citySnapshot) in
-                    for cityChild in citySnapshot.children{
-                        let cityDictionary = (child as! DataSnapshot).value as? NSDictionary
-                        let country = cityDictionary?["Country"] as? String
-                    self.ref.child("CITIES").child("ZRH").observeSingleEvent(of: DataEventType.value, with: { (countrySnap) in
-                        for countryChild in countrySnap.children{
-                        let countryDictionary = (countryChild as! DataSnapshot).value as? NSDictionary
-               let name = countryDictionary?["englishName"] as? String
-                        if (country == name!){
-                            self.ref.child("CITY").child("\(cityName)").updateChildValues(["CountryId" : countryDictionary?["id"]])
-                           print("YES")
-                        }
-                    }
-                    
-                        })
- */
-                    /*
-                   // print("\(country!) : \(cityName)")
-                    var url = "https://api.tugo.com/v1/travelsafe/countries"
-                    
-                    let headers : HTTPHeaders = ["X-Auth-Api-Key": "crkhekpcghn5vkardynczv2q"]
-                    Alamofire.request(url, method: .get, headers: headers).responseJSON{ response in
-                        print("City: \(cityName)")
-print(response.result.value)
-                        if (response.result.value != nil){
-                        let countryArray = response.result.value as? NSArray
-for countryItem in countryArray!{
-                                let countryDictionary = countryItem as? NSDictionary
-                            let name = countryDictionary?["englishName"] as! String
-    print("country:  eklenicek \(name)")
-                            if (country! == name){
-                                self.ref.child("CITY").child("\(cityName)").updateChildValues(["CountryId" : countryDictionary?["id"]])
-                                print("Country \(country!) added to \(cityName)")
-                            }
-                            
-                        }
- 
-                        }
-                    
-
- 
-                    }
- 
-                    }
- 
-                }
-                    )
-            }
-        }
-            )
- 
- */
-
- 
- 
- 
+        
+        
+        
         ///////////////////////////
         places = Array()
         
         
         for place in placeArray{
-                        let placeDictionary = place as! NSDictionary
+            let placeDictionary = place as! NSDictionary
             
             if (placeDictionary.count > 4){
                 
@@ -582,15 +574,15 @@ for countryItem in countryArray!{
                  
                  ref.child("AIRPORTS").child("\(newPlace.cityName!)").setValue(["SkyScannerCode" : newPlace.code])
                  
-                
-                //do catche tekrar bakmak lazım
-                // print(newPlace.cityName!)
-                
-                //update 4 of the INTEREST VALUES
-                
-                
-                var city = "\(newPlace.cityName!)"
-                                 let networkSession = URLSession.shared
+                 
+                 //do catche tekrar bakmak lazım
+                 // print(newPlace.cityName!)
+                 
+                 //update 4 of the INTEREST VALUES
+                 
+                 
+                 var city = "\(newPlace.cityName!)"
+                 let networkSession = URLSession.shared
                  print("hmmm")
                  var city = "\(newPlace.cityName!)"
                  
@@ -649,8 +641,8 @@ for countryItem in countryArray!{
                  print ("ERRRRROOOR")
                  }
                  }
-                */
-                 //  */
+                 */
+                //  */
                 
                 
                 
