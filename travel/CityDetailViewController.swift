@@ -63,46 +63,18 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
         activityIndicator.startAnimating()
         
         ref = Database.database().reference()
-        if isSaved{
-            cityNameStr = (("\(selectedCity["CityName"]!)") as! String)
-            countryNameStr = (("\(selectedCity["CountryName"]!)") as! String)
-            
-        }else{
-            cityNameStr = (("\(selectedCity["DestinationCity"]!)" ) as String)
-            countryNameStr = (("\(selectedCity["Country"]!) ") as String)
-        }
-        let storageRef = storage.reference().child("\(cityNameStr!).jpg")
-        storageRef.downloadURL { (url, error)-> Void in
-            if (url != nil){
-                let newUrl = (url?.absoluteString)
-                self.cityImage.kf.setImage(with: URL(string : newUrl!))
-            }else {
-                self.cityImage.kf.setImage(with: URL (string : "https://firebasestorage.googleapis.com/v0/b/travelapp-31a9e.appspot.com/o/Prag.jpg?alt=media&token=c5f0100b-4f5d-4ec6-a1b0-61a197598ecf"))
-                while(self.cityImage.image == nil){
-                    
-                }
-                self.activityIndicator.stopAnimating()
-            }
-        }
         
-        let networkSession = URLSession.shared
+        setCity()
+        
+        setImage()
+                     let dataUrl = "https://www.triposo.com/api/v2/location.json?id=\(cityNameStr!)&fields=intro,properties&account=RJ1V77PU&token=dvz1fidxe66twck6qynircn6ii3o2ydg"
 
-
-        let dataUrl = "https://www.triposo.com/api/v2/location.json?id=\(cityNameStr!)&fields=intro,properties&account=RJ1V77PU&token=dvz1fidxe66twck6qynircn6ii3o2ydg"
-        var req = URLRequest(url: URL(string: dataUrl)!)
-        
-        req.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        let dataTask = networkSession.dataTask(with: req) {(data,response,error) in print("Data")
-            
-            let jsonReadable = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-            print(jsonReadable)
+        Alamofire.request(dataUrl,method:.get).responseJSON{ response in
+            let jsonDictionary = response.result.value as? NSDictionary
             
             do
             {
-                let jsonDictionary = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! [String: Any]
-                
-                let resultArray = jsonDictionary["results"]! as! NSArray
+                    let resultArray = jsonDictionary?["results"]! as! NSArray
                 for result in resultArray{
                     let resultDictionary = result as! NSDictionary
                     let intro = resultDictionary["intro"]! as! String
@@ -119,27 +91,47 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
                         }
                     }
                 }
-            }
-            catch
-            {
+            }catch{
                 print("We have a JSON exception")
             }
-            
-            
-            
         }
-        dataTask.resume()
-        // self.title = "\(((selectedCity["DestinationCity"]) as AnyObject).uppercased!)"
         cityData.delegate = self
-        // "DESTINATION : \(city["DestinationCity"]!
       
         
         self.cityName?.text = cityNameStr
-        self.countryName?.text = countryNameStr
+        self.countryName?.text = "\(cityNameStr!),\(countryNameStr!)"
+        self.countryName?.font = UIFont(name: "Georgia-Bold", size: 20)
+        self.countryName?.textColor = UIColor.black
         
         // Do any additional setup after loading the view.
     }
+    func setCity(){
+        if isSaved{
+            cityNameStr = (("\(selectedCity["CityName"]!)") as! String)
+            countryNameStr = (("\(selectedCity["CountryName"]!)") as! String)
+            
+        }else{
+            cityNameStr = (("\(selectedCity["DestinationCity"]!)" ) as String)
+            countryNameStr = (("\(selectedCity["Country"]!) ") as String)
+        }
+
+    }
+   func setImage(){
+    let storageRef = storage.reference().child("\(cityNameStr!).jpg")
+    storageRef.downloadURL { (url, error)-> Void in
+        if (url != nil){
+            let newUrl = (url?.absoluteString)
+            self.cityImage.kf.setImage(with: URL(string : newUrl!))
+            self.activityIndicator.stopAnimating()
+        }else{
+            self.cityImage.kf.setImage(with: URL (string :"http://pic.triposo.com/ios/urchin_17_1/pic/\(self.cityNameStr!).jpg") )
+            self.activityIndicator.stopAnimating()
+
+
+        }
+    }
     
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if isSaved{
             backButton.setTitle("< Back", for: UIControlState.normal)
