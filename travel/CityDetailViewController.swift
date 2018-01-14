@@ -128,8 +128,8 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
         // "DESTINATION : \(city["DestinationCity"]!
         var countryNameStr = ""
         if isSaved{
-            cityNameStr = (("\(selectedCity["CityName"])" ) as! String)
-            countryNameStr = (("\(selectedCity["CountryName"])" ) as! String)
+            cityNameStr = (("\(selectedCity["CityName"]!)") as! String)
+            countryNameStr = (("\(selectedCity["CountryName"]!)") as! String)
             print(cityNameStr)
             print(countryNameStr)
         }else{
