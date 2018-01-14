@@ -264,14 +264,16 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
                     self.ref.child("SavedCities").child("\(self.userUid!)").updateChildValues(["\(self.cityNameStr!)" : "\(self.countryNameStr!)"])
                     
                     let alert = UIAlertController(title: "Done!", message: "The city has been added to your list!", preferredStyle: UIAlertControllerStyle.alert)
+                     self.savedCities.append(["CityName":"\(self.cityNameStr!)" ,"CountryName":"\(self.countryNameStr!)"])
+                      print(["\(self.cityNameStr!)" : "\(self.countryNameStr!)"])
                     alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.default, handler:nil))
                     self.present(alert, animated:true,completion:nil)
                     if(self.activityIndicator.isAnimating){
                         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
                             let success = self.saveImage(image: self.cityImage.image!, cityname: self.cityNameStr!)
                             print(success)
-                            self.savedCities.append(["CityName":"\(self.cityNameStr!)" ,"CountryName":"\(self.countryNameStr!)"])
-                            print(["\(self.cityNameStr!)" : "\(self.countryNameStr!)"])
+                           
+                          
                         })
                     }
                     else{
