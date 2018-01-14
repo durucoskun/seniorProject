@@ -24,6 +24,7 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
     var countryNameStr : String?
     var citydata = CityDataSource()
     var savedCities: [NSDictionary] = []
+    var previousView: String = ""
     
     var currency: String = ""
     
@@ -80,6 +81,7 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
                     let intro = resultDictionary["intro"]! as! String
                     DispatchQueue.main.async() {
                         self.cityInfo.text = intro
+                        self.cityInfo.font = UIFont(name: "Georgia", size: 16)
                     }
                     let propertiesArray = resultDictionary["properties"] as! NSArray
                     
@@ -88,6 +90,7 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
                         self.pop = dict["value"]! as! String
                         DispatchQueue.main.async() {
                             self.population.text = "Population : \(self.pop)"
+                            self.population.font = UIFont(name: "Georgia", size: 14)
                         }
                     }
                 }
@@ -133,27 +136,28 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
     
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if isSaved{
-            backButton.setTitle("< Back", for: UIControlState.normal)
-            if let nextView = segue.destination as? CityAttractionController{
-                nextView.attractionNames = self.attractionNames
-                nextView.attractionDescription = self.attractionDescription
-                nextView.imageUrls = self.imageUrls
-                nextView.cityDict = self.selectedCity
-                nextView.currency = self.currency
-                nextView.userUid = self.userUid!
+        if(previousView == "CityView"){
+            if  let nextView = segue.destination as? CityViewController{
                 nextView.cityDataSource = self.citydata
-                nextView.savedCities = self.savedCities
-                nextView.isSaved = true
+                nextView.currency = self.currency
+                nextView.userUid = self.userUid
+                nextView.savedCitiesList = self.savedCities
             }
         }
-        if  let nextView = segue.destination as? CityViewController{
-            nextView.cityDataSource = self.citydata
-            nextView.currency = self.currency
-            nextView.userUid = self.userUid
-            nextView.savedCitiesList = self.savedCities
+        else if(previousView == "SavedCities"){
+            if let nextView = segue.destination as? UserTabController{
+                nextView.userUid = self.userUid
+                let profileController = nextView.viewControllers?[0] as! UserProfileController
+                profileController.userUid = self.userUid
+                let savedLocationsController = nextView.viewControllers?[1] as! SavedLocationsController
+                savedLocationsController.userUid = self.userUid
+                savedLocationsController.cityList = self.savedCities
+                let searchController = nextView.viewControllers?[2] as! HomePageViewController
+                searchController.savedCities = self.savedCities
+                nextView.selectedViewController = nextView.viewControllers?[1]
+            }
         }
-        else if let nextView = segue.destination as? CityAttractionController{
+        if let nextView = segue.destination as? CityAttractionController{
             nextView.attractionNames = self.attractionNames
             nextView.attractionDescription = self.attractionDescription
             nextView.imageUrls = self.imageUrls
@@ -162,8 +166,7 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
             nextView.userUid = self.userUid!
             nextView.cityDataSource = self.citydata
             nextView.savedCities = self.savedCities
-            print(attractionNames)
-            print(selectedCity)
+            nextView.originView = self.previousView
         }
     }
     
@@ -174,6 +177,7 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
     
     
     override func viewDidAppear(_ animated: Bool) {
+        print(previousView)
         var cityNameStr = ""
         if isSaved{
             cityNameStr = selectedCity["CityName"] as! String
@@ -282,6 +286,15 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
                 }
                 
         } )
+    }
+    @IBAction func backAction(_ sender: UIButton) {
+        print(previousView)
+        if(previousView == "CityView"){
+            self.performSegue(withIdentifier:"DisplayCityList" , sender: Any?)
+        }
+        if(previousView == "SavedCities"){
+            self.performSegue(withIdentifier: "DisplaySavedCities", sender: Any?)
+        }
     }
     
 }

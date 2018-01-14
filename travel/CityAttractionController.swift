@@ -25,6 +25,7 @@ class CityAttractionController: UIViewController,UITableViewDataSource,UITableVi
     var savedCities:[NSDictionary] = []
     var cityDataSource = CityDataSource()
     var isSaved : Bool = false
+    var originView: String = ""
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -89,6 +90,7 @@ cityAttractionCell?.descriptionText.text = ("\(attractionNames[indexPath.row]) :
                 nextView.userUid = self.userUid
                 nextView.savedCities = self.savedCities
                 nextView.isSaved = true
+                nextView.previousView = self.originView
             }
 
         }else{
@@ -98,6 +100,7 @@ cityAttractionCell?.descriptionText.text = ("\(attractionNames[indexPath.row]) :
             nextView.currency = self.currency
             nextView.userUid = self.userUid
             nextView.savedCities = self.savedCities
+            nextView.previousView = self.originView
             }
             
     }
