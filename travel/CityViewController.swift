@@ -99,7 +99,7 @@ class CityViewController: UIViewController,UITableViewDataSource,UITableViewDele
         cityDetailController.currency = self.currency
         cityDetailController.selectedCity = (cityDataSource.sortedArray?[(selectedIndexPath?.row)!])!
         cityDetailController.savedCities = self.savedCitiesList
-        
+        cityDetailController.previousView = "CityView"
     
         }
         else if let nextView = segue.destination as? UserTabController{
