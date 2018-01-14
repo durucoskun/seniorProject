@@ -56,6 +56,8 @@ class SavedLocationsController : UIViewController,UITableViewDataSource,UITableV
             if let image = getSavedImage(named: "\(city).png") {
                 print(image.size)
                 cityCell?.cityImage.image = image
+            }else if cityCell?.cityImage.image == nil{
+                  cityCell?.cityImage.kf.setImage(with: URL (string :"http://pic.triposo.com/ios/urchin_17_1/pic/\(city).jpg") )
             }
             
             cityCell?.countryName.attributedText = NSMutableAttributedString(string:"\(country)",attributes: countryFont)
