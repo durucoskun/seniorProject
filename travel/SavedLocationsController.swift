@@ -85,7 +85,13 @@ class SavedLocationsController : UIViewController,UITableViewDataSource,UITableV
             nextView.cityname = cityList[(indexPath?.row)!]
         }
  */
-        
+        if let nextView = segue.destination as? CityDetailViewController{
+            let selectedCell = sender as! CityCell
+            let indexPath = self.cityTableView.indexPath(for : selectedCell)
+nextView.isSaved = true
+            nextView.selectedCity = self.cityList[(indexPath?.row)!]
+            nextView.savedCities = self.cityList
+        }
         
     }
     

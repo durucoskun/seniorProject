@@ -49,6 +49,7 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
     var attractionDescription =  Array<String> ()
     var imageUrls = Array <String> ()
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    var isSaved : Bool = false
     
     
     override func viewDidLoad() {
@@ -61,8 +62,13 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
         activityIndicator.startAnimating()
         
         ref = Database.database().reference()
-        
-        let storageRef = storage.reference().child("\(selectedCity["DestinationCity"]!).jpg")
+        var cityNameStr = ""
+        if isSaved{
+            cityNameStr = selectedCity["CityName"] as! String
+        }else{
+            cityNameStr = selectedCity["DestinationCity"] as! String
+        }
+        let storageRef = storage.reference().child("\(cityNameStr).jpg")
         storageRef.downloadURL { (url, error)-> Void in
             if (url != nil){
                 let newUrl = (url?.absoluteString)
@@ -77,9 +83,7 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
         }
         
         let networkSession = URLSession.shared
-        let dataUrl = "https://www.triposo.com/api/v2/location.json?id=\(selectedCity["DestinationCity"]!)&fields=intro,properties&account=RJ1V77PU&token=dvz1fidxe66twck6qynircn6ii3o2ydg"
-        /// deneme :december
-        //   let coordinateURL = "https://www.triposo.com/api/20171027/poi.json?location_id=\(cityName)&account=RJ1V77PU&token=dvz1fidxe66twck6qynircn6ii3o2ydg"
+        let dataUrl = "https://www.triposo.com/api/v2/location.json?id=\(cityNameStr)&fields=intro,properties&account=RJ1V77PU&token=dvz1fidxe66twck6qynircn6ii3o2ydg"
         var req = URLRequest(url: URL(string: dataUrl)!)
         
         req.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -107,9 +111,7 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
                         DispatchQueue.main.async() {
                             self.population.text = "Population : \(self.pop)"
                         }
-                        // self.population.text = "Population :\(self.pop)"
                     }
-                    
                 }
             }
             catch
@@ -121,15 +123,22 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
             
         }
         dataTask.resume()
-        self.title = "\(((selectedCity["DestinationCity"]) as AnyObject).uppercased!)"
-        
+        // self.title = "\(((selectedCity["DestinationCity"]) as AnyObject).uppercased!)"
         cityData.delegate = self
         // "DESTINATION : \(city["DestinationCity"]!
+        var countryNameStr = ""
+        if isSaved{
+            cityNameStr = (("\(selectedCity["CityName"])" ) as! String)
+            countryNameStr = (("\(selectedCity["CountryName"])" ) as! String)
+            print(cityNameStr)
+            print(countryNameStr)
+        }else{
+            cityNameStr = (("\(selectedCity["DestinationCity"]!)" ) as String)
+            countryNameStr = (("\(selectedCity["Country"]!) ") as String)
+        }
         
-        cityname = (("\(selectedCity["DestinationCity"]!)" ) as String)
-        countryname = (("\(selectedCity["Country"]!) ") as String)
-        self.cityName?.text = cityname
-        self.countryName?.text = countryname
+        self.cityName?.text = cityNameStr
+        self.countryName?.text = countryNameStr
         
         // Do any additional setup after loading the view.
     }
@@ -153,7 +162,6 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
         }
     }
     
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -161,8 +169,13 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
     
     
     override func viewDidAppear(_ animated: Bool) {
-        //   cityData.loadCityDetail(cityId: selectedCity!.cityId)
-        ref.child("CITY").child("\(selectedCity["DestinationCity"]!)").observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
+        var cityNameStr = ""
+        if isSaved{
+            cityNameStr = selectedCity["CityName"] as! String
+        }else{
+            cityNameStr = (selectedCity["DestinationCity"]! as! String)
+        }
+        ref.child("CITY").child(cityNameStr).observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
             var cityInfo = snapshot.value as? NSDictionary
             
             if let coordinates = cityInfo?["COORDINATES"] as? NSDictionary{
@@ -173,7 +186,7 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
             }
             
             
-            self.getAttractionData(city : self.selectedCity["DestinationCity"]!  as! String)
+            self.getAttractionData(city : cityNameStr  as! String)
         })
     }
     func getAttractionData(city : String){
@@ -247,8 +260,8 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
                     self.present(alert, animated:true,completion:nil)
                     if(self.activityIndicator.isAnimating){
                         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
-                        let success = self.saveImage(image: self.cityImage.image!, cityname: name!)
-                        print(success)
+                            let success = self.saveImage(image: self.cityImage.image!, cityname: name!)
+                            print(success)
                         })
                     }
                     else{
