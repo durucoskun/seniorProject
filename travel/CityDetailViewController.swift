@@ -20,8 +20,8 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
     @IBOutlet weak var backButton: UIButton!
     
     var userUid : String?
-    var cityname : String?
-    var countryname : String?
+    var cityNameStr : String?
+    var countryNameStr : String?
     var citydata = CityDataSource()
     var savedCities: [NSDictionary] = []
     
@@ -63,13 +63,15 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
         activityIndicator.startAnimating()
         
         ref = Database.database().reference()
-        var cityNameStr = ""
         if isSaved{
-            cityNameStr = selectedCity["CityName"] as! String
+            cityNameStr = (("\(selectedCity["CityName"]!)") as! String)
+            countryNameStr = (("\(selectedCity["CountryName"]!)") as! String)
+            
         }else{
-            cityNameStr = selectedCity["DestinationCity"] as! String
+            cityNameStr = (("\(selectedCity["DestinationCity"]!)" ) as String)
+            countryNameStr = (("\(selectedCity["Country"]!) ") as String)
         }
-        let storageRef = storage.reference().child("\(cityNameStr).jpg")
+        let storageRef = storage.reference().child("\(cityNameStr!).jpg")
         storageRef.downloadURL { (url, error)-> Void in
             if (url != nil){
                 let newUrl = (url?.absoluteString)
@@ -84,7 +86,9 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
         }
         
         let networkSession = URLSession.shared
-        let dataUrl = "https://www.triposo.com/api/v2/location.json?id=\(cityNameStr)&fields=intro,properties&account=RJ1V77PU&token=dvz1fidxe66twck6qynircn6ii3o2ydg"
+
+
+        let dataUrl = "https://www.triposo.com/api/v2/location.json?id=\(cityNameStr!)&fields=intro,properties&account=RJ1V77PU&token=dvz1fidxe66twck6qynircn6ii3o2ydg"
         var req = URLRequest(url: URL(string: dataUrl)!)
         
         req.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -92,6 +96,7 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
         let dataTask = networkSession.dataTask(with: req) {(data,response,error) in print("Data")
             
             let jsonReadable = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+            print(jsonReadable)
             
             do
             {
@@ -127,16 +132,7 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
         // self.title = "\(((selectedCity["DestinationCity"]) as AnyObject).uppercased!)"
         cityData.delegate = self
         // "DESTINATION : \(city["DestinationCity"]!
-        var countryNameStr = ""
-        if isSaved{
-            cityNameStr = (("\(selectedCity["CityName"]!)") as! String)
-            countryNameStr = (("\(selectedCity["CountryName"]!)") as! String)
-            print(cityNameStr)
-            print(countryNameStr)
-        }else{
-            cityNameStr = (("\(selectedCity["DestinationCity"]!)" ) as String)
-            countryNameStr = (("\(selectedCity["Country"]!) ") as String)
-        }
+      
         
         self.cityName?.text = cityNameStr
         self.countryName?.text = countryNameStr
@@ -245,7 +241,7 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
             return false
         }
         do {
-            try data.write(to: directory.appendingPathComponent("\(cityname).png")!)
+            try data.write(to: directory.appendingPathComponent("\(cityNameStr!).png")!)
             return true
         } catch {
             print(error.localizedDescription)
@@ -254,13 +250,11 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
     }
     
     @IBAction func addCities(_ sender: Any) {
-        var name = cityname as String!
-        var country = countryname as String!
-        country?.remove(at: (country?.index(before: (country?.endIndex)!))!)
+               countryNameStr?.remove(at: (countryNameStr?.index(before: (countryNameStr?.endIndex)!))!)
         ref.child("SavedCities").child("\(self.userUid!)").observeSingleEvent(
             of: DataEventType.value, with: { (snapshot) in
                 
-                if snapshot.hasChild("\(name!)"){
+                if snapshot.hasChild("\(self.cityNameStr!)"){
                     
                     let alert = UIAlertController(title: "", message: "You already have the city in your list!", preferredStyle: UIAlertControllerStyle.alert)
                     alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.default, handler:nil))
@@ -270,19 +264,21 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
                     //ALERT you already added this city
                 }else{
                     
-                    self.ref.child("SavedCities").child("\(self.userUid!)").updateChildValues(["\(name!)" : "\(country!)"])
+                    self.ref.child("SavedCities").child("\(self.userUid!)").updateChildValues(["\(self.cityNameStr!)" : "\(self.countryNameStr!)"])
                     
                     let alert = UIAlertController(title: "Done!", message: "The city has been added to your list!", preferredStyle: UIAlertControllerStyle.alert)
                     alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.default, handler:nil))
                     self.present(alert, animated:true,completion:nil)
                     if(self.activityIndicator.isAnimating){
                         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
-                            let success = self.saveImage(image: self.cityImage.image!, cityname: name!)
+                            let success = self.saveImage(image: self.cityImage.image!, cityname: self.cityNameStr!)
                             print(success)
+                            self.savedCities.append(["CityName":"\(self.cityNameStr!)" ,"CountryName":"\(self.countryNameStr!)"])
+                            print(["\(self.cityNameStr!)" : "\(self.countryNameStr!)"])
                         })
                     }
                     else{
-                        let success = self.saveImage(image: self.cityImage.image!, cityname: name!)
+                        let success = self.saveImage(image: self.cityImage.image!, cityname: self.cityNameStr!)
                         print(success)
                     }
                     
