@@ -9,15 +9,26 @@
 
 import UIKit
 import  Kingfisher
+import FirebaseDatabase
 
 class SavedLocationsController : UIViewController,UITableViewDataSource,UITableViewDelegate{
     
-    
+    var ref : DatabaseReference!
     var cityList : [NSDictionary] = []
     var userUid : String!
     var infoDictionary : NSDictionary = [:]
     var cityCell : CityCell? = nil
 
+    @IBAction func removeCity(_ sender: Any) {
+        ref =  Database.database().reference()
+        let buttonPosition = (sender as AnyObject).convert!(CGPoint.zero, to: self.cityTableView)
+       let indexPath = self.cityTableView.indexPathForRow(at: buttonPosition)
+//databaseden sil
+        let dict = cityList[(indexPath?.row)!]
+        ref.child("SavedCities").child(userUid!).child(dict["CityName"] as! String).removeValue()
+        cityList.remove(at: (indexPath?.row)!)
+        self.cityTableView.reloadData()
+    }
    
    
   
@@ -32,6 +43,7 @@ class SavedLocationsController : UIViewController,UITableViewDataSource,UITableV
         super.viewDidLoad()
         self.title = "Saved Locations"
         cityTableView.dataSource = self
+        ref = Database.database().reference()
         //cityDataSource.delegate = self
         }
     
