@@ -44,7 +44,7 @@ class RegistrationViewController: UIViewController {
                 // SET USERNAME and Email
               
               self.ref.root.child("USERS").child((user?.uid)!).setValue(["username":self.username.text,"email":self.email.text])
-                             self.ref.root.child("USERS").child((user?.uid)!).child("INTERESTS").setValue(["Festival":0,"Adventure":0,"Romance":0,"Nature":0,"Night Life":0,"Beach":0,"Food and Drink":0,"Warm Weather":0,"Safety":0,"RoadTrip":0])
+                             self.ref.root.child("USERS").child((user?.uid)!).child("INTERESTS").setValue(["Festivals":0,"Sightseeing":0,"Art":0,"Culture":0,"Nightlife":0,"Shopping":0,"Food":0,"Architecture":0,"Safety":0,"History":0])
                 
                 //user is found
                 self.performSegue(withIdentifier: "showLoginPage", sender: self)
@@ -63,6 +63,7 @@ class RegistrationViewController: UIViewController {
         ref = Database.database().reference()
         super.viewDidLoad()
 self.view.backgroundColor = UIColor (patternImage:UIImage(named : "travelling-1.png")!)
+         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: Selector("endEditing:")))
         // Do any additional setup after loading the view.
     }
 

@@ -29,7 +29,7 @@ class HomePageViewController: UIViewController, CLLocationManagerDelegate {
     
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     var overlayView: UIView = UIView()
-    
+        
     @IBOutlet weak var departureDate: UIDatePicker!
     @IBOutlet weak var returnDate: UIDatePicker!
     @IBOutlet weak var maxPrice: UITextField!

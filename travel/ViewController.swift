@@ -19,6 +19,8 @@ class ViewController: UIViewController ,UITableViewDelegate{
     var savedCities : [NSDictionary] = []
     var images : [UIImageView?] = []
     var storageRef : StorageReference!
+    var interestRef : DatabaseReference!
+    var interestDictionary : [String : Int] = [:]
 
   
     
@@ -64,32 +66,20 @@ class ViewController: UIViewController ,UITableViewDelegate{
     }
     
     func loginOperations(user: User?){
-        self.userUid = user?.uid
-        self.email = user?.email
         
         let userTabController = self.storyboard?.instantiateViewController(withIdentifier: "UserTabController")as! UserTabController
-        
-        
-        userTabController.email = self.email
-        
-        userTabController.username = user?.displayName //// degistir
-        userTabController.selectedViewController = userTabController.viewControllers?[2]
-        let profileContoller  = userTabController.viewControllers?[0] as! UserProfileController
-        profileContoller.mail = self.email
-        profileContoller.userUid = self.userUid
-        
         let savedLocationsController = userTabController.viewControllers?[1] as! SavedLocationsController
-        savedLocationsController.userUid = self.userUid
+        let profileContoller  = userTabController.viewControllers?[0] as! UserProfileController
         
         let searchController = userTabController.viewControllers?[2] as! HomePageViewController
-        searchController.userUid = self.userUid
+        userTabController.email = self.email
+        
         
         let semaphore = DispatchSemaphore(value: 0);
         
         DispatchQueue.main.async{
         self.ref.child("SavedCities").child(self.userUid!).observeSingleEvent(
             of: DataEventType.value, with: { (snapshot) in
-                print("COK UZULUYOM")
                 if let data = snapshot.value as? [String: String] {
                     let dataArray = Array(data)
                     let cityNames = dataArray.map { $0.0 }
@@ -107,6 +97,10 @@ class ViewController: UIViewController ,UITableViewDelegate{
         }
             
         )
+            self.interestRef = Database.database().reference().child("USERS").child(self.userUid!).child("INTERESTS")
+            self.interestRef.observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
+                self.interestDictionary = (snapshot.value)! as! [String : Int]
+            })
         }
         //    semaphore.wait(timeout: DispatchTime.distantFuture);
 //        semaphore.wait(timeout: DispatchTime.now());
@@ -137,6 +131,20 @@ class ViewController: UIViewController ,UITableViewDelegate{
 //                 //as [String?]
 //
 //      }
+        self.userUid = user?.uid
+        self.email = user?.email
+        
+        userTabController.username = user?.displayName //// degistir
+        userTabController.selectedViewController = userTabController.viewControllers?[2]
+        profileContoller.mail = self.email
+        profileContoller.userUid = self.userUid
+        profileContoller.interestDictionary = self.interestDictionary
+        
+        
+        savedLocationsController.userUid = self.userUid
+        
+        
+        searchController.userUid = self.userUid
         savedLocationsController.cityList = self.savedCities
         self.present(userTabController,animated: true,completion : nil)
         
@@ -174,6 +182,7 @@ class ViewController: UIViewController ,UITableViewDelegate{
             nextView.userUid = self.userUid
             nextView.username = self.username.text
             nextView.email = self.email
+            nextView.interestDictionary = self.interestDictionary
         }
     }
 }

@@ -14,6 +14,7 @@ class UserTabController : UITabBarController{
     var userUid : String!
     var username : String!
     var email : String!
+    var interestDictionary : [String : Int] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad();
@@ -36,7 +37,8 @@ class UserTabController : UITabBarController{
  */
         let flightSearchController = viewControllers?[2] as! HomePageViewController
         flightSearchController.userUid = self.userUid
-        self.selectedIndex = 2
+        
+        self.selectedIndex = 2 // degismeli
     }
     
 }

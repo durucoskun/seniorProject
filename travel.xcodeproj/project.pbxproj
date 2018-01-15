@@ -34,6 +34,7 @@
 		92206C311FD37B7800AF09CA /* SavedLocationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92206C301FD37B7700AF09CA /* SavedLocationsController.swift */; };
 		9234C7861EC3915600A4DB6A /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9234C7851EC3915600A4DB6A /* RegistrationViewController.swift */; };
 		924195631FCF430600C0899D /* UserTabDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924195621FCF430600C0899D /* UserTabDelegate.swift */; };
+		92532C05200C138F00398F49 /* InterestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92532C04200C138F00398F49 /* InterestData.swift */; };
 		927A81511ED046DC0026841B /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927A81501ED046DC0026841B /* MainNavigationController.swift */; };
 		927A81531ED04A630026841B /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927A81521ED04A630026841B /* File.swift */; };
 		9297359B1FFCFD7000F0417B /* CityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9297359A1FFCFD7000F0417B /* CityCell.swift */; };
@@ -73,6 +74,7 @@
 		92206C301FD37B7700AF09CA /* SavedLocationsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedLocationsController.swift; sourceTree = "<group>"; };
 		9234C7851EC3915600A4DB6A /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		924195621FCF430600C0899D /* UserTabDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTabDelegate.swift; sourceTree = "<group>"; };
+		92532C04200C138F00398F49 /* InterestData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterestData.swift; sourceTree = "<group>"; };
 		927A81501ED046DC0026841B /* MainNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		927A81521ED04A630026841B /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		9297359A1FFCFD7000F0417B /* CityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityCell.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 		86769EE51E9F95520083EB76 = {
 			isa = PBXGroup;
 			children = (
+				92532C04200C138F00398F49 /* InterestData.swift */,
 				92FBACFE1ED255C50088EFA6 /* Launch Screen.storyboard */,
 				860EFD451EBA3EDB002736B7 /* Images.xcassets */,
 				3FFC036B1EACF2130044AB9C /* Currency.swift */,
@@ -313,6 +316,7 @@
 				92206C311FD37B7800AF09CA /* SavedLocationsController.swift in Sources */,
 				3FFC036A1EACF20A0044AB9C /* Carrier.swift in Sources */,
 				3F0627CC1EB16852005B2DB7 /* Flight.swift in Sources */,
+				92532C05200C138F00398F49 /* InterestData.swift in Sources */,
 				8693B92F200AAB610021207A /* CityDetailViewController.swift in Sources */,
 				3FFC03671EACF1FF0044AB9C /* Place.swift in Sources */,
 				3FFC03681EACF1FF0044AB9C /* Quote.swift in Sources */,
