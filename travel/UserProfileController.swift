@@ -16,6 +16,7 @@ import Kingfisher
 class UserProfileController: UIViewController,  UIImagePickerControllerDelegate,
 UINavigationControllerDelegate{
     
+    @IBOutlet weak var label: UILabel!
     var mail : String!
     var user: String!
     var userUid : String!
@@ -55,6 +56,8 @@ UINavigationControllerDelegate{
     
     
     override func viewDidLoad() {
+        label.font =  UIFont(name: "Georgia-Bold", size: 15)
+
         super.viewDidLoad()
         overlayView = UIView(frame: UIScreen.main.bounds)
         overlayView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5);
