@@ -70,7 +70,8 @@ cityAttractionCell?.descriptionText.text = ("\(attractionDescription[indexPath.r
         if (imageUrls[indexPath.row] != "empty"){
         cityAttractionCell?.attractionImageView.kf.setImage(with: URL(string : imageUrls[indexPath.row]))
         } else{
-            cityAttractionCell?.attractionImageView.image = #imageLiteral(resourceName: "noImage")
+            cityAttractionCell?.attractionImageView.image = #imageLiteral(resourceName: "noImg")
+            
         }
                return cityAttractionCell!
     }

@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "travel/CityDetailViewController.swift"
-            timestampString = "537637763.737273"
+            timestampString = "537711949.4457099"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "249"
-            endingLineNumber = "249"
-            landmarkName = "addCities(_:)"
+            startingLineNumber = "250"
+            endingLineNumber = "250"
+            landmarkName = "saveImage(image:cityname:)"
             landmarkType = "7">
             <Locations>
                <Location

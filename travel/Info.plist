@@ -28,9 +28,9 @@
 		<true/>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Konumunu kullanacam ha!</string>
+	<string>The app needs your location to provide accurate results</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>izin vercen mi?</string>
+	<string>To change your profile picture, you need to allow access to your photos.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -42,8 +42,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 </dict>
 </plist>

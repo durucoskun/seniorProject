@@ -85,7 +85,7 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
                         self.cityInfo.font = UIFont(name: "Georgia", size: 16)
                     }
                     let propertiesArray = resultDictionary["properties"] as! NSArray
-                    
+                    print(propertiesArray)
                     for item in propertiesArray{
                         let dict = item as! NSDictionary
                         self.pop = dict["value"]! as! String
@@ -93,6 +93,7 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
                             self.population.text = "Population : \(self.pop)"
                             self.population.font = UIFont(name: "Georgia", size: 14)
                         }
+                        break
                     }
                 }
             }catch{
