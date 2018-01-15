@@ -146,7 +146,7 @@ activityIndicatorView.startAnimating()
         if interestDictionary[tag] as! Int == 1{
             button.backgroundColor = UIColor.purple
         }else if interestDictionary[tag] as! Int == 0{
-            button.backgroundColor = UIColor.lightGray
+            button.backgroundColor = UIColor.clear
             
         }
     }
@@ -200,7 +200,7 @@ activityIndicatorView.startAnimating()
         if   interestDictionary[tag] as! Int == 1{
             interestDictionary[tag] = 0 // emin degilim
             self.interestRef.child("USERS").child(userUid).child("INTERESTS").updateChildValues([tag:0])
-            button.backgroundColor = UIColor.lightGray
+            button.backgroundColor = UIColor.clear
         }else{
             print(interestDictionary[tag])
 
