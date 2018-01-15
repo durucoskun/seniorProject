@@ -138,16 +138,20 @@ activityIndicatorView.startAnimating()
     
            }
     func setInterestButton(button : UIButton , tag : String){
-         button.setTitleColor(UIColor.white,for: UIControlState.normal)
+         button.setTitleColor(UIColor.black,for: UIControlState.normal)
         button.frame.size.height = 85
         button.frame.size.width = 30
         button.layer.cornerRadius = 15
         button.layer.masksToBounds = true
+        if (interestDictionary[tag] != nil){
         if interestDictionary[tag] as! Int == 1{
+            button.setTitleColor(UIColor.white,for: UIControlState.normal)
             button.backgroundColor = UIColor.purple
+
         }else if interestDictionary[tag] as! Int == 0{
-            button.backgroundColor = UIColor.clear
+            button.backgroundColor = UIColor.lightGray
             
+        }
         }
     }
     func setButtons(){
@@ -197,20 +201,26 @@ activityIndicatorView.startAnimating()
 
     }
     func setInterest(button : UIButton , tag : String){
-        if   interestDictionary[tag] as! Int == 1{
-            interestDictionary[tag] = 0 // emin degilim
+        if interestDictionary[tag] != nil {
+        if   self.interestDictionary[tag] as! Int == 1{
+            self.interestDictionary[tag] = 0 // emin degilim
             self.interestRef.child("USERS").child(userUid).child("INTERESTS").updateChildValues([tag:0])
-            button.backgroundColor = UIColor.clear
-        }else{
-            print(interestDictionary[tag])
+            button.backgroundColor = UIColor.lightGray
+            button.setTitleColor(UIColor.black,for: UIControlState.normal)
 
-            interestDictionary[tag] = 1
-            print(interestDictionary[tag])
-            self.interestRef.child("USERS").child(userUid).child("INTERESTS").updateChildValues([tag:1])
+        
+        }else{
+            print(self.interestDictionary[tag])
+
+            self.interestDictionary[tag] = 1
+            print(self.interestDictionary[tag])
+            self.interestRef.child("USERS").child(self.userUid).child("INTERESTS").updateChildValues([tag:1])
             button.backgroundColor = UIColor.purple
+            button.setTitleColor(UIColor.white,for: UIControlState.normal)
+
         }
         
-
+        }
     }
     @IBAction func preferCulture(_ sender: Any) {
         setInterest(button: cultureButton,tag: "Culture")
