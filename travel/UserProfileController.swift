@@ -137,42 +137,47 @@ activityIndicatorView.startAnimating()
     }
     
            }
-    func setInterestButton(tag : String){
+    func setInterestButton(button : UIButton , tag : String){
+         button.setTitleColor(UIColor.white,for: UIControlState.normal)
+        button.frame.size.height = 85
+        button.frame.size.width = 30
+        button.layer.cornerRadius = 15
+        button.layer.masksToBounds = true
         if interestDictionary[tag] as! Int == 1{
-            safetyButton.backgroundColor = UIColor.blue
-        }else{
-            safetyButton.backgroundColor = UIColor.white
+            button.backgroundColor = UIColor.purple
+        }else if interestDictionary[tag] as! Int == 0{
+            button.backgroundColor = UIColor.lightGray
             
         }
     }
     func setButtons(){
       
-        setInterestButton(tag: "Safety")
-        setInterestButton(tag:"Art")
-        setInterestButton(tag:"Architecture")
-        setInterestButton(tag:"Sightseeing")
-        setInterestButton(tag:"Culture")
-        setInterestButton(tag:"History")
-        setInterestButton(tag:"Shopping")
-        setInterestButton(tag:"Food")
-        setInterestButton(tag:"Festivals")
-        setInterestButton(tag:"Nightlife")
+        setInterestButton(button : safetyButton, tag: "Safety")
+        setInterestButton(button : artButton,tag:"Art")
+        setInterestButton(button : architectureButton,tag:"Architecture")
+        setInterestButton(button : sightseeingButton,tag:"Sightseeing")
+        setInterestButton(button : cultureButton,tag:"Culture")
+        setInterestButton(button : historyButton,tag:"History")
+        setInterestButton(button : shoppingButton,tag:"Shopping")
+        setInterestButton(button : foodButton,tag:"Food")
+        setInterestButton(button : festivalButton,tag:"Festivals")
+        setInterestButton(button : nightLifeButton,tag:"Nightlife")
 
     }
 
    
     @IBAction func preferSafety(_ sender: Any) {
-        setInterest(button:festivalButton,tag:"Safety")
+        setInterest(button:safetyButton,tag:"Safety")
 
         
     }
     @IBAction func preferNightlife(_ sender: Any) {
-        setInterest(button:festivalButton,tag:"Nightlife")
+        setInterest(button:nightLifeButton,tag:"Nightlife")
 
         
     }
     @IBAction func preferShopping(_ sender: Any) {
-        setInterest(button: festivalButton,tag: "Shopping")
+        setInterest(button: shoppingButton,tag: "Shopping")
 
 
     }
@@ -194,12 +199,15 @@ activityIndicatorView.startAnimating()
     func setInterest(button : UIButton , tag : String){
         if   interestDictionary[tag] as! Int == 1{
             interestDictionary[tag] = 0 // emin degilim
-            self.interestRef.child("USERS").child("INTERESTS").updateChildValues([tag:0])
-            button.backgroundColor = UIColor.white
+            self.interestRef.child("USERS").child(userUid).child("INTERESTS").updateChildValues([tag:0])
+            button.backgroundColor = UIColor.lightGray
         }else{
+            print(interestDictionary[tag])
+
             interestDictionary[tag] = 1
-            self.interestRef.child("USERS").child("INTERESTS").updateChildValues([tag:1])
-            button.backgroundColor = UIColor.blue
+            print(interestDictionary[tag])
+            self.interestRef.child("USERS").child(userUid).child("INTERESTS").updateChildValues([tag:1])
+            button.backgroundColor = UIColor.purple
         }
         
 

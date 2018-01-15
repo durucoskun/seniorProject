@@ -52,6 +52,7 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
     var imageUrls = Array <String> ()
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     var isSaved : Bool = false
+    var interestDictionary : [String : Int] = [:]
     
     
     override func viewDidLoad() {
@@ -142,6 +143,7 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
                 nextView.currency = self.currency
                 nextView.userUid = self.userUid
                 nextView.savedCitiesList = self.savedCities
+                nextView.interestDictionary = self.interestDictionary
             }
         }
         else if(previousView == "SavedCities"){
@@ -149,11 +151,14 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
                 nextView.userUid = self.userUid
                 let profileController = nextView.viewControllers?[0] as! UserProfileController
                 profileController.userUid = self.userUid
+                profileController.interestDictionary = self.interestDictionary
                 let savedLocationsController = nextView.viewControllers?[1] as! SavedLocationsController
                 savedLocationsController.userUid = self.userUid
                 savedLocationsController.cityList = self.savedCities
+                savedLocationsController.interestDictionary = self.interestDictionary
                 let searchController = nextView.viewControllers?[2] as! HomePageViewController
                 searchController.savedCities = self.savedCities
+                searchController.interestDictionary = self.interestDictionary
                 nextView.selectedViewController = nextView.viewControllers?[1]
             }
         }
@@ -168,6 +173,7 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
             nextView.savedCities = self.savedCities
             nextView.originView = self.previousView
             nextView.isSaved = self.isSaved
+            nextView.interestDictionary = self.interestDictionary
         }
     }
     

@@ -18,6 +18,8 @@ class SavedLocationsController : UIViewController,UITableViewDataSource,UITableV
     var userUid : String!
     var infoDictionary : NSDictionary = [:]
     var cityCell : CityCell? = nil
+    var interestDictionary : [String : Int] = [:]
+
 
     @IBAction func removeCity(_ sender: Any) {
         ref =  Database.database().reference()
@@ -108,6 +110,7 @@ nextView.isSaved = true
             nextView.userUid = self.userUid
             nextView.previousView = "SavedCities"
             nextView.isSaved = true
+            nextView.interestDictionary = self.interestDictionary
         }
         
     }

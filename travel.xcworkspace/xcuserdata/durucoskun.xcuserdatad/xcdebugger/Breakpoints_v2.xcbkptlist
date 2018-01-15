@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "travel/CityAttractionController.swift"
-            timestampString = "537634289.080337"
+            timestampString = "537671633.673787"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "travel/CityDetailViewController.swift"
-            timestampString = "537646442.53224"
+            timestampString = "537671633.673787"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "295"
-            endingLineNumber = "295"
+            startingLineNumber = "301"
+            endingLineNumber = "301"
             landmarkName = "backAction(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "travel/CityDetailViewController.swift"
-            timestampString = "537646442.53224"
+            timestampString = "537671633.673787"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "299"
-            endingLineNumber = "299"
+            startingLineNumber = "305"
+            endingLineNumber = "305"
             landmarkName = "backAction(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "travel/UserProfileController.swift"
-            timestampString = "537669485.75674"
+            timestampString = "537672718.8103909"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "219"
-            endingLineNumber = "219"
+            startingLineNumber = "227"
+            endingLineNumber = "227"
             landmarkName = "preferArt(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -106,7 +106,7 @@
                   moduleName = "travel"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/durucoskun/Downloads/finalProject/travel/UserProfileController.swift"
-                  timestampString = "537669486.9989229"
+                  timestampString = "537670770.796882"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "72"
@@ -121,7 +121,7 @@
                   moduleName = "travel"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/durucoskun/Downloads/finalProject/travel/UserProfileController.swift"
-                  timestampString = "537669487.003865"
+                  timestampString = "537670770.817374"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "74"
@@ -186,7 +186,7 @@
                   moduleName = "travel"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/durucoskun/Downloads/finalProject/InterestData.swift"
-                  timestampString = "537669487.031547"
+                  timestampString = "537670770.928439"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "23"
@@ -201,7 +201,7 @@
                   moduleName = "travel"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/durucoskun/Downloads/finalProject/InterestData.swift"
-                  timestampString = "537669487.036463"
+                  timestampString = "537670770.972482"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "24"
@@ -266,7 +266,7 @@
                   moduleName = "travel"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/durucoskun/Downloads/finalProject/InterestData.swift"
-                  timestampString = "537669487.063953"
+                  timestampString = "537670771.08303"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "26"
@@ -281,7 +281,7 @@
                   moduleName = "travel"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/durucoskun/Downloads/finalProject/InterestData.swift"
-                  timestampString = "537669487.069038"
+                  timestampString = "537670771.085892"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "26"
@@ -336,6 +336,22 @@
             startingLineNumber = "77"
             endingLineNumber = "77"
             landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "travel/UserProfileController.swift"
+            timestampString = "537672718.8103909"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "169"
+            endingLineNumber = "169"
+            landmarkName = "preferSafety(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

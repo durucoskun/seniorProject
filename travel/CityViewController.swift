@@ -23,6 +23,7 @@ class CityViewController: UIViewController,UITableViewDataSource,UITableViewDele
     var cityDataSource = CityDataSource()
     var currency : String = ""
     var savedCitiesList: [NSDictionary] = []
+    var interestDictionary : [String : Int] = [:]
   
     
     override func viewDidLoad() {
@@ -93,7 +94,8 @@ class CityViewController: UIViewController,UITableViewDataSource,UITableViewDele
         if let cityDetailController = segue.destination as? CityDetailViewController{
             let selectedCell = sender as! CityTableViewCell
             let selectedIndexPath = self.cityTableView.indexPath(for : selectedCell)
-        
+            cityDetailController.interestDictionary = self.interestDictionary
+
         cityDetailController.userUid = self.userUid
         cityDetailController.citydata = self.cityDataSource
         cityDetailController.currency = self.currency
@@ -104,13 +106,16 @@ class CityViewController: UIViewController,UITableViewDataSource,UITableViewDele
         }
         else if let nextView = segue.destination as? UserTabController{
             nextView.userUid = self.userUid
+            nextView.interestDictionary = self.interestDictionary
             let profileController = nextView.viewControllers?[0] as! UserProfileController
             profileController.userUid = self.userUid
+            profileController.interestDictionary = self.interestDictionary
             let savedLocationsController = nextView.viewControllers?[1] as! SavedLocationsController
             savedLocationsController.userUid = self.userUid
             savedLocationsController.cityList = self.savedCitiesList
             let searchController = nextView.viewControllers?[2] as! HomePageViewController
             searchController.savedCities = self.savedCitiesList
+            searchController.interestDictionary = self.interestDictionary
         }
     }
 }

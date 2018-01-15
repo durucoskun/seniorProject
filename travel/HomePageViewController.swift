@@ -25,6 +25,7 @@ class HomePageViewController: UIViewController, CLLocationManagerDelegate {
     var cityCode : String = ""
     var userUid : String!
     var savedCities : [NSDictionary] = []
+    var interestDictionary : [String : Int] = [:]
     @IBOutlet weak var departureLocation: UITextField!
     
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
@@ -193,6 +194,7 @@ class HomePageViewController: UIViewController, CLLocationManagerDelegate {
             nextView.currency = currency
             nextView.userUid = self.userUid
             nextView.savedCitiesList = self.savedCities
+                nextView.interestDictionary = self.interestDictionary
             
         }
         
