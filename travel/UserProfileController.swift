@@ -72,7 +72,7 @@ activityIndicatorView.startAnimating()
         //
         interestRef = Database.database().reference()
         let interestData = InterestData(userUid: userUid)
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
 
         self.interestDictionary = interestData.interestDictionary
             if !(self.interestDictionary == nil){

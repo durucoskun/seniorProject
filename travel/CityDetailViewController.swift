@@ -19,6 +19,7 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
     
     @IBOutlet weak var backButton: UIButton!
     
+    @IBOutlet weak var area: UILabel!
     var userUid : String?
     var cityNameStr : String?
     var countryNameStr : String?
@@ -29,7 +30,8 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
     var currency: String = ""
     
     var pop: String = ""
-    @IBOutlet weak var cityInfo: UILabel!
+  
+    @IBOutlet weak var cityInfo: UITextView!
     
     @IBOutlet weak var population: UILabel!
     @IBOutlet weak var cityImage: UIImageView!
@@ -86,14 +88,26 @@ class CityDetailViewController: UIViewController ,CityDataDelegate{
                     }
                     let propertiesArray = resultDictionary["properties"] as! NSArray
                     print(propertiesArray)
+                    var population = ""
+                    var area = ""
                     for item in propertiesArray{
                         let dict = item as! NSDictionary
-                        self.pop = dict["value"]! as! String
                         DispatchQueue.main.async() {
-                            self.population.text = "Population : \(self.pop)"
+
+                        if dict["name"] as! String == "Population"{
+                            population = dict["value"]! as! String
+                            self.population.text = "Population : \(population)"
                             self.population.font = UIFont(name: "Georgia", size: 14)
+                            
+
+                        }else if dict["name"] as! String  == "Area"{
+                            area = dict["value"]! as! String
+                            self.area.text = "Area : \(area)"
+                            self.area.font = UIFont(name: "Georgia", size: 14)
+self.area.textColor = UIColor.white
                         }
-                        break
+                        self.pop = dict["value"]! as! String
+                        }
                     }
                 }
             }catch{
